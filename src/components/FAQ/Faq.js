@@ -44,41 +44,48 @@ const Faq = () => {
 
   return (
     <div
-      className="w-screen min-h-screen overflow-x-hidden"
-      style={{
-        backgroundImage: "url('https://i.imgur.com/dVuatMy.jpeg')",
-      }}
-    >
-      <div className="flex justify-center  p-5 mt-10">
-        <div className=" w-full md:w-3/5 text-white p-5 bg-black bg-opacity-50 rounded-lg">
-          <div className="text-center mb-5 text-2xl font-bold">
-            Frequently Asked Questions
+  className="w-screen min-h-screen overflow-x-hidden relative"
+  style={{
+    backgroundImage: "url('https://i.imgur.com/dVuatMy.jpeg')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}
+>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black bg-opacity-45"></div>
+
+  {/* Content */}
+  <div className="relative flex justify-center p-5 mt-10">
+    <div className="w-full md:w-3/5 text-white p-5 bg-charcoalGray bg-opacity-50 rounded-lg">
+      <div className="text-center mb-5 text-2xl font-bold">
+        Frequently Asked Questions
+      </div>
+      <div className="space-y-5">
+        {faqs.map((faq, index) => (
+          <div key={index} className="p-3 rounded-lg">
+            <div
+              className="accordion-header cursor-pointer flex items-center space-x-3 p-3 bg-black bg-opacity-50 rounded-lg hover:bg-gray-700"
+              onClick={() => toggleAccordion(index)}
+            >
+              {activeIndex === index ? <FaMinus /> : <FaPlus />}
+              <h3 className="text-lg font-semibold">{faq.question}</h3>
+            </div>
+            <div
+              ref={(el) => (contentRefs.current[index] = el)}
+              className="accordion-content overflow-hidden transition-all duration-300 ease-out text-left"
+              style={{
+                maxHeight: activeIndex === index ? height[index] : 0,
+              }}
+            >
+              <p className="p-4">{faq.answer}</p>
+            </div>
           </div>
-          <div className="space-y-5">
-            {faqs.map((faq, index) => (
-              <div key={index} className="p-3 rounded-lg">
-                <div
-                  className="accordion-header cursor-pointer flex items-center space-x-3 p-3 bg-black bg-opacity-50 rounded-lg  hover:bg-gray-700"
-                  onClick={() => toggleAccordion(index)}
-                >
-                  {activeIndex === index ? <FaMinus /> : <FaPlus />}
-                  <h3 className="text-lg font-semibold">{faq.question}</h3>
-                </div>
-                <div
-                  ref={(el) => (contentRefs.current[index] = el)}
-                  className="accordion-content overflow-hidden transition-all duration-300 ease-out text-left"
-                  style={{
-                    maxHeight: activeIndex === index ? height[index] : 0,
-                  }}
-                >
-                  <p className="p-4">{faq.answer}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
     </div>
+  </div>
+</div>
+
   );
 };
 

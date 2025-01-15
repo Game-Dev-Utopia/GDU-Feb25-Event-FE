@@ -166,7 +166,7 @@ const DnDCard = ({ card }) => {
 
 const Event = () => {
   return (
-    <div className="p-8 bg-stone-950 min-h-screen">
+    <div className="p-8 min-h-screen">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {cardData.map((card) => (
           <DnDCard key={card.title} card={card} />

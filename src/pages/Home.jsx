@@ -11,10 +11,12 @@ const Home = () => {
 
   return (
     <>
-      <div className="w-screen overflow-y-scroll">
+      <div className="w-screen overflow-y-scroll bg-goldenrod">
         {/* Home Banner */}
         <div className="relative text-white font-sans">
           {/* Background section with button */}
+        <div className="absolute inset-0 bg-black/45 rounded-lg z-1"></div>
+
           <div
             className="bg-cover bg-center bg-no-repeat h-[91vh] w-auto flex items-end justify-center"
             style={{
