@@ -9,13 +9,16 @@ import Layout from './layout/Layout';
 import Home from './pages/Home';
 import Intro from './pages/Intro';
 import EventRegistrationForm from './components/RegistrationForm/EventRegistrationForm';
+import Login from './components/LoginPage_Preet/login';
+import SignUp from './components/LoginPage_Preet/SignUp';
 
 const router = new Router(
   createRoutesFromElements(
     <Route path='/' exact element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="/register" element={ <EventRegistrationForm/>} />
-      <Route path="/Intro" element={<Intro />} />
+      <Route path="/signin" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/*" element={<PageNotFound />} />
     </Route>
   )

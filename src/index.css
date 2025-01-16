@@ -19,3 +19,17 @@
 .body{
   scroll-behavior: smooth;
 }
+
+
+@font-face {
+  font-family: 'HarryP';
+  src: url('./components/LoginPage_Preet/assets/HARRYP__.TTF') format('truetype');
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+.body{
+  scroll-behavior: smooth;
+}
