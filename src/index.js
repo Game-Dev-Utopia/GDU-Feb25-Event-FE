@@ -9,7 +9,7 @@ import Layout from './layout/Layout';
 import Home from './pages/Home';
 import Intro from './pages/Intro';
 import EventRegistrationForm from './components/RegistrationForm/EventRegistrationForm';
-import Login from './components/LoginPage_Preet/login';
+import Login from './components/LoginPage_Preet/Login';
 import SignUp from './components/LoginPage_Preet/SignUp';
 
 const router = new Router(
