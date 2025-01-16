@@ -3,6 +3,7 @@ import SponsorCard from "../components/SponsorCard";
 import "../index.css";
 import DnDCardGrid from "../components/events/Event";
 import Faq from "../components/FAQ/Faq";
+import BackgroundImages from  "../components/BG";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const Home = () => {
         Join Us
       </button>
     </div>
+    <BackgroundImages></BackgroundImages>
     </>
   );
 };

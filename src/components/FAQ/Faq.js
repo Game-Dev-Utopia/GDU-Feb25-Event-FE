@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { FaMinus, FaPlus } from "react-icons/fa6";
+//import { FaMinus, FaPlus } from "react-icons/fa6";
 
 const Faq = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -61,7 +61,7 @@ const Faq = () => {
                   className="accordion-header cursor-pointer flex items-center space-x-3 p-3 bg-black bg-opacity-50 rounded-lg  hover:bg-gray-700"
                   onClick={() => toggleAccordion(index)}
                 >
-                  {activeIndex === index ? <FaMinus /> : <FaPlus />}
+                  
                   <h3 className="text-lg font-semibold">{faq.question}</h3>
                 </div>
                 <div
@@ -81,5 +81,5 @@ const Faq = () => {
     </div>
   );
 };
-
+//{activeIndex === index ? <FaMinus /> : <FaPlus />}
 export default Faq;
