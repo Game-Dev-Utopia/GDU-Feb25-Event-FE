@@ -16,7 +16,7 @@ export async function getRequest(URL) {
 
 export async function postRequest(URL, payload, queryParams = {}) {
   try {
-    const query = new URLSearchParams(queryParams); 
+    const query = new URLSearchParams(queryParams);
     const updatedURL = `${URL}?token=${query.toString()}`;
 
     const response = await axiosClient.post(updatedURL, payload);
@@ -47,13 +47,33 @@ export async function postRequestJson(URL, payload) {
   }
 }
 
+export async function postRequestJsonwithHeader(URL, payload) {
+  try {
+    const token = localStorage.getItem("accessToken") || ""; // Retrieve token from localStorage or wherever it is stored
+
+    const response = await axiosClient.post(
+      URL,
+      payload,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`, // Include the Authorization header
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 
 
 export async function patchRequest(URL, payload, queryParams = {}) {
   try {
-    const query = new URLSearchParams(queryParams); 
+    const query = new URLSearchParams(queryParams);
     const updatedURL = `${URL}?token=${query.toString()}`;
-    
+
     const response = await axiosClient.patch(updatedURL, payload);
     return response.data;
   } catch (error) {

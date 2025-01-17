@@ -153,11 +153,7 @@ const DnDCard = ({ card }) => {
             
           </div>
 
-          <div>
-              <Link to='/register'>
-              <button className='bg-goldenrod'>Register</button>
-              </Link>
-            </div>
+          
             
         </div>
       )}

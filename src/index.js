@@ -19,15 +19,17 @@ import SignUp from './components/LoginPage_Preet/SignUp';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Logout from './components/LoginPage_Preet/Logout';
 
 const router = new Router(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
-      <Route path="/register" element={<EventRegistrationForm />} />
+      <Route path="/register/:eventID" element={<EventRegistrationForm />} />
       <Route path="/signin" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/*" element={<PageNotFound />} />
+      <Route path="/logout" element={<Logout />} />
     </Route>
   )
 );
