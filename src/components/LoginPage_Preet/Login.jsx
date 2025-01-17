@@ -20,12 +20,15 @@ const Login = () => {
     try {
       const response = await postRequestJson(`/api/v1/users/login`, JSON.stringify({ email, password }));
 
+      console.log(response);
+
       if (response) {
-        const data = await response.json();
         toast.success("Login successful!", { position: "top-right" });
         // Save token or user data if provided by API
-        localStorage.setItem("token", data.token);
-        setTimeout(() => navigate("/home"), 2000); // Redirect to /home
+        localStorage.setItem("accessToken", response.accessToken);
+        localStorage.setItem("refreshToken", response.refreshToken);
+        
+        setTimeout(() => navigate("/"), 2000); // Redirect to /home
       } else {
         const errorData = await response.json();
         toast.error(`Login failed: ${errorData.message || "Unknown error"}`, {
@@ -81,7 +84,7 @@ const Login = () => {
             </label>
             <input
               className="w-full border-2 border-gray-300 rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-blue-500 text-yellow-200"
-              type="password"
+              type="text"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

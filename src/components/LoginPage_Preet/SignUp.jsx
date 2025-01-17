@@ -7,14 +7,14 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
-    fullName: "",
     email: "",
     contact: "",
+    fullname: "",
     password: "",
     collegeName: "",
     year: "",
-    department: "",
-    rollNumber: "",
+    dept: "",
+    rollNo: "",
   });
 
   const handleInputChange = (e) => {
@@ -30,7 +30,8 @@ const SignUp = () => {
     }
 
     try {
-      const response = await postRequestJson(`/api/v1/users/register`, formData);
+      const response = await postRequestJson(`/api/v1/users/register
+`, formData);
       console.log(response);
 
       if (response) {
@@ -81,7 +82,7 @@ const SignUp = () => {
             },
             {
               label: "Full Name",
-              name: "fullName",
+              name: "fullname",
               type: "text",
               placeholder: "Enter your full name",
             },
@@ -100,7 +101,7 @@ const SignUp = () => {
             {
               label: "Password",
               name: "password",
-              type: "password",
+              type: "text",
               placeholder: "Enter your password",
             },
             {
@@ -117,13 +118,13 @@ const SignUp = () => {
             },
             {
               label: "Department",
-              name: "department",
+              name: "dept",
               type: "text",
               placeholder: "Enter your department",
             },
             {
               label: "Roll Number",
-              name: "rollNumber",
+              name: "rollNo",
               type: "text",
               placeholder: "Enter your roll number",
             },

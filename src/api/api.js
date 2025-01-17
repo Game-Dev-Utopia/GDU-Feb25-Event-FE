@@ -42,6 +42,7 @@ export async function postRequestJson(URL, payload) {
     const response = await axiosClient.post(URL, payload);
     return response.data;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 }
