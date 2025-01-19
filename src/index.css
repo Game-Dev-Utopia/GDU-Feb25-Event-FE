@@ -33,3 +33,25 @@
 .body{
   scroll-behavior: smooth;
 }
+
+/* Add a black overlay and linear gradient for all sections */
+.overlay-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+  z-index: 1;
+}
+
+.overlay-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* Black overlay */
+  z-index: 2;
+}
+
+.overlay-section > * {
+  position: relative;
+  z-index: 3; /* Ensure content is above the overlay */
+}

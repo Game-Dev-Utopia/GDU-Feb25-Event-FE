@@ -31,17 +31,10 @@ module.exports = {
         'slide-left': {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-100%)' },
-        },
-        parallax: {
-          "0%": { transform: "translateY(0%)" },
-          "100%": { transform: "translateY(100%)" },
-        },
+        }
       },
       animation: {
         'slide-left': 'slide-left 8s linear infinite',
-      },
-      animation: {
-        parallax: "parallax 5s linear infinite",
       },
       
     },

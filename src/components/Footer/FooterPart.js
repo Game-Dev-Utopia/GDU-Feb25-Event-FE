@@ -14,7 +14,7 @@ function FooterPart() {
     <div
       className="relative w-full h-[50vh] bg-cover bg-center"
       style={{
-        backgroundImage: "url('/images/sky.jpg')", // Replace with your image path
+       
         height: "50vh",
       }}
     >

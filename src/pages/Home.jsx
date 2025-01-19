@@ -4,26 +4,22 @@ import Sponser from "../components/Sponsers/Sponser";
 import "../index.css";
 import Event from "../components/Events/Event";
 import Faq from "../components/FAQ/Faq";
-import Footer from "../components/Footer/FooterPart"
+import Footer from "../components/Footer/FooterPart";
 import SponserSlider from "../components/Sponsers/SponserSlider";
+import Countdown from "../components/Countdown/Countdown";
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
     <>
-    
       <div className="w-screen h-screen overflow-y-scroll bg-goldenrod">
         {/* Home Banner */}
         <div className="relative text-white font-sans">
           {/* Background section with button */}
-        <div className="absolute inset-0 bg-black/45 rounded-lg z-1"></div>
-
-          <div
-            className="bg-cover bg-center bg-no-repeat h-screen w-auto flex items-end justify-center"
+          <div className="relative bg-cover bg-center bg-no-repeat h-screen w-full flex items-end justify-center overlay-section"
             style={{
-              backgroundImage:
-                "url(/images/a2.webp)",
+              backgroundImage: `url(/images/a2.webp)`,
             }}
           >
             <button
@@ -34,20 +30,52 @@ const Home = () => {
             </button>
           </div>
         </div>
-        <SponserSlider />
 
-        {/*Events */}
-        <Event />
+        {/* Sponser Slider */}
+        <div className="relative bg-cover bg-center bg-no-repeat py-20 overlay-section"
+          style={{
+            backgroundImage: `url(/images/bg8.webp)`,
+          }}
+        >
+          <SponserSlider />
+        </div>
 
-        <Faq />
+        {/* Countdown */}
+        <div className="relative bg-cover bg-center bg-no-repeat py-20 overlay-section"
+          style={{
+            backgroundImage: `url(/images/bg9.jpg)`,
+          }}
+        >
+          <Countdown />
+        </div>
 
-        <Sponser />
+        {/* Events */}
+        <div className="relative bg-cover bg-center bg-no-repeat py-20 overlay-section"
+          style={{
+            backgroundImage: `url(/images/bg7.jpg)`,
+          }}
+        >
+          <Event />
+        </div>
 
-        <Footer />
+        {/* FAQ */}
+        <div className="relative bg-cover bg-center bg-no-repeat py-20 overlay-section"
+          style={{
+            backgroundImage: `url(/images/background_img2.jpg)`,
+          }}
+        >
+          <Faq />
+        </div>
+
+        {/* Footer */}
+        <div className="relative bg-cover bg-center bg-no-repeat overlay-section"
+          style={{
+            backgroundImage: `url(/images/sky.jpg)`,
+          }}
+        >
+          <Footer />
+        </div>
       </div>
-    
-
-    
     </>
   );
 };
