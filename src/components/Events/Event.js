@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import ImageCard from './ImageCard';
 
 
-
-
 const ImageCardGrid = () => {
   const cards = [
     {

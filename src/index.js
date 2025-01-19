@@ -30,6 +30,7 @@ const router = new Router(
       <Route path="/signup" element={<SignUp />} />
       <Route path="/*" element={<PageNotFound />} />
       <Route path="/logout" element={<Logout />} />
+      <Route path="/intro" element={<Intro />} />
     </Route>
   )
 );

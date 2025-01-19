@@ -32,6 +32,7 @@
 
 .body{
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Add a black overlay and linear gradient for all sections */
@@ -55,3 +56,6 @@
   position: relative;
   z-index: 3; /* Ensure content is above the overlay */
 }
+
+
+
