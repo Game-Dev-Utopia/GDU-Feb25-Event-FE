@@ -54,12 +54,12 @@ const Login = () => {
       }}
     >
       <div
-        className="bg-black bg-opacity-90 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-md w-full md:w-1/2 mx-5"
-        style={{ fontFamily: "HarryP" }}
+        className="bg-black bg-opacity-90 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-md w-full md:w-1/2 mx-5 font-cinzel"
+        
       >
         <h1
-          className="text-5xl md:text-5xl font-semibold text-center text-yellow-400 mb-6"
-          style={{ fontFamily: "HarryP" }}
+          className="text-6xl md:text-6xl font-semibold text-center text-yellow-400 mb-6"
+          
         >
           GLITCHED
         </h1>
@@ -93,7 +93,7 @@ const Login = () => {
 
           <div className="mt-8 flex flex-col gap-y-4">
             <button
-              className="active:scale-[.98] active:duration-75 hover:scale-[1.1] transition-all py-3 rounded-xl bg-blue-500 text-white text-2xl font-bold hover:bg-green-600 transition-colors"
+              className="active:scale-[.98] active:duration-75 hover:scale-[1.1] transition-all py-3 rounded-xl bg-deepCrimson text-goldenrod text-2xl font-bold "
               onClick={handleLogin}
             >
               LOGIN

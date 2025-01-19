@@ -45,19 +45,19 @@ const Faq = () => {
   return (
 
   <div className="relative flex justify-center p-5 mt-10 font-playfair">
-    <div className="w-full md:w-3/5 text-white p-5 bg-charcoalGray bg-opacity-50 rounded-lg">
-      <div className="text-center mb-5 text-6xl font-bold font-cinzel">
+    <div className="w-full md:w-3/5 p-5 bg-charcoalGray bg-opacity-50 rounded-lg">
+      <div className="text-center mb-5 text-6xl font-bold font-cinzel text-goldenrod">
         Frequently Asked Questions
       </div>
       <div className="space-y-5">
         {faqs.map((faq, index) => (
           <div key={index} className="p-3 rounded-lg">
             <div
-              className="accordion-header cursor-pointer flex items-center space-x-3 p-3 bg-black bg-opacity-50 rounded-lg hover:bg-gray-700"
+              className="accordion-header cursor-pointer flex items-center space-x-3 p-3 bg-black bg-opacity-50 rounded-lg hover:bg-gray-700 text-burntOrange"
               onClick={() => toggleAccordion(index)}
             >
               {activeIndex === index ? <FaMinus /> : <FaPlus />}
-              <h3 className="text-lg font-semibold">{faq.question}</h3>
+              <h3 className="text-2xl font-semibold ">{faq.question}</h3>
             </div>
             <div
               ref={(el) => (contentRefs.current[index] = el)}
@@ -66,7 +66,7 @@ const Faq = () => {
                 maxHeight: activeIndex === index ? height[index] : 0,
               }}
             >
-              <p className="p-4">{faq.answer}</p>
+              <p className="p-4 text-white text-2xl">{faq.answer}</p>
             </div>
           </div>
         ))}

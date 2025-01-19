@@ -55,21 +55,21 @@ const ImageCard = ({ title, description, imageUrl, modalImageUrl, eveurl }) => {
           </div>
           
           <div
-            className={`absolute bottom-0 left-0 right-0 h-1/2 bg-black transition-opacity duration-300 ${
+            className={`absolute bottom-0 left-0 right-0 h-1/2 bg-black bg-opacity-85 transition-opacity duration-300 ${
               isHovered ? 'opacity-75' : 'opacity-0'
             }`}
           />
           
           <div
-            className={`absolute bottom-0 left-0 right-0 h-1/2 p-6 flex flex-col justify-end text-white transition-all duration-300 transform ${
+            className={`absolute bottom-0 left-0 right-0 h-1/2 p-6 flex flex-col justify-end  transition-all duration-300 transform ${
               isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
           >
-            <h3 className="text-xl font-bold mb-2">{title}</h3>
-            <p className="text-sm mb-4 line-clamp-2">{description}</p>
+            <h3 className="text-2xl font-bold mb-1 text-burntOrange">{title}</h3>
+            <p className="text-lg mb-2 line-clamp-3 text-silver">{description}</p>
             <button 
               onClick={() => setIsOpen(true)}
-              className="bg-white text-black px-4 py-2 rounded-md w-fit hover:bg-gray-200 transition-colors duration-200"
+              className="bg-goldenrod text-deepCrimson px-4 py-2 rounded-md w-fit  transition-colors duration-200"
             >
               Read More
             </button>

@@ -9,7 +9,7 @@ const MobileSidebar = () => {
       {/* Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 right-4 z-20 bg-red-500 p-2 rounded-lg shadow-md hover:bg-red-600 transition duration-300"
+        className="fixed top-4 right-4 z-20 bg-goldenrod p-2 rounded-lg shadow-md transition duration-300"
       >
         <img
           src="https://cdn-icons-png.flaticon.com/128/6015/6015685.png"
@@ -27,7 +27,7 @@ const MobileSidebar = () => {
         {/* Close Button */}
         <button
           onClick={() => setIsOpen(false)}
-          className="absolute top-4 right-4 bg-gray-800 py-2 px-3 rounded-full text-white hover:bg-red-500 transition"
+          className="absolute top-4 right-4 bg-deepCrimson py-2 px-3 rounded-full text-goldenrod transition"
         >
           ✕
         </button>
@@ -36,10 +36,10 @@ const MobileSidebar = () => {
         <ul className="flex flex-col items-center justify-center h-full space-y-6">
           {["Home", "Feature", "Card", "About Us", "FAQ's"].map(
             (item, index) => (
-              <li key={index} className="relative group w-full">
+              <li key={index} className="relative group w-full ">
                 <Link
                   to="/"
-                  className="block text-lg text-white py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
+                  className="block text-3xl text-goldenrod py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
                 >
                   {item}
                 </Link>

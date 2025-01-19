@@ -12,7 +12,7 @@ function FooterPart() {
     <footer>
     {/* Footer Background with Dark Overlay */}
     <div
-      className="relative w-full h-[50vh] bg-cover bg-center"
+      className="relative w-full h-[50vh] bg-cover bg-center font-cinzel font-semibold"
       style={{
        
         height: "50vh",
@@ -28,7 +28,7 @@ function FooterPart() {
       </div>
 
       {/* Content on Image */}
-      {/* <div className="relative z-10 flex flex-col justify-center items-center h-full text-white px-4 md:px-20">
+      {/* <div className="relative z-10 flex flex-col justify-center items-center h-full text-goldenrod px-4 md:px-20">
         <h2 className="text-2xl md:text-4xl font-cinzel text-center leading-snug">
           ENTER THE GAME, <br /> CONQUER THE WORLD!
         </h2>
@@ -38,15 +38,16 @@ function FooterPart() {
       </div> */}
 
       {/* Footer Line Over Image */}
-      <div className="absolute bottom-0 w-full text-white bg-black bg-opacity-50 py-4 px-6">
+      <div className="absolute bottom-0 w-full text-goldenrod bg-black bg-opacity-50 py-4 px-6 text-2xl">
         <div className="flex flex-col md:flex-row justify-between items-center text-sm md:text-base">
           {/* Social Icons */}
-          <div className="flex gap-4 mb-2 md:mb-0">
-            <FaFacebookF className="text-lg hover:text-yellow-400 cursor-pointer" />
-            <FaTwitter className="text-lg hover:text-yellow-400 cursor-pointer" />
-            <FaInstagram className="text-lg hover:text-yellow-400 cursor-pointer" />
-            <FaWhatsapp className="text-lg hover:text-yellow-400 cursor-pointer" />
+
+          {/* Branding */}
+          <div className="text-center md:text-right">
+            <span>Game Development Utopia</span>
           </div>
+
+          
 
           {/* Copyright */}
           <div className="flex items-center gap-1 mb-2 md:mb-0">
@@ -54,10 +55,14 @@ function FooterPart() {
             <span>2025 Copyright reserved.</span>
           </div>
 
-          {/* Branding */}
-          <div className="text-center md:text-right">
-            <span>Game Development Utopia</span>
+          <div className="flex gap-4 mb-2 md:mb-0">
+            <FaFacebookF className="text-lg hover:text-yellow-400 cursor-pointer" />
+            <FaTwitter className="text-lg hover:text-yellow-400 cursor-pointer" />
+            <FaInstagram className="text-lg hover:text-yellow-400 cursor-pointer" />
+            <FaWhatsapp className="text-lg hover:text-yellow-400 cursor-pointer" />
           </div>
+
+          
         </div>
       </div>
     </div>

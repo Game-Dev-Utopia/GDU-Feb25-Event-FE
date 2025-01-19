@@ -12,8 +12,8 @@ function Countdown() {
                 
                 className="bg-cover flex justify-center items-center">
                 <div className="font-bold text-white tracking-widest text-center font-cinzel" >
-                    <h1 className="lg:text-5xl md:text-2xl tracking-[10px] mb-20 text-[#F2F2F2]">WE'RE LAUNCHING SOON</h1>
-                    <div className="text=[#8486A9] font-cinzel">
+                    <h1 className="text-5xl md:text-6xl tracking-[10px] mb-16 text-goldenrod">WE'RE LAUNCHING SOON</h1>
+                    <div className="text=[#C49A3E] font-cinzel">
                         <FlipCountdown
                             hideYear
                             hideMonth
