@@ -55,9 +55,9 @@ const Faq = () => {
   <div className="absolute inset-0 bg-black bg-opacity-45"></div>
 
   {/* Content */}
-  <div className="relative flex justify-center p-5 mt-10">
+  <div className="relative flex justify-center p-5 mt-10 font-playfair">
     <div className="w-full md:w-3/5 text-white p-5 bg-charcoalGray bg-opacity-50 rounded-lg">
-      <div className="text-center mb-5 text-2xl font-bold">
+      <div className="text-center mb-5 text-2xl font-bold ">
         Frequently Asked Questions
       </div>
       <div className="space-y-5">
