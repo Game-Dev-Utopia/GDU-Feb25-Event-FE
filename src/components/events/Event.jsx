@@ -1,76 +1,56 @@
 import React, { useState } from 'react';
 
-const cardData = [
-  {
-    title: "Ancient Dragon's Lair",
-    description:
-      "Deep within the Forgotten Realms lies a legendary dragon's lair, rumored to hold treasures beyond mortal imagination...",
-    challengeRating: 24,
-    environment: "Volcanic",
-    fullDescription:
-      "Deep within the Forgotten Realms lies a legendary dragon's lair, rumored to hold treasures beyond mortal imagination. The ancient red dragon Infernothrax has made this volcanic cavern its home for millennia, amassing a hoard that would make kings weep with envy.",
-    image: '/dragon.png',
-  },
-  {
-    title: "Wizard's Tower",
-    description: "A crystalline spire pierces the clouds, home to an eccentric archmage and their collection of forbidden spells...",
-    challengeRating: 18,
-    environment: "Arcane",
-    fullDescription:
-      "A crystalline spire pierces the clouds, home to an eccentric archmage and their collection of forbidden spells. The tower shifts and changes, its rooms rearranging themselves according to their master's whims.",
-    image: null,
-  },
-  {
-    title: "Goblin Caves",
-    description: "Dark and damp, these caves are filled with scheming goblins ready to ambush unwary adventurers...",
-    challengeRating: 5,
-    environment: "Underground",
-    fullDescription:
-      "Dark and damp, these caves are filled with scheming goblins ready to ambush unwary adventurers. Hidden traps and secret passages await those who dare enter.",
-    image: null,
-  },
-];
-
-const DnDCard = ({ card }) => {
+const ImageCard = ({ title, description, imageUrl, modalImageUrl, eveurl }) => {
+  const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [showReadMore, setShowReadMore] = useState(false);
 
   return (
     <>
-      {/* Card */}
       <div
-        className="relative w-full h-96 overflow-hidden transition-all duration-500 bg-gradient-to-br from-[#368BC1] to-[#142] hover:from-[#383838] hover:to-stone-800 border-2 border-amber-900 hover:border-amber-600 transform hover:-translate-y-2 hover:shadow-xl hover:shadow-red-900/30 rounded-lg"
-        onMouseEnter={() => setShowReadMore(true)}
-        onMouseLeave={() => setShowReadMore(false)}
+        className="relative overflow-hidden rounded-lg transition-all duration-300 h-[320px] shadow-lg hover:shadow-xl"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="p-0 h-full relative">
+        {/* Main background image */}
+        <img
+          src={imageUrl}
+          alt={title}
+          className="w-full h-full object-cover"
+        />
+        
+        {/* Overlay smaller placeholder */}
+        <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 overflow-hidden rounded-lg shadow-xl">
           <img
-            src={card.image || `https://via.placeholder.com/600x400?text=${encodeURIComponent(card.title)}`}
-            alt={card.title}
+            src={eveurl.replace('224/320', '112/160')}
+            alt={`${title} Overlay`}
             className="w-full h-full object-cover"
           />
-
-          <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 p-4 text-white">
-            <h3 className="text-2xl font-medieval text-[#6C3B90]">{card.title}</h3>
-            <p className="text-amber-200/80">{card.description}</p>
-          </div>
-
-          <div
-            className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-stone-900 to-transparent p-6 transform transition-all duration-300 ${
-              showReadMore ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-            }`}
+          {/* Removed the border div */}
+        </div>
+        
+        <div
+          className={`absolute bottom-0 left-0 right-0 h-1/2 bg-black transition-opacity duration-300 ${
+            isHovered ? 'opacity-75' : 'opacity-0'
+          }`}
+        />
+        
+        <div
+          className={`absolute bottom-0 left-0 right-0 h-1/2 p-6 flex flex-col justify-end text-white transition-all duration-300 transform ${
+            isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}
+        >
+          <h3 className="text-xl font-bold mb-2">{title}</h3>
+          <p className="text-sm mb-4 line-clamp-2">{description}</p>
+          <button 
+            onClick={() => setIsOpen(true)}
+            className="bg-white text-black px-4 py-2 rounded-md w-fit hover:bg-gray-200 transition-colors duration-200"
           >
-            <button
-              onClick={() => setIsOpen(true)}
-              className="w-full py-2 px-4 bg-red-900 hover:bg-red-800 text-amber-400 rounded-md border border-amber-600 flex items-center justify-center gap-2 transition-colors duration-300"
-            >
-              Read More
-            </button>
-          </div>
+            Read More
+          </button>
         </div>
       </div>
 
-      {/* Enhanced Vintage Modal */}
+      {/* Modal remains unchanged */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-8"
@@ -97,7 +77,6 @@ const DnDCard = ({ card }) => {
               `
             }}
           >
-            {/* Decorative Borders */}
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-amber-600/80 rounded-tl-lg"></div>
               <div className="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-amber-600/80 rounded-tr-lg"></div>
@@ -105,54 +84,58 @@ const DnDCard = ({ card }) => {
               <div className="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-amber-600/80 rounded-br-lg"></div>
             </div>
 
-            {/* Left Side: Image with enhanced frame */}
             <div className="w-1/3 relative">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-amber-900/20 to-amber-600/20 rounded-lg pointer-events-none"></div>
                 <img
-                  src={card.image || `https://via.placeholder.com/600x300?text=${encodeURIComponent(card.title)}`}
-                  alt={`${card.title} Expanded`}
+                  src={modalImageUrl}
+                  alt={`${title} Expanded`}
                   className="rounded-lg w-full object-cover border-4 border-amber-900/80 shadow-lg shadow-amber-900/40"
                 />
               </div>
             </div>
 
-            {/* Right Side: Enhanced Content */}
             <div className="w-2/3 flex flex-col">
-              <h2 className="text-4xl font-medieval text-amber-400 mb-6"
-                  style={{
-                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 191, 0, 0.3)'
-                  }}>
-                {card.title}
+              <h2 
+                className="text-4xl font-bold text-amber-400 mb-6"
+                style={{
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 191, 0, 0.3)'
+                }}
+              >
+                {title}
               </h2>
               
               <div className="relative">
                 <div className="absolute inset-0 bg-black/20 rounded-lg filter blur-sm"></div>
-                <p className="relative text-lg leading-relaxed text-amber-200/90 mb-6"
-                   style={{
-                     textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
-                   }}>
-                  {card.fullDescription}
+                <p 
+                  className="relative text-lg leading-relaxed text-amber-200/90 mb-6"
+                  style={{
+                    textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)'
+                  }}
+                >
+                  {description}
                 </p>
               </div>
 
               <div className="mt-6 p-6 bg-gradient-to-br from-black/60 to-black/40 rounded-lg border-2 border-amber-900/50 backdrop-blur-sm relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-amber-900/5 to-transparent opacity-50"></div>
-                <h4 className="text-2xl text-amber-400 mb-4 relative"
-                    style={{
-                      textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)'
-                    }}>
-                  Dungeon Master's Notes
+                <h4 
+                  className="text-2xl text-amber-400 mb-4 relative"
+                  style={{
+                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)'
+                  }}
+                >
+                  Additional Details
                 </h4>
                 <div className="space-y-2 text-amber-200/90 relative">
                   <p className="flex items-center gap-2">
-                    <span className="text-amber-400">Challenge Rating:</span> {card.challengeRating}
+                    <span className="text-amber-400">Category:</span> Featured
                   </p>
                   <p className="flex items-center gap-2">
-                    <span className="text-amber-400">Environment:</span> {card.environment}
+                    <span className="text-amber-400">Type:</span> Article
                   </p>
                   <p className="flex items-center gap-2">
-                    <span className="text-amber-400">Treasure Hoard:</span> Legendary
+                    <span className="text-amber-400">Reading Time:</span> 5 minutes
                   </p>
                 </div>
               </div>
@@ -164,16 +147,54 @@ const DnDCard = ({ card }) => {
   );
 };
 
-const DnDCardGrid = () => {
+const ImageCardGrid = () => {
+  const cards = [
+    {
+      title: "The Art of Photography",
+      description: "Explore the fundamentals of composition, lighting, and perspective that make photographs truly memorable. Learn from master photographers and discover how they capture the perfect moment.",
+      imageUrl: "/scroll2.jpg", // Dynamic image URL
+      modalImageUrl: "dragon.png", // Dynamic image URL
+      eveurl: "dragon.png", // Dynamic image URL
+    },
+    {
+      title: "Modern Architecture",
+      description: "Discover how contemporary architects are pushing the boundaries of design and sustainability. From soaring skyscrapers to innovative homes, explore the intersection of form and function.",
+      imageUrl: "https://source.unsplash.com/random/800x600?architecture", // Dynamic image URL
+      modalImageUrl: "https://source.unsplash.com/random/800x600?architecture_modal", // Dynamic image URL
+      eveurl: "https://source.unsplash.com/random/224x320?architecture", // Dynamic image URL
+    },
+    {
+      title: "Urban Gardens",
+      description: "Learn how city dwellers are transforming concrete jungles into green oases with innovative gardening solutions. Explore vertical gardens, rooftop farms, and community spaces.",
+      imageUrl: "https://source.unsplash.com/random/800x600?gardens", // Dynamic image URL
+      modalImageUrl: "https://source.unsplash.com/random/800x600?gardens_modal", // Dynamic image URL
+      eveurl: "https://source.unsplash.com/random/224x320?gardens", // Dynamic image URL
+    },
+    {
+      title: "Digital Innovation",
+      description: "Stay ahead of the curve with insights into the latest technological breakthroughs and digital trends. Understand how emerging technologies are reshaping industries and creating new opportunities.",
+      imageUrl: "https://source.unsplash.com/random/800x600?technology", // Dynamic image URL
+      modalImageUrl: "https://source.unsplash.com/random/800x600?technology_modal", // Dynamic image URL
+      eveurl: "https://source.unsplash.com/random/224x320?technology", // Dynamic image URL
+    }
+  ];
+
   return (
-    <div className="p-8 bg-stone-950 min-h-screen">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {cardData.map((card) => (
-          <DnDCard key={card.title} card={card} />
+    <div className="container mx-auto px-4 py-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {cards.map((card, index) => (
+          <ImageCard
+            key={index}
+            title={card.title}
+            description={card.description}
+            imageUrl={card.imageUrl}
+            modalImageUrl={card.modalImageUrl}
+            eveurl={card.eveurl}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-export default DnDCardGrid;
+export default ImageCardGrid;
