@@ -123,7 +123,7 @@ const EventRegistrationForm = () => {
 
         {/* Form Elements */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          {event.typeOfevent === "solo" ? (
+          {event.typeOfevent === "solo" || event.typeOfevent === "Solo"  ? (
             <>
               {/* Solo Event */}
               <label htmlFor="email" className="block text-lg font-semibold text-white z-20">

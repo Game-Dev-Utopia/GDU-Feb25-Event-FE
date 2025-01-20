@@ -36,13 +36,6 @@ module.exports = {
       animation: {
         'slide-left': 'slide-left 8s linear infinite',
       },
-
-      perspective: {
-        "50em": "50em",
-      },
-      rotate: {
-        "y-1": "rotateY(1turn)",
-      },
       
     },
     
