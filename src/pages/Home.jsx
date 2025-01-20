@@ -13,7 +13,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="w-screen h-screen overflow-y-scroll bg-goldenrod">
+      <div className="w-screen h-screen overflow-y-scroll bg-goldenrod" id="Home">
         {/* Home Banner */}
         <div className="relative text-white font-sans">
           {/* Background section with button */}
@@ -36,6 +36,7 @@ const Home = () => {
           style={{
             backgroundImage: `url(/images/bg8.webp)`,
           }}
+          id="Sponsers"
         >
           <SponserSlider />
         </div>
@@ -54,6 +55,7 @@ const Home = () => {
           style={{
             backgroundImage: `url(/images/bg7.jpg)`,
           }}
+          id="Events"
         >
           <Event />
         </div>
@@ -63,6 +65,7 @@ const Home = () => {
           style={{
             backgroundImage: `url(/images/background_img2.jpg)`,
           }}
+          id="FAQ's"
         >
           <Faq />
         </div>

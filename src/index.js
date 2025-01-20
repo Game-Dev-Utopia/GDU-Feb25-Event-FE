@@ -16,6 +16,7 @@ import Intro from './pages/Intro';
 import EventRegistrationForm from './components/RegistrationForm/EventRegistrationForm';
 import Login from './components/LoginPage_Preet/Login';
 import SignUp from './components/LoginPage_Preet/SignUp';
+import Profile from './components/Profile/Profile';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
@@ -31,6 +32,7 @@ const router = new Router(
       <Route path="/*" element={<PageNotFound />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/intro" element={<Intro />} />
+      <Route path="/profile" element={<Profile />} />
     </Route>
   )
 );

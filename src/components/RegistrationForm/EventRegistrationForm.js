@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getRequest , postRequestJsonwithHeader} from '../../api/api';
+import { getRequest, postRequestJsonwithHeader } from '../../api/api';
 import { toast } from 'react-toastify';
 
 const EventRegistrationForm = () => {
@@ -8,6 +8,7 @@ const EventRegistrationForm = () => {
   const navigate = useNavigate();
   const [event, setEvent] = useState(null); // Fetched event details
   const [loading, setLoading] = useState(true); // Loading state
+  const [registering, setRegistering] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
 
   const [formData, setFormData] = useState({
@@ -71,38 +72,41 @@ const EventRegistrationForm = () => {
     } else if (event?.typeOfevent === "team") {
       console.log(formData);
     }
+    setRegistering(true);
+    try {
 
-     try {
-          
-          const token = localStorage.getItem("accessToken");
-          const response = await postRequestJsonwithHeader(`/api/v1/registration/eventregister?eventId=${eventID}`, formData);
-    
-          console.log(response);
-    
-          if (response) {
-            toast.success("Registration successful!", { position: "top-right" });
-            setFormData({
-              teamName: "",
-              teamemail: [],
-              email: "",
-            });
-            setTimeout(() => navigate("/"), 2000); // Redirect to /home
-          } else {
-            const errorData = await response.json();
-            toast.error(`Registration failed: ${errorData.message || "Unknown error"}`, {
-              position: "top-right",
-            });
-          }
-        } catch (error) {
-          toast.error(
-            "An error occurred while Registering. Please try again later.",
-            { position: "top-right" }
-          );
-        }
-      
+      const token = localStorage.getItem("accessToken");
+      const response = await postRequestJsonwithHeader(`/api/v1/registration/eventregister?eventId=${eventID}`, formData);
 
-    
-   
+      console.log(response);
+
+      if (response) {
+        toast.success("Registration successful!", { position: "top-right" });
+        setFormData({
+          teamName: "",
+          teamemail: [],
+          email: "",
+        });
+        setTimeout(() => navigate("/"), 2000); // Redirect to /home
+      } else {
+        const errorData = await response.json();
+        toast.error(`Registration failed: ${errorData.message || "Unknown error"}`, {
+          position: "top-right",
+        });
+      }
+    } catch (error) {
+      toast.error(
+        "An error occurred while Registering. Please try again later.",
+        { position: "top-right" }
+      );
+    }
+    finally{
+      setRegistering(false);
+    }
+
+
+
+
   };
 
   if (loading) return <div>Loading event details...</div>;
@@ -113,7 +117,7 @@ const EventRegistrationForm = () => {
     style={{ backgroundImage: `url('/images/dragondungeon.webp')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
   >
     {/* Form Container */}
-    <div className="relative z-20 bg-white/5 p-6 rounded-lg max-w-md w-full shadow-lg border-2 border-red-900 sm:p-8 md:max-w-lg lg:max-w-xl">
+    <div className="relative z-20 bg-goldenrod/5 p-6 rounded-lg max-w-md w-full shadow-lg border-2 border-red-900 sm:p-8 md:max-w-lg lg:max-w-xl">
       {/* Dark Overlay for Form Background */}
       <div className="absolute inset-0 bg-black/70 rounded-lg z-0"></div>
 
@@ -123,7 +127,7 @@ const EventRegistrationForm = () => {
 
         {/* Form Elements */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          {event.typeOfevent === "solo" || event.typeOfevent === "Solo"  ? (
+          {event.typeOfevent === "solo" || event.typeOfevent === "Solo" ? (
             <>
               {/* Solo Event */}
               <label htmlFor="email" className="block text-lg font-semibold text-white z-20">
@@ -194,8 +198,9 @@ const EventRegistrationForm = () => {
           <button
             type="submit"
             className="w-full px-4 py-2 bg-yellow-400 text-black font-bold rounded-md hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            disabled={registering}
           >
-            Embark on Quest
+           {registering ? "Registering....": "Embark on Quest"}
           </button>
         </form>
 

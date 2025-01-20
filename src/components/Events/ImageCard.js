@@ -9,9 +9,11 @@ const ImageCard = ({
   description = "No description available.",
   bgUrl,
   imageUrl,
+  typeOfevent,
+  date,
   registrationFee = "Free",
   teamSize = "N/A",
-  rules = [],
+  rules,
   venue = "Unknown Venue",
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -25,7 +27,7 @@ const ImageCard = ({
     } catch (error) {
       if (error.response?.status === 401) {
         toast.error("Login first to register!", { position: "top-right" });
-        setTimeout(() => navigate("/signup"), 2000);
+        setTimeout(() => navigate("/signin"), 2000);
       } else {
         toast.error(
           `An error occurred: ${error.response?.data?.message || "Unknown error"}`,
@@ -37,53 +39,51 @@ const ImageCard = ({
 
   return (
     <>
-        <div
-          className="relative overflow-hidden rounded-lg transition-all duration-300 h-[320px] shadow-lg hover:shadow-xl"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          {/* Main background image */}
+      <div
+        className="relative overflow-hidden rounded-lg transition-all duration-300 h-[320px] shadow-lg hover:shadow-xl"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Main background image */}
+        <img
+          src={bgUrl}
+          alt={title}
+          className="w-full h-full object-cover"
+        />
+
+        {/* Overlay smaller placeholder */}
+        <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 overflow-hidden rounded-lg shadow-xl">
           <img
-            src={bgUrl}
-            alt={title}
+            src={imageUrl.replace('224/320', '112/160')}
+            alt={`${title} Overlay`}
             className="w-full h-full object-cover"
           />
-          
-          {/* Overlay smaller placeholder */}
-          <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 overflow-hidden rounded-lg shadow-xl">
-            <img
-              src={imageUrl.replace('224/320', '112/160')}
-              alt={`${title} Overlay`}
-              className="w-full h-full object-cover"
-            />
-            {/* Removed the border div */}
-          </div>
-          
-          <div
-            className={`absolute bottom-0 left-0 right-0 h-1/2 bg-black bg-opacity-85 transition-opacity duration-300 ${
-              isHovered ? 'opacity-75' : 'opacity-0'
-            }`}
-          />
-          
-          <div
-            className={`absolute bottom-0 left-0 right-0 h-1/2 p-6 flex flex-col justify-end  transition-all duration-300 transform ${
-              isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-          >
-            <h3 className="text-2xl font-bold mb-1 text-burntOrange">{title}</h3>
-            <p className="text-lg mb-2 line-clamp-3 text-silver">{description}</p>
-            <button 
-              onClick={() => setIsOpen(true)}
-              className="bg-goldenrod text-deepCrimson px-4 py-2 rounded-md w-fit  transition-colors duration-200"
-            >
-              Read More
-            </button>
-          </div>
+          {/* Removed the border div */}
         </div>
-  
-        {/* Modal remains unchanged */}
-        {isOpen && (
-          <div
+
+        <div
+          className={`absolute bottom-0 left-0 right-0 h-1/2 bg-black bg-opacity-85 transition-opacity duration-300 ${isHovered ? 'opacity-75' : 'opacity-0'
+            }`}
+        />
+
+        <div
+          className={`absolute bottom-0 left-0 right-0 h-1/2 p-6 flex flex-col justify-end  transition-all duration-300 transform ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+        >
+          <h3 className="text-2xl font-bold mb-1 text-burntOrange">{title}</h3>
+          <p className="text-lg mb-2 line-clamp-3 text-silver">{description}</p>
+          <button
+            onClick={() => setIsOpen(true)}
+            className="bg-goldenrod text-deepCrimson px-4 py-2 rounded-md w-fit  transition-colors duration-200"
+          >
+            Read More
+          </button>
+        </div>
+      </div>
+
+      {/* Modal remains unchanged */}
+      {isOpen && (
+        <div
           className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4 sm:p-8 mt-[10rem] md:mt-0"
           onClick={() => setIsOpen(false)}
         >
@@ -121,7 +121,7 @@ const ImageCard = ({
                   />
                 </div>
               </div>
-        
+
               {/* Content */}
               <div className="w-full lg:w-2/3 flex flex-col gap-6">
                 {/* Title */}
@@ -133,7 +133,7 @@ const ImageCard = ({
                 >
                   {title}
                 </h2>
-        
+
                 {/* Description */}
                 <div className="relative">
                   <div className="absolute inset-0 bg-black/20 rounded-lg filter blur-sm"></div>
@@ -146,7 +146,7 @@ const ImageCard = ({
                     {description}
                   </p>
                 </div>
-        
+
                 {/* Box */}
                 <div className="p-6 bg-gradient-to-br from-black/60 to-black/40 rounded-lg border-2 border-amber-900/50 backdrop-blur-sm relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-amber-900/5 to-transparent opacity-50"></div>
@@ -160,19 +160,31 @@ const ImageCard = ({
                   </h4>
                   <div className="space-y-2 text-amber-200/90 relative">
                     <p className="flex items-center justify-center lg:justify-start gap-2">
-                      <span className="text-amber-400">Challenge Rating:</span> 100
+                      <span className="text-amber-400">Event Type : </span> {typeOfevent}
                     </p>
                     <p className="flex items-center justify-center lg:justify-start gap-2">
-                      <span className="text-amber-400">Environment:</span> TBD
+                      <span className="text-amber-400">Team Size : </span> TBD
                     </p>
                     <p className="flex items-center justify-center lg:justify-start gap-2">
-                      <span className="text-amber-400">Treasure Hoard:</span> Legendary
+                      <span className="text-amber-400">Registration Fee :</span> {registrationFee || "Free"}
                     </p>
+                    {venue &&
+
+                      <p className="flex items-center justify-center lg:justify-start gap-2">
+                        <span className="text-amber-400">Time & Venue :</span> {venue}
+                      </p>
+                    }
+                    {
+                      rules &&
+                      <p className="items-center  gap-2">
+                        <span className="text-amber-400">Rules & Regulations :</span> {rules}
+                      </p>
+                    }
                   </div>
                 </div>
               </div>
             </div>
-        
+
             {/* Register Button */}
             <div className="mt-8 flex justify-center">
               <button
@@ -184,10 +196,10 @@ const ImageCard = ({
             </div>
           </div>
         </div>
-        
-        
-        )}
-      </>
+
+
+      )}
+    </>
   );
 };
 

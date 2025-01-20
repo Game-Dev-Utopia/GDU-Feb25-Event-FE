@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { postRequestJson } from "../../api/api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -17,8 +18,13 @@ const Login = () => {
       return;
     }
 
+    setIsLoading(true); // Start loading
+
     try {
-      const response = await postRequestJson(`/api/v1/users/login`, JSON.stringify({ email, password }));
+      const response = await postRequestJson(
+        `/api/v1/users/login`,
+        JSON.stringify({ email, password })
+      );
 
       console.log(response);
 
@@ -27,8 +33,11 @@ const Login = () => {
         // Save token or user data if provided by API
         localStorage.setItem("accessToken", response.accessToken);
         localStorage.setItem("refreshToken", response.refreshToken);
-        
-        setTimeout(() => navigate("/"), 2000); // Redirect to /home
+        localStorage.setItem("username", response.user.username);
+        setEmail("");
+        setPassword("");
+
+        setTimeout(() => navigate("/"), 2000); // Redirect to /
       } else {
         const errorData = await response.json();
         toast.error(`Login failed: ${errorData.message || "Unknown error"}`, {
@@ -40,6 +49,8 @@ const Login = () => {
         "An error occurred while logging in. Please try again later.",
         { position: "top-right" }
       );
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -55,20 +66,14 @@ const Login = () => {
     >
       <div
         className="bg-black bg-opacity-90 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-md w-full md:w-1/2 mx-5 font-cinzel"
-        
       >
-        <h1
-          className="text-6xl md:text-6xl font-semibold text-center text-yellow-400 mb-6"
-          
-        >
+        <h1 className="text-6xl md:text-6xl font-semibold text-center text-yellow-400 mb-6">
           GLITCHED
         </h1>
 
         <div className="mt-8">
           <div className="mb-6">
-            <label className="text-2xl font-medium text-yellow-400">
-              Email
-            </label>
+            <label className="text-2xl font-medium text-yellow-400">Email</label>
             <input
               className="w-full border-2 border-gray-300 rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-blue-500 text-yellow-200"
               type="text"
@@ -84,7 +89,7 @@ const Login = () => {
             </label>
             <input
               className="w-full border-2 border-gray-300 rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-blue-500 text-yellow-200"
-              type="text"
+              type="password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -93,11 +98,21 @@ const Login = () => {
 
           <div className="mt-8 flex flex-col gap-y-4">
             <button
-              className="active:scale-[.98] active:duration-75 hover:scale-[1.1] transition-all py-3 rounded-xl bg-deepCrimson text-goldenrod text-2xl font-bold "
+              className={`active:scale-[.98] active:duration-75 hover:scale-[1.1] transition-all py-3 rounded-xl bg-deepCrimson text-goldenrod text-2xl font-bold ${
+                isLoading ? "opacity-70 cursor-not-allowed" : ""
+              }`}
               onClick={handleLogin}
+              disabled={isLoading}
             >
-              LOGIN
+              {isLoading ? "Logging In..." : "LOGIN"}
             </button>
+          </div>
+
+          <div className="text-goldenrod mt-2">
+            Don't Have an Account?{" "}
+            <span className="text-iceBlue font-bold cursor-pointer">
+              <Link to="/signup">Sign Up</Link>
+            </span>
           </div>
         </div>
       </div>

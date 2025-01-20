@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { postRequestJson } from "../../api/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false); // Loading state
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -28,10 +30,13 @@ const SignUp = () => {
       alert("Please fill all fields");
       return;
     }
-
+    setIsLoading(true); // Start loading
     try {
-      const response = await postRequestJson(`/api/v1/users/register
-`, formData);
+      const response = await postRequestJson(
+        `/api/v1/users/register
+`,
+        formData
+      );
       console.log(response);
 
       if (response) {
@@ -48,6 +53,9 @@ const SignUp = () => {
       toast.error("An error occurred. Please try again later.", {
         position: "top-right",
       });
+    }
+    finally{
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -147,11 +155,19 @@ const SignUp = () => {
 
         <div className="mt-8 flex flex-col gap-y-4">
           <button
-            className="active:scale-[.98] active:duration-75 hover:scale-[1.05] transition-all py-3 rounded-xl bg-blue-500 text-white text-2xl font-bold hover:bg-green-600 transition-colors"
+            className="active:scale-[.98] active:duration-75 hover:scale-[1.1] transition-all py-3 rounded-xl bg-deepCrimson text-goldenrod text-2xl font-bold "
             onClick={handleSubmit}
+            disabled={isLoading}
           >
-            SIGN UP
+            {isLoading ? "Logging In..." : "LOGIN"}
           </button>
+        </div>
+
+        <div className="text-goldenrod mt-2">
+          Already Have an Account ?{" "}
+          <span className="text-iceBlue font-bold cursor-pointer">
+            <Link to="/signin">Sign In</Link>
+          </span>
         </div>
       </div>
     </div>

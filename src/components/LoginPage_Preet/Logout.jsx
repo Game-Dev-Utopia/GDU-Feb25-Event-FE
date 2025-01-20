@@ -8,6 +8,7 @@ const Logout = () => {
     // Remove tokens from localStorage
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    localStorage.removeItem('username');
 
     // Optionally clear any other user-related data here
     // Redirect to the home page

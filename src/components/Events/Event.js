@@ -48,9 +48,11 @@ const ImageCardGrid = () => {
               title={card.name || "Untitled Event"}
               description={card.description || "No description available."}
               registrationFee={card.registrationFee || "Free"}
-              teamSize = {card.teamSize || ""}
-              venue = {card.venue || ""}
-              rules= {card.rules || ""}
+              typeOfevent = {card.typeOfevent}
+              teamSize = {card.teamSize}
+              date = {card.date}
+              venue = {card.venue}
+              rules= {card.rules}
               bgUrl={ "/scroll1.jpg"} 
               modalImageUrl={card.modalImageUrl || "dragon.png"}
               imageUrl={card.imageUrl || "dragon.png"}
