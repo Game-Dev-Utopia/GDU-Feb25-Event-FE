@@ -5,7 +5,7 @@ const MobileSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="block md:hidden">
+    <div className="md:hidden block">
       {/* Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
