@@ -84,28 +84,28 @@ const ImageCard = ({
       {/* Modal remains unchanged */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4 sm:p-8 mt-[10rem] md:mt-0"
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-start justify-center z-50 overflow-y-auto p-4  mt-10"
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="w-full max-w-4xl bg-[#2a1810] rounded-lg p-6 sm:p-8 mx-4 overflow-y-auto max-h-screen flex flex-col gap-8 relative"
+            className="w-full max-w-4xl bg-[#2a1810] rounded-lg p-6 sm:p-8 mx-4 flex flex-col gap-8 relative mt-10"
             onClick={(e) => e.stopPropagation()}
             style={{
               backgroundImage: `
-                linear-gradient(45deg, #2a1810 25%, transparent 25%),
-                linear-gradient(-45deg, #2a1810 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, #3a2218 75%),
-                linear-gradient(-45deg, transparent 75%, #3a2218 75%),
-                radial-gradient(circle at 50% 50%, #321c14 0%, #2a1810 100%)
-              `,
+              linear-gradient(45deg, #2a1810 25%, transparent 25%),
+              linear-gradient(-45deg, #2a1810 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, #3a2218 75%),
+              linear-gradient(-45deg, transparent 75%, #3a2218 75%),
+              radial-gradient(circle at 50% 50%, #321c14 0%, #2a1810 100%)
+            `,
               backgroundSize: '24px 24px, 24px 24px, 24px 24px, 24px 24px, 100% 100%',
               backgroundPosition: '0 0, 0 12px, 12px -12px, -12px 0px, 0 0',
               boxShadow: `
-                0 0 0 2px #8b4513,
-                0 0 0 4px #654321,
-                0 0 25px rgba(139, 69, 19, 0.6),
-                inset 0 0 100px rgba(0, 0, 0, 0.8)
-              `,
+              0 0 0 2px #8b4513,
+              0 0 0 4px #654321,
+              0 0 25px rgba(139, 69, 19, 0.6),
+              inset 0 0 100px rgba(0, 0, 0, 0.8)
+            `,
             }}
           >
             {/* Modal Content */}
@@ -124,7 +124,6 @@ const ImageCard = ({
 
               {/* Content */}
               <div className="w-full lg:w-2/3 flex flex-col gap-6">
-                {/* Title */}
                 <h2
                   className="text-4xl font-medieval text-amber-400 text-center lg:text-left"
                   style={{
@@ -134,7 +133,6 @@ const ImageCard = ({
                   {title}
                 </h2>
 
-                {/* Description */}
                 <div className="relative">
                   <div className="absolute inset-0 bg-black/20 rounded-lg filter blur-sm"></div>
                   <p
@@ -147,7 +145,6 @@ const ImageCard = ({
                   </p>
                 </div>
 
-                {/* Box */}
                 <div className="p-6 bg-gradient-to-br from-black/60 to-black/40 rounded-lg border-2 border-amber-900/50 backdrop-blur-sm relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-amber-900/5 to-transparent opacity-50"></div>
                   <h4
@@ -156,27 +153,25 @@ const ImageCard = ({
                       textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
                     }}
                   >
-                    Dungeon Master's Notes
+                   {title} Notes
                   </h4>
                   <div className="space-y-2 text-amber-200/90 relative">
-                    <p className="flex items-center justify-center lg:justify-start gap-2">
+                    <p className=" gap-2">
                       <span className="text-amber-400">Event Type : </span> {typeOfevent}
                     </p>
-                    <p className="flex items-center justify-center lg:justify-start gap-2">
-                      <span className="text-amber-400">Team Size : </span> TBD
+                    <p className=" gap-2">
+                      <span className="text-amber-400">Team Size : </span>{teamSize}
                     </p>
-                    <p className="flex items-center justify-center lg:justify-start gap-2">
+                    <p className=" gap-2">
                       <span className="text-amber-400">Registration Fee :</span> {registrationFee || "Free"}
                     </p>
                     {venue &&
-
-                      <p className="flex items-center justify-center lg:justify-start gap-2">
+                      <p className=" gap-2">
                         <span className="text-amber-400">Time & Venue :</span> {venue}
                       </p>
                     }
-                    {
-                      rules &&
-                      <p className="items-center  gap-2">
+                    {rules &&
+                      <p className="items-center gap-2">
                         <span className="text-amber-400">Rules & Regulations :</span> {rules}
                       </p>
                     }
@@ -196,6 +191,7 @@ const ImageCard = ({
             </div>
           </div>
         </div>
+
 
 
       )}

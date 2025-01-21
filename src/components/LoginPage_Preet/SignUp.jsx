@@ -61,9 +61,9 @@ const SignUp = () => {
 
   return (
     <div
-      className="flex justify-center items-center min-h-screen"
+      className="flex justify-center items-center min-h-screen font-playfair"
       style={{
-        backgroundImage: `url('/images/background_img2.jpg')`,
+        backgroundImage: `url('/images/bg8.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -71,11 +71,11 @@ const SignUp = () => {
     >
       <div
         className="bg-black bg-opacity-90 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-4xl w-full mx-5 mt-20"
-        style={{ fontFamily: "HarryP" }}
+        
       >
         <h1
           className="text-5xl md:text-5xl font-semibold text-center text-yellow-400"
-          style={{ fontFamily: "HarryP" }}
+          
         >
           GLITCHED
         </h1>
@@ -138,11 +138,11 @@ const SignUp = () => {
             },
           ].map(({ label, name, type, placeholder }) => (
             <div key={name}>
-              <label className="text-3xl font-medium text-yellow-400">
+              <label className="text-2xl font-medium text-yellow-400">
                 {label}
               </label>
               <input
-                className="w-full border-2 border-gray-300 rounded-2xl p-4 bg-transparent focus:outline-none focus:border-blue-500 text-yellow-200 text-xl"
+                className="w-full border-2 border-gray-300 rounded-xl p-4 bg-transparent focus:outline-none focus:border-blue-500 text-yellow-200 text-xl"
                 type={type}
                 name={name}
                 value={formData[name]}
@@ -155,11 +155,11 @@ const SignUp = () => {
 
         <div className="mt-8 flex flex-col gap-y-4">
           <button
-            className="active:scale-[.98] active:duration-75 hover:scale-[1.1] transition-all py-3 rounded-xl bg-deepCrimson text-goldenrod text-2xl font-bold "
+            className="active:scale-[.98] active:duration-75 hover:scale-[1.1] transition-all py-3 rounded-xl bg-deepCrimson text-goldenrod text-2xl font-bold mx-5"
             onClick={handleSubmit}
             disabled={isLoading}
           >
-            {isLoading ? "Logging In..." : "LOGIN"}
+            {isLoading ? "Signing Up..." : "Sign Up"}
           </button>
         </div>
 

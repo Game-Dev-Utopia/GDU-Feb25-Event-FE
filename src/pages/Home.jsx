@@ -7,6 +7,7 @@ import Faq from "../components/FAQ/Faq";
 import Footer from "../components/Footer/FooterPart";
 import SponserSlider from "../components/Sponsers/SponserSlider";
 import Countdown from "../components/Countdown/Countdown";
+import Prizepool from "../components/PrizePool/Prizepool";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -49,6 +50,8 @@ const Home = () => {
         >
           <Countdown />
         </div>
+
+        <Prizepool />
 
         {/* Events */}
         <div className="relative bg-cover bg-center bg-no-repeat py-20 overlay-section"
