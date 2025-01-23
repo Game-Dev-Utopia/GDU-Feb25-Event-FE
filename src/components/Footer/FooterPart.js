@@ -44,7 +44,8 @@ function FooterPart() {
 
           {/* Branding */}
           <div className="text-center md:text-right">
-            <span>Game Development Utopia</span>
+            {/* <img src='/images/Gdulogo.png' className="h-5 w-5" /> */}
+            <span>GamedevUtopia</span>
           </div>
 
           

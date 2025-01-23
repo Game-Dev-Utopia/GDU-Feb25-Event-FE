@@ -1,8 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const MobileSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("accessToken")
+  );
+
+  useEffect(() => {
+    // Listen for changes in localStorage
+    const handleStorageChange = () => {
+      setIsLoggedIn(!!localStorage.getItem("accessToken"));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    setIsLoggedIn(false);
+    setIsOpen(false); // Close sidebar after logout
+  };
 
   return (
     <div className="md:hidden block">
@@ -36,10 +58,11 @@ const MobileSidebar = () => {
         <ul className="flex flex-col items-center justify-center h-full space-y-6">
           {["Home", "Feature", "Card", "About Us", "FAQ's"].map(
             (item, index) => (
-              <li key={index} className="relative group w-full ">
+              <li key={index} className="relative group w-full">
                 <Link
                   to="/"
                   className="block text-3xl text-goldenrod py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
+                  onClick={() => setIsOpen(false)} // Close sidebar when navigating
                 >
                   {item}
                 </Link>
@@ -47,6 +70,42 @@ const MobileSidebar = () => {
                 <span className="absolute inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span>
               </li>
             )
+          )}
+          {isLoggedIn && (
+            <>
+              <li className="relative group w-full">
+                <Link
+                  to="/profile"
+                  className="block text-3xl text-goldenrod py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
+                  onClick={() => setIsOpen(false)} // Close sidebar when navigating
+                >
+                  Profile
+                </Link>
+                {/* Glow Effect */}
+                <span className="absolute inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span>
+              </li>
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="block px-4 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-3xl"
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          )}
+          {!isLoggedIn && (
+            <li className="relative group w-full">
+              <Link
+                to="/signin"
+                className="block px-4 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-3xl text-center"
+                onClick={() => setIsOpen(false)} // Close sidebar when navigating
+              >
+                Login
+              </Link>
+              {/* Glow Effect */}
+              <span className="absolute inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span>
+            </li>
           )}
         </ul>
       </div>

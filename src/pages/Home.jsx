@@ -8,13 +8,14 @@ import Footer from "../components/Footer/FooterPart";
 import SponserSlider from "../components/Sponsers/SponserSlider";
 import Countdown from "../components/Countdown/Countdown";
 import Prizepool from "../components/PrizePool/Prizepool";
+import Contact from "../components/ContactUs/Contact";
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <div className="w-screen h-screen overflow-y-scroll bg-goldenrod" id="Home">
+      <div className="w-screen h-screen overflow-y-scroll overflow-x-hidden bg-goldenrod" id="Home">
         {/* Home Banner */}
         <div className="relative text-white font-sans">
           {/* Background section with button */}
@@ -43,7 +44,7 @@ const Home = () => {
         </div>
 
         {/* Countdown */}
-        <div className="relative bg-cover bg-center bg-no-repeat py-20 overlay-section"
+         <div className="relative bg-cover bg-center bg-no-repeat py-20 overlay-section"
           style={{
             backgroundImage: `url(/images/bg9.jpg)`,
           }}
@@ -51,14 +52,12 @@ const Home = () => {
           <Countdown />
         </div>
 
-        <Prizepool />
 
         {/* Events */}
         <div className="relative bg-cover bg-center bg-no-repeat py-20 overlay-section"
           style={{
-            backgroundImage: `url(/images/bg7.jpg)`,
+            backgroundImage: `url(/images/bg10.png)`,
           }}
-          id="Events"
         >
           <Event />
         </div>
@@ -72,6 +71,16 @@ const Home = () => {
         >
           <Faq />
         </div>
+
+        {/* Contact */}
+        <div className="relative bg-cover bg-center bg-no-repeat overlay-section"
+          style={{
+            backgroundImage: `url(/images/mysticalforest.webp)`,
+          }}
+        >
+          <Contact />
+        </div>
+
 
         {/* Footer */}
         <div className="relative bg-cover bg-center bg-no-repeat overlay-section"

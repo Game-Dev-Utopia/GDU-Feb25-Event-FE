@@ -36,32 +36,30 @@ const ImageCardGrid = () => {
   if (cards.length === 0) return <div className="text-center text-xl">No events found.</div>;
 
   return (
-    <div className="container mx-auto p-16">
+    <div className="container mx-auto p-4 sm:p-8 overflow-x-hidden">
       <div className="text-center mb-16 text-6xl font-bold font-cinzel text-goldenrod">
         Events
       </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {cards.map((card, index) => (
-            <ImageCard
-              key={index}
-              eventId = {card._id}
-              title={card.name || "Untitled Event"}
-              description={card.description || "No description available."}
-              registrationFee={card.registrationFee || "Free"}
-              typeOfevent = {card.typeOfevent}
-              teamSize = {card.teamSize}
-              date = {card.date}
-              venue = {card.venue}
-              rules= {card.rules}
-              bgUrl={ "/scroll1.jpg"} 
-              modalImageUrl={card.modalImageUrl || "dragon.png"}
-              imageUrl={card.imageUrl || "dragon.png"}
-            />
-          ))}
-        </div>
-
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {cards.map((card, index) => (
+          <ImageCard
+            key={index}
+            eventId={card._id}
+            title={card.name || "Untitled Event"}
+            description={card.description || "No description available."}
+            registrationFee={card.registrationFee || "Free"}
+            typeOfevent={card.typeOfevent}
+            teamSize={card.teamSize}
+            date={card.date}
+            venue={card.venue}
+            rules={card.rules}
+            bgUrl={"/scroll1.jpg"}
+            modalImageUrl={card.modalImageUrl || "dragon.png"}
+            imageUrl={card.imageUrl || "dragon.png"}
+          />
+        ))}
       </div>
-    
+    </div>
   );
 };
 
