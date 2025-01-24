@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const MobileSidebar = () => {
+  const navigate  = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem("accessToken")
@@ -22,8 +24,11 @@ const MobileSidebar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("username");
     setIsLoggedIn(false);
     setIsOpen(false); // Close sidebar after logout
+    navigate("/");
   };
 
   return (
