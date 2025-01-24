@@ -98,13 +98,13 @@ const MobileSidebar = () => {
             <li className="relative group w-full">
               <Link
                 to="/signin"
-                className="block px-4 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-3xl text-center"
+                className="block  px-4 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-3xl text-center"
                 onClick={() => setIsOpen(false)} // Close sidebar when navigating
               >
                 Login
               </Link>
               {/* Glow Effect */}
-              <span className="absolute inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span>
+              <span className="absolute z-[-1] inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span>
             </li>
           )}
         </ul>
