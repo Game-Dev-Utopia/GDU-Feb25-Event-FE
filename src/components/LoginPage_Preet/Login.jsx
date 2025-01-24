@@ -36,6 +36,12 @@ const Login = () => {
         localStorage.setItem("username", response.user.username);
         setEmail("");
         setPassword("");
+        // Dispatch the custom authChange event
+        const authEvent = new Event("authChange");
+        window.dispatchEvent(authEvent);
+        console.log("Event dispatched!"); // Debugging log
+        setEmail("");
+        setPassword("");
 
         setTimeout(() => navigate("/"), 2000); // Redirect to /
       } else {
@@ -64,16 +70,16 @@ const Login = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div
-        className="bg-black bg-opacity-90 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-md w-full md:w-1/2 mx-5 font-playfair"
-      >
+      <div className="bg-black bg-opacity-90 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-md w-full md:w-1/2 mx-5 font-playfair">
         <h1 className="text-6xl md:text-6xl font-semibold text-center text-yellow-400 mb-6">
           GLITCHED
         </h1>
 
         <div className="mt-8">
           <div className="mb-6">
-            <label className="text-2xl font-medium text-yellow-400">Email</label>
+            <label className="text-2xl font-medium text-yellow-400">
+              Email
+            </label>
             <input
               className="w-full border-2 border-gray-300 rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-blue-500 text-yellow-200"
               type="text"

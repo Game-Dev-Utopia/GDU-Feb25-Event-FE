@@ -3,22 +3,21 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const MobileSidebar = () => {
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem("accessToken")
   );
 
   useEffect(() => {
-    // Listen for changes in localStorage
-    const handleStorageChange = () => {
+    const handleAuthChange = () => {
       setIsLoggedIn(!!localStorage.getItem("accessToken"));
     };
 
-    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("authChange", handleAuthChange);
 
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("authChange", handleAuthChange);
     };
   }, []);
 
@@ -26,8 +25,10 @@ const MobileSidebar = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("username");
-    setIsLoggedIn(false);
-    setIsOpen(false); // Close sidebar after logout
+
+    const authEvent = new Event("authChange");
+    window.dispatchEvent(authEvent);
+
     navigate("/");
   };
 

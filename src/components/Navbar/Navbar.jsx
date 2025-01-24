@@ -12,33 +12,25 @@ const Navbar = () => {
   );
 
   useEffect(() => {
-    // Function to listen for auth changes via a custom event
     const handleAuthChange = () => {
       setIsLoggedIn(!!localStorage.getItem("accessToken"));
     };
 
-    // Listen for changes in auth status via a custom event
     window.addEventListener("authChange", handleAuthChange);
 
-    // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener("authChange", handleAuthChange);
     };
   }, []);
 
-  const triggerAuthChange = () => {
-    const authEvent = new Event("authChange");
-    window.dispatchEvent(authEvent);
-  };
-
   const handleLogout = () => {
-    // Remove tokens and user info from localStorage
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("username");
 
     // Trigger the custom event for auth changes
-    triggerAuthChange();
+    const authEvent = new Event("authChange");
+    window.dispatchEvent(authEvent);
 
     // Redirect to the home page
     navigate("/");
@@ -67,6 +59,18 @@ const Navbar = () => {
             </li>
           )
         )}
+        {isLoggedIn && (
+          <li className="relative group">
+            <Link
+              to="/profile"
+              className="relative z-10 text-goldenrod hover:deepCrimson transition text-xl"
+            >
+              Profile
+            </Link>
+            {/* Glow Effect */}
+            <span className="absolute inset-0 bg-goldenrod opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
+          </li>
+        )}
       </ul>
 
       {/* Call-to-Action Button */}
@@ -83,7 +87,6 @@ const Navbar = () => {
                 setIsOpen={setIsNotificationOpen}
               />
             </button>
-
             <button
               className="px-4 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-xl"
               onClick={handleLogout}
