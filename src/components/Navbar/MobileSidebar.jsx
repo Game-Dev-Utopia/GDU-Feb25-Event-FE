@@ -22,8 +22,11 @@ const MobileSidebar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("username");
     setIsLoggedIn(false);
     setIsOpen(false); // Close sidebar after logout
+    navigate("/");
   };
 
   return (
