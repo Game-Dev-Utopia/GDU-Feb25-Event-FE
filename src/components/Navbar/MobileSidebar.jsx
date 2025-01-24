@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const MobileSidebar = () => {
+  const navigate  = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem("accessToken")
