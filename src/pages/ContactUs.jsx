@@ -2,7 +2,7 @@ import React from 'react';
 
 const ContactUs = () => {
   return (
-    <div className="p-6 bg-gray-100 text-gray-800 rounded-lg shadow-lg max-w-2xl mx-auto mt-10">
+    <div className="p-6 bg-gray-100 text-gray-800 rounded-lg shadow-lg max-w-2xl mx-auto mt-16">
       <h1 className="text-2xl font-bold mb-4 text-center">Contact Us</h1>
       <p className="text-sm text-gray-500 text-center mb-6">Last updated on 25-01-2025 12:41:23</p>
       <p className="mb-4">You may contact us using the information below:</p>

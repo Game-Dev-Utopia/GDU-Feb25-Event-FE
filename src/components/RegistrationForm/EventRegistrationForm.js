@@ -113,31 +113,31 @@ const EventRegistrationForm = () => {
   if (error) return <div>Error: {error}</div>;
   if (!event) return <div>No event found</div>;
   return (<div
-    className="relative h-screen w-full flex flex-col items-center justify-center bg-cover bg-center pt-16 px-4 sm:px-8 md:px-16"
+    className="relative h-screen w-full flex flex-col items-center justify-center bg-cover bg-center pt-16 px-4 sm:px-8 md:px-16 font-playfair"
     style={{ backgroundImage: `url('/images/dragondungeon.webp')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
   >
     {/* Form Container */}
-    <div className="relative z-20 bg-goldenrod/5 p-6 rounded-lg max-w-md w-full shadow-lg border-2 border-red-900 sm:p-8 md:max-w-lg lg:max-w-xl">
+    <div className="relative z-20 bg-goldenrod/5 p-6 rounded-lg max-w-md w-full shadow-lg border-2 border-deepCrimson sm:p-8 md:max-w-lg lg:max-w-xl">
       {/* Dark Overlay for Form Background */}
-      <div className="absolute inset-0 bg-black/70 rounded-lg z-0"></div>
+      <div className="absolute inset-0 bg-black/60 rounded-lg z-0"></div>
 
       <div className="relative z-20">
         {/* Form Title */}
-        <h1 className="text-center text-2xl font-bold text-yellow-400 mb-6 md:text-3xl lg:text-4xl">⚔️ Registration For {event.name} 🐉</h1>
+        <h1 className="text-center text-2xl font-bold text-goldenrod mb-6 md:text-3xl lg:text-4xl">⚔️ Registration For {event.name} 🐉</h1>
 
         {/* Form Elements */}
         <form onSubmit={handleSubmit} className="space-y-4">
           {event.typeOfevent === "solo" || event.typeOfevent === "Solo" ? (
             <>
               {/* Solo Event */}
-              <label htmlFor="email" className="block text-lg font-semibold text-white z-20">
+              <label htmlFor="email" className="block text-xl font-semibold text-goldenrod z-20">
                 Email:
               </label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                className="w-full px-4 py-2 bg-red-900 text-white border border-red-900 rounded-md placeholder:text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full px-4 py-2 bg-deepCrimson text-lg text-goldenrod border border-deepCrimson rounded-md placeholder:text-goldenrod focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="example@realm.com"
@@ -147,21 +147,21 @@ const EventRegistrationForm = () => {
           ) : (
             <>
               {/* Team Event */}
-              <label htmlFor="teamName" className="block text-lg font-semibold text-white z-20">
+              <label htmlFor="teamName" className="block text-xl font-semibold text-goldenrod z-20">
                 Team Name:
               </label>
               <input
                 type="text"
                 id="teamName"
                 name="teamName"
-                className="w-full px-4 py-2 bg-red-900 text-white border border-red-900 rounded-md placeholder:text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full px-4 py-2 bg-deepCrimson text-lg text-goldenrod border border-deepCrimson rounded-md placeholder:text-goldenrod focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 value={formData.teamName}
                 onChange={handleChange}
                 placeholder="Enter your team name"
                 required
               />
 
-              <label htmlFor="email" className="block text-lg font-semibold text-white z-20">
+              <label htmlFor="email" className="block text-xl font-semibold text-goldenrod z-20">
                 Team Member Email:
               </label>
               <div className="flex items-center space-x-2">
@@ -170,14 +170,14 @@ const EventRegistrationForm = () => {
                   type="email"
                   id="email"
                   name="email"
-                  className="flex-grow px-4 py-2 bg-red-900 text-white border border-red-900 rounded-md placeholder:text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="flex-grow px-4 py-2 bg-deepCrimson text-lg text-goldenrod border border-deepCrimson rounded-md placeholder:text-goldenrod focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Enter team member email"
                 />
                 <button
                   type="button"
-                  className="flex items-center justify-center w-10 h-10 bg-yellow-400 text-black font-bold rounded-md hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="flex items-center justify-center w-10 h-10 bg-yellow-400 text-black font-bold rounded-md hover:bg-goldenrod focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   onClick={handleAddTeamMember}
                 >
                   +
@@ -186,9 +186,9 @@ const EventRegistrationForm = () => {
 
 
               {/* Display Added Team Members */}
-              <ul className="mt-4 text-white">
+              <ul className="mt-4 text-goldenrod">
                 {formData.teamemail.map((email, index) => (
-                  <li key={index} className="text-yellow-300">
+                  <li key={index} className="text-goldenrod">
                     {index + 1}. {email}
                   </li>
                 ))}
@@ -197,7 +197,7 @@ const EventRegistrationForm = () => {
           )}
           <button
             type="submit"
-            className="w-full px-4 py-2 bg-yellow-400 text-black font-bold rounded-md hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="w-full px-4 py-2 bg-goldenrod text-xl text-black font-bold rounded-md hover:bg-deepCrimson focus:outline-none focus:ring-2 focus:ring-goldenrod"
             disabled={registering}
           >
            {registering ? "Registering....": "Embark on Quest"}

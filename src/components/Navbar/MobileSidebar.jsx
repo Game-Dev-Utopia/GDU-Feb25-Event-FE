@@ -62,18 +62,18 @@ const MobileSidebar = () => {
 
         {/* Navigation Links */}
         <ul className="flex flex-col items-center justify-center h-full space-y-6">
-          {["Home", "Feature", "Card", "About Us", "FAQ's"].map(
+          {["Home", "Sponsers", "Events", "FAQ's", "Contact Us" ].map(
             (item, index) => (
               <li key={index} className="relative group w-full">
                 <Link
                   to="/"
-                  className="block z-20 text-3xl text-goldenrod py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
+                  className="block z-20 text-2xl text-goldenrod py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
                   onClick={() => setIsOpen(false)} // Close sidebar when navigating
                 >
                   {item}
                 </Link>
                 {/* Glow Effect */}
-                <span className="absolute z-[-1] inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span>
+                {/* <span className="absolute z-[-1] inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span> */}
               </li>
             )
           )}
@@ -82,18 +82,18 @@ const MobileSidebar = () => {
               <li className="relative group w-full">
                 <Link
                   to="/profile"
-                  className="block z-20 text-3xl text-goldenrod py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
+                  className="block z-20 text-2xl text-goldenrod py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
                   onClick={() => setIsOpen(false)} // Close sidebar when navigating
                 >
                   Profile
                 </Link>
-                {/* Glow Effect */}
-                <span className="absolute z-[-1] inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span>
+               
+                {/* <span className="absolute z-[-1] inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span> */}
               </li>
               <li>
                 <button
                   onClick={handleLogout}
-                  className="block px-4 z-20 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-3xl"
+                  className="block px-4 z-20 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-2xl"
                 >
                   Logout
                 </button>
@@ -104,13 +104,13 @@ const MobileSidebar = () => {
             <li className="relative group w-full">
               <Link
                 to="/signin"
-                className="block  px-4 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-3xl text-center"
+                className="block  px-4 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-2xl text-center"
                 onClick={() => setIsOpen(false)} // Close sidebar when navigating
               >
                 Login
               </Link>
               {/* Glow Effect */}
-              <span className="absolute z-[-1] inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span>
+              {/* <span className="absolute z-[-1] inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span> */}
             </li>
           )}
         </ul>

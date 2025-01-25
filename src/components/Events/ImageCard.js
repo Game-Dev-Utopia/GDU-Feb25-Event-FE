@@ -138,7 +138,7 @@ const ImageCard = ({
                 <div className="relative">
                   <div className="absolute inset-0 bg-black/20 rounded-lg filter blur-sm"></div>
                   <p
-                    className="relative text-lg leading-relaxed  mb-6 text-center lg:text-left"
+                    className="relative  text-lg leading-relaxed  mb-6 text-center lg:text-left"
                     style={{
                       textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
                     }}
@@ -161,7 +161,7 @@ const ImageCard = ({
                   >
                    {title} Notes
                   </h4>
-                  <div className="space-y-2  relative">
+                  <div className="space-y-2  relative text-lg">
                     <p className=" gap-2">
                       <span className="font-bold text-burntOrange">Event Type : </span> {typeOfevent}
                     </p>

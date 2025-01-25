@@ -70,11 +70,11 @@ const SignUp = () => {
       }}
     >
       <div
-        className="bg-black bg-opacity-90 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-4xl w-full mx-5 mt-20"
+        className="bg-black bg-opacity-60 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-4xl w-[90%] mx-5 mt-20"
         
       >
         <h1
-          className="text-5xl md:text-5xl font-semibold text-center text-yellow-400"
+          className="text-4xl md:text-6xl font-semibold text-center text-yellow-400"
           
         >
           GLITCHED
@@ -138,7 +138,7 @@ const SignUp = () => {
             },
           ].map(({ label, name, type, placeholder }) => (
             <div key={name}>
-              <label className="text-2xl font-medium text-yellow-400">
+              <label className="text-xl md:text-2xl font-medium text-yellow-400">
                 {label}
               </label>
               <input

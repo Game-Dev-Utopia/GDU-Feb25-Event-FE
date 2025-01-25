@@ -70,8 +70,8 @@ const Login = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="bg-black bg-opacity-90 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-md w-full md:w-1/2 mx-5 font-playfair">
-        <h1 className="text-6xl md:text-6xl font-semibold text-center text-yellow-400 mb-6">
+      <div className="bg-black bg-opacity-60 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg  w-[90%] md:w-1/3 mx-5 font-playfair">
+        <h1 className="text-5xl md:text-6xl font-semibold text-center text-yellow-400 mb-6">
           GLITCHED
         </h1>
 

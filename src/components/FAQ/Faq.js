@@ -57,7 +57,7 @@ const Faq = () => {
               onClick={() => toggleAccordion(index)}
             >
               {activeIndex === index ? <FaMinus /> : <FaPlus />}
-              <h3 className="text-2xl font-semibold ">{faq.question}</h3>
+              <h3 className="text-xl md:text-2xl font-semibold ">{faq.question}</h3>
             </div>
             <div
               ref={(el) => (contentRefs.current[index] = el)}
@@ -66,7 +66,7 @@ const Faq = () => {
                 maxHeight: activeIndex === index ? height[index] : 0,
               }}
             >
-              <p className="p-4 text-white text-2xl">{faq.answer}</p>
+              <p className="p-4 text-white text-lg md:text-2xl">{faq.answer}</p>
             </div>
           </div>
         ))}

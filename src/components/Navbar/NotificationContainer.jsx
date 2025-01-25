@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getRequest } from "../../api/api";
 
 const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const containerRef = useRef(null);
 
   const fetchNotifications = async () => {
     try {
@@ -39,9 +40,12 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
     fetchNotifications();
   }, []);
 
+  
+
   return (
     <div
-      className={`absolute w-[300px] text-left right-2 top-12 max-h-60 overflow-y-scroll bg-deepCrimson text-white p-4 rounded-lg shadow-lg transition-transform duration-300 ${
+      ref={containerRef}
+      className={`absolute w-[250px] md:w-[300px] text-left right-2 top-12 max-h-60 overflow-y-scroll bg-deepCrimson text-white p-4 rounded-lg shadow-lg transition-transform duration-300 ${
         isOpen
           ? "opacity-100 translate-y-0 scale-100"
           : "opacity-0 translate-y-[-20px] scale-95"
@@ -52,7 +56,7 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
         {notifications.map((notification, index) => (
           <li key={index} className="py-2">
             <div className="flex items-center justify-between">
-              <h5 className="text-xl">{notification.title}</h5>
+              <h5 className="text-md md:text-xl">{notification.title}</h5>
               <p className="text-sm">
                 {notification.remainingTime ?? "Some"} days left
               </p>

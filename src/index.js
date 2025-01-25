@@ -34,6 +34,7 @@ const router = new Router(
       <Route path="/*" element={<PageNotFound />} />
       <Route path="/logout" element={<Logout />} />
       {/* <Route path="/intro" element={<Intro />} /> */}
+      <Route path="/profile" element={<Profile />} /> 
       <Route path="/contactus" element={<ContactUs />} />
       <Route path="/terms" element={<TermsAndConditions />} />
     </Route>

@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import MobileSidebar from "./MobileSidebar";
 import { IoMdNotifications } from "react-icons/io";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import NotificationContainer from "./NotificationContainer";
 
 const Navbar = () => {
@@ -10,6 +10,7 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem("accessToken")
   );
+  const notificationRef = useRef(null);
 
   useEffect(() => {
     const handleAuthChange = () => {
@@ -23,6 +24,25 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(event.target)
+      ) {
+        setIsNotificationOpen(false);
+      }
+    };
+
+    if (isNotificationOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isNotificationOpen]);
+
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
@@ -34,6 +54,11 @@ const Navbar = () => {
 
     // Redirect to the home page
     navigate("/");
+  };
+
+  const handleNotificationClick = (event) => {
+    event.stopPropagation(); // Prevent click from propagating to the document
+    setIsNotificationOpen(!isNotificationOpen);
   };
 
   return (
@@ -76,7 +101,7 @@ const Navbar = () => {
       {/* Call-to-Action Button */}
       <div className="md:flex hidden">
         {isLoggedIn ? (
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4" ref={notificationRef}>
             <button
               className="p-2 bg-goldenrod text-deepCrimson rounded-full transition relative"
               onClick={() => setIsNotificationOpen(!isNotificationOpen)}
