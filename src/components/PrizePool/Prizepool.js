@@ -82,7 +82,7 @@ const PrizePool = () => {
     >
       <div className="animate-fade-in text-overlay">
         <div className="text-3xl md:text-6xl mb-4 heading font-bold">With prize pool worth more than</div>
-        <div className="text-6xl  md:text-[10rem] font-bold count-up">₹{count.toLocaleString()}+</div>
+        <div className="text-6xl  md:text-[10rem] count-up font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-mysticPurple to-burntOrange">₹{count.toLocaleString()}+</div>
       </div>
       <canvas
         id="confettiCanvas"

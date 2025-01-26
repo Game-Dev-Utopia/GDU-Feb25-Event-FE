@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -17,12 +17,29 @@ import EventRegistrationForm from './components/RegistrationForm/EventRegistrati
 import Login from './components/LoginPage_Preet/Login';
 import SignUp from './components/LoginPage_Preet/SignUp';
 import Profile from './components/Profile/Profile';
+import Loader from './components/Loader/Loader';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Logout from './components/LoginPage_Preet/Logout';
 import ContactUs from './pages/ContactUs';
 import TermsAndConditions from './pages/TermsCondition';
+
+const AppWrapper = () => {
+  const [loading, setLoading] = useState(true);
+
+  const handlePreloadComplete = () => {
+    setTimeout(() => {
+      setLoading(false); // Hide loader after images are preloaded
+    }, 1000); // Optional delay for UX
+  };
+
+  if (loading) {
+    return <Loader onPreloadComplete={handlePreloadComplete} />;
+  }
+
+  return <RouterProvider router={router} />;
+};
 
 const router = new Router(
   createRoutesFromElements(
@@ -34,7 +51,7 @@ const router = new Router(
       <Route path="/*" element={<PageNotFound />} />
       <Route path="/logout" element={<Logout />} />
       {/* <Route path="/intro" element={<Intro />} /> */}
-      <Route path="/profile" element={<Profile />} /> 
+      <Route path="/profile" element={<Profile />} />
       <Route path="/contactus" element={<ContactUs />} />
       <Route path="/terms" element={<TermsAndConditions />} />
     </Route>
@@ -44,12 +61,9 @@ const router = new Router(
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
-    <ToastContainer /> {/* Move this outside of RouterProvider */}
-    <RouterProvider router={router} />
+    <ToastContainer />
+    <AppWrapper />
   </>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

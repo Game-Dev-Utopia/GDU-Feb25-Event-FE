@@ -18,7 +18,7 @@ const Home = () => {
     <>
       <div
         className="w-screen h-screen overflow-y-scroll overflow-x-hidden bg-goldenrod"
-        id="Home"
+        id="home"
       >
         {/* Home Banner */}
         <div className="relative text-white font-sans">
@@ -37,6 +37,7 @@ const Home = () => {
             </button>
           </div>
         </div>
+        
 
         {/* Sponser Slider */}
         <div
@@ -44,7 +45,7 @@ const Home = () => {
           style={{
             backgroundImage: `url(/images/bg8.webp)`,
           }}
-          id="Sponsers"
+          id="sponsers"
         >
           <SponserSlider />
         </div>
@@ -75,6 +76,7 @@ const Home = () => {
           style={{
             backgroundImage: `url(/images/bg10.png)`,
           }}
+          id="events"
         >
           <Event />
         </div>

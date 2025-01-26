@@ -9,10 +9,29 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleLogin = async () => {
-    // Basic validation
+    // Validations
     if (!email || !password) {
       toast.error("Please fill in both email and password.", {
+        position: "top-right",
+      });
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      toast.error("Please enter a valid email address.", {
+        position: "top-right",
+      });
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long.", {
         position: "top-right",
       });
       return;
@@ -40,8 +59,6 @@ const Login = () => {
         const authEvent = new Event("authChange");
         window.dispatchEvent(authEvent);
         console.log("Event dispatched!"); // Debugging log
-        setEmail("");
-        setPassword("");
 
         setTimeout(() => navigate("/"), 2000); // Redirect to /
       } else {
@@ -83,6 +100,7 @@ const Login = () => {
             <input
               className="w-full border-2 border-gray-300 rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-blue-500 text-yellow-200"
               type="text"
+              minLength="0" maxLength="100"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -96,6 +114,7 @@ const Login = () => {
             <input
               className="w-full border-2 border-gray-300 rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-blue-500 text-yellow-200"
               type="password"
+              minLength="8" maxLength="20"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

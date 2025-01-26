@@ -13,6 +13,15 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
           "username"
         )}`
       );
+
+      
+
+      // Check if the response is empty
+      if (!response.message === "No events registered for the user.") {
+        setNotifications([]);
+        return;
+      }
+
       const eventidArr = response.eventdetail.map((event) => event.eventid);
       const eventDetails = await Promise.all(
         eventidArr.map(async (eventId) => {
@@ -22,6 +31,7 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
           return event;
         })
       );
+
       const processedData = eventDetails.map((event, index) => ({
         title: event.name,
         remainingTime: response.eventdetail[index].remainingTime,
@@ -40,8 +50,6 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
     fetchNotifications();
   }, []);
 
-  
-
   return (
     <div
       ref={containerRef}
@@ -52,21 +60,29 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
       }`}
     >
       <h4 className="text-lg font-semibold">Notifications</h4>
-      <ul className="divide-y divide-white divide-opacity-20 flex flex-col gap-2 mt-2">
-        {notifications.map((notification, index) => (
-          <li key={index} className="py-2">
-            <div className="flex items-center justify-between">
-              <h5 className="text-md md:text-xl">{notification.title}</h5>
-              <p className="text-sm">
-                {notification.remainingTime ?? "Some"} days left
+      {loading ? (
+        <p className="text-center mt-4">Loading...</p>
+      ) : notifications.length === 0 ? (
+        <p className="text-center mt-4 text-sm text-gray-300">
+          No notifications
+        </p>
+      ) : (
+        <ul className="divide-y divide-white divide-opacity-20 flex flex-col gap-2 mt-2">
+          {notifications.map((notification, index) => (
+            <li key={index} className="py-2">
+              <div className="flex items-center justify-between">
+                <h5 className="text-md md:text-xl">{notification.title}</h5>
+                <p className="text-sm">
+                  {notification.remainingTime ?? "Some"} days left
+                </p>
+              </div>
+              <p className="text-[10px] text-gray-300 line-clamp-2">
+                {notification.description}
               </p>
-            </div>
-            <p className="text-[10px] text-gray-300 line-clamp-2">
-              {notification.description}
-            </p>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

@@ -123,7 +123,7 @@ const EventRegistrationForm = () => {
 
       <div className="relative z-20">
         {/* Form Title */}
-        <h1 className="text-center text-2xl font-bold text-goldenrod mb-6 md:text-3xl lg:text-4xl">⚔️ Registration For {event.name} 🐉</h1>
+        <h1 className="text-center text-2xl font-bold text-goldenrod mb-6 md:text-3xl lg:text-4xl">🛡️ Registration For {event.name} 🛡️ </h1>
 
         {/* Form Elements */}
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -139,6 +139,7 @@ const EventRegistrationForm = () => {
                 name="email"
                 className="w-full px-4 py-2 bg-deepCrimson text-lg text-goldenrod border border-deepCrimson rounded-md placeholder:text-goldenrod focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 value={formData.email}
+                maxLength="50"
                 onChange={handleChange}
                 placeholder="example@realm.com"
                 required
@@ -146,54 +147,55 @@ const EventRegistrationForm = () => {
             </>
           ) : (
             <>
-              {/* Team Event */}
-              <label htmlFor="teamName" className="block text-xl font-semibold text-goldenrod z-20">
-                Team Name:
-              </label>
+            {/* Team Event */}
+            <label htmlFor="teamName" className="block text-xl font-semibold text-goldenrod z-20">
+              Team Name:
+            </label>
+            <input
+              type="text"
+              id="teamName"
+              name="teamName"
+              maxLength="50"
+              className="w-full px-4 py-2 bg-deepCrimson text-lg text-goldenrod border border-deepCrimson rounded-md placeholder:text-goldenrod focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              value={formData.teamName}
+              onChange={handleChange}
+              placeholder="Enter your team name"
+              required
+            />
+          
+            <label htmlFor="email" className="block text-xl font-semibold text-goldenrod z-20">
+              Team Member Email:
+            </label>
+            <div className="flex items-center space-x-2">
               <input
-                type="text"
-                id="teamName"
-                name="teamName"
-                className="w-full px-4 py-2 bg-deepCrimson text-lg text-goldenrod border border-deepCrimson rounded-md placeholder:text-goldenrod focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                value={formData.teamName}
+                type="email"
+                id="email"
+                name="email"
+                maxLength="50"
+                className="flex-grow px-4 py-2 bg-deepCrimson text-lg text-goldenrod border border-deepCrimson rounded-md placeholder:text-goldenrod focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter your team name"
-                required
+                placeholder="Enter team member email"
               />
-
-              <label htmlFor="email" className="block text-xl font-semibold text-goldenrod z-20">
-                Team Member Email:
-              </label>
-              <div className="flex items-center space-x-2">
-
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="flex-grow px-4 py-2 bg-deepCrimson text-lg text-goldenrod border border-deepCrimson rounded-md placeholder:text-goldenrod focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Enter team member email"
-                />
-                <button
-                  type="button"
-                  className="flex items-center justify-center w-10 h-10 bg-yellow-400 text-black font-bold rounded-md hover:bg-goldenrod focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                  onClick={handleAddTeamMember}
-                >
-                  +
-                </button>
-              </div>
-
-
-              {/* Display Added Team Members */}
-              <ul className="mt-4 text-goldenrod">
-                {formData.teamemail.map((email, index) => (
-                  <li key={index} className="text-goldenrod">
-                    {index + 1}. {email}
-                  </li>
-                ))}
-              </ul>
-            </>
+              <button
+                type="button"
+                className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-yellow-400 text-black text-xl font-bold rounded-md hover:bg-goldenrod focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                onClick={handleAddTeamMember}
+              >
+                +
+              </button>
+            </div>
+          
+            {/* Display Added Team Members */}
+            <ul className="mt-4 text-goldenrod">
+              {formData.teamemail.map((email, index) => (
+                <li key={index} className="text-goldenrod">
+                  {index + 1}. {email}
+                </li>
+              ))}
+            </ul>
+          </>
+          
           )}
           <button
             type="submit"
