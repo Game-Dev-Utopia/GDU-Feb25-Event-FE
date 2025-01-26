@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router";
-import { toast } from "react-toastify";
+import { CloseButton, toast } from "react-toastify";
 import { useState } from "react";
 import { postRequestJsonwithHeader } from "../../api/api";
+import { FaCross } from "react-icons/fa6";
+import { FaRegWindowClose } from "react-icons/fa";
 
 const ImageCard = ({
   eventId,
@@ -58,7 +60,6 @@ const ImageCard = ({
             alt={`${title} Overlay`}
             className="w-full h-full object-cover"
           />
-          {/* Removed the border div */}
         </div>
 
         <div
@@ -81,10 +82,10 @@ const ImageCard = ({
         </div>
       </div>
 
-      {/* Modal remains unchanged */}
+      {/* Modal */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex items-start justify-center z-50 overflow-y-auto p-4  mt-10 font-cinzel"
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-start justify-center z-50 overflow-y-auto font-cinzel mt-16 md:mt-12 p-2"
           onClick={() => setIsOpen(false)}
         >
           <div
@@ -96,20 +97,24 @@ const ImageCard = ({
               linear-gradient(-45deg, #2a1810 25%, transparent 25%),
               linear-gradient(45deg, transparent 75%, #3a2218 75%),
               linear-gradient(-45deg, transparent 75%, #3a2218 75%),
-              radial-gradient(circle at 50% 50%, #321c14 0%, #2a1810 100%)
-            `,
+              radial-gradient(circle at 50% 50%, #321c14 0%, #2a1810 100%)`,
               backgroundSize: '24px 24px, 24px 24px, 24px 24px, 24px 24px, 100% 100%',
               backgroundPosition: '0 0, 0 12px, 12px -12px, -12px 0px, 0 0',
               boxShadow: `
               0 0 0 2px #8b4513,
               0 0 0 4px #654321,
               0 0 25px rgba(139, 69, 19, 0.6),
-              inset 0 0 100px rgba(0, 0, 0, 0.8)
-            `,
-            // backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfuk6TZuvwgjp1Oko5UkT6Y8mbPrUhDoroQQ&s')`,
-            // backgroundSize: 'cover'
+              inset 0 0 100px rgba(0, 0, 0, 0.8)`,
             }}
           >
+            {/* Close Button */}
+            <button
+              className="absolute top-2 right-2 text-goldenrod text-3xl font-bold bg-transparent hover:text-red-500 focus:outline-none"
+              onClick={() => setIsOpen(false)}
+            >
+              <FaRegWindowClose  />
+            </button>
+
             {/* Modal Content */}
             <div className="flex flex-col lg:flex-row gap-8 text-goldenrod">
               {/* Image */}
@@ -127,18 +132,17 @@ const ImageCard = ({
               {/* Content */}
               <div className="w-full lg:w-2/3 flex flex-col gap-6">
                 <h2
-                  className="text-5xl font-bold text-center lg:text-left "
+                  className="text-5xl font-bold text-center lg:text-left"
                   style={{
                     textShadow: '0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 191, 0, 0.3)',
                   }}
                 >
                   {title}
                 </h2>
-
                 <div className="relative">
                   <div className="absolute inset-0 bg-black/20 rounded-lg filter blur-sm"></div>
                   <p
-                    className="relative  text-lg leading-relaxed  mb-6 text-center lg:text-left"
+                    className="relative text-lg leading-relaxed mb-6 text-center lg:text-left"
                     style={{
                       textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
                     }}
@@ -146,43 +150,8 @@ const ImageCard = ({
                     {description}
                   </p>
                 </div>
-
-                
               </div>
             </div>
-
-            <div className="p-6 bg-gradient-to-br from-black/40 to-black/10 rounded-lg border-2 border-deepCrimson/50 backdrop-blur-sm relative overflow-hidden text-goldenrod">
-                 
-                  <h4
-                    className="text-2xl font-bold  mb-4 relative text-center lg:text-left"
-                    style={{
-                      textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
-                    }}
-                  >
-                   {title} Notes
-                  </h4>
-                  <div className="space-y-2  relative text-lg">
-                    <p className=" gap-2">
-                      <span className="font-bold text-burntOrange">Event Type : </span> {typeOfevent}
-                    </p>
-                    <p className=" gap-2">
-                      <span className="font-bold text-burntOrange">Team Size : </span>{teamSize}
-                    </p>
-                    <p className=" gap-2">
-                      <span className="font-bold text-burntOrange">Registration Fee :</span> {registrationFee || "Free"}
-                    </p>
-                    {venue &&
-                      <p className=" gap-2">
-                        <span className="font-bold text-burntOrange">Time & Venue :</span> {venue}
-                      </p>
-                    }
-                    {rules &&
-                      <p className="items-center gap-2">
-                        <span className="font-bold text-burntOrange">Rules & Regulations :</span> {rules}
-                      </p>
-                    }
-                  </div>
-                </div>
 
             {/* Register Button */}
             <div className="mt-8 flex justify-center">
@@ -195,9 +164,6 @@ const ImageCard = ({
             </div>
           </div>
         </div>
-
-
-
       )}
     </>
   );
