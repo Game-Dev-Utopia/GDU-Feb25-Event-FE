@@ -44,30 +44,53 @@ const Login = () => {
         `/api/v1/users/login`,
         JSON.stringify({ email, password })
       );
-
+    
       console.log(response);
-
-      if (response) {
+    
+      if (response.ok) {
+        // Successful login
+        const responseData = await response.json();
         toast.success("Login successful!", { position: "top-right" });
+    
         // Save token or user data if provided by API
-        localStorage.setItem("accessToken", response.accessToken);
-        localStorage.setItem("refreshToken", response.refreshToken);
-        localStorage.setItem("username", response.user.username);
+        localStorage.setItem("accessToken", responseData.accessToken);
+        localStorage.setItem("refreshToken", responseData.refreshToken);
+        localStorage.setItem("username", responseData.user.username);
+    
         setEmail("");
         setPassword("");
+    
         // Dispatch the custom authChange event
         const authEvent = new Event("authChange");
         window.dispatchEvent(authEvent);
         console.log("Event dispatched!"); // Debugging log
-
-        setTimeout(() => navigate("/"), 2000); // Redirect to /
+    
+        // Redirect to /
+        setTimeout(() => navigate("/"), 2000);
       } else {
+        // Handle error based on status code
         const errorData = await response.json();
-        toast.error(`Login failed: ${errorData.message || "Unknown error"}`, {
-          position: "top-right",
-        });
+    
+        switch (response.status) {
+          case 400:
+            toast.error("All fields are required.", { position: "top-right" });
+            break;
+          case 404:
+            toast.error("User with this email does not exist.", { position: "top-right" });
+            break;
+          case 401:
+            toast.error("Invalid email or password.", { position: "top-right" });
+            break;
+          default:
+            toast.error(
+              `Login failed: ${errorData.message || "Unknown error"}`,
+              { position: "top-right" }
+            );
+            break;
+        }
       }
     } catch (error) {
+      // Handle network or other unexpected errors
       toast.error(
         "An error occurred while logging in. Please try again later.",
         { position: "top-right" }
@@ -75,6 +98,7 @@ const Login = () => {
     } finally {
       setIsLoading(false); // Stop loading
     }
+    
   };
 
   return (

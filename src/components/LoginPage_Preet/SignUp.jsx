@@ -74,18 +74,50 @@ const SignUp = () => {
     try {
       const response = await postRequestJson(`/api/v1/users/register`, formData);
       console.log(response);
-
-      if (response) {
+    
+      if (response.ok) {
+        // Successful registration
+        const responseData = await response.json();
         toast.success("Registration successful!", { position: "top-right" });
+    
         setTimeout(() => {
-          navigate("/signin"); // Navigate to /home after success
+          navigate("/signin"); // Navigate to /signin after success
         }, 3000);
       } else {
-        toast.error("Registration failed. Try again!", { position: "top-right" });
+        // Handle error based on status code
+        const errorData = await response.json();
+    
+        switch (response.status) {
+          case 400:
+            toast.error("All fields are required.", { position: "top-right" });
+            break;
+          case 409:
+            toast.error(
+              "User with email or username already exists.",
+              { position: "top-right" }
+            );
+            break;
+          case 500:
+            toast.error(
+              "Something went wrong while registering. Please try again later.",
+              { position: "top-right" }
+            );
+            break;
+          default:
+            toast.error(
+              `Registration failed: ${errorData.message || "Unknown error"}`,
+              { position: "top-right" }
+            );
+            break;
+        }
       }
     } catch (error) {
-      toast.error("An error occurred. Please try again later.", { position: "top-right" });
-    } finally {
+      // Handle network or other unexpected errors
+      toast.error("An error occurred. Please try again later.", {
+        position: "top-right",
+      });
+    }    
+     finally {
       setIsLoading(false); // Stop loading
     }
   };
