@@ -126,6 +126,13 @@ const ImageCard = ({
                     alt={`${title} Expanded`}
                     className="rounded-lg w-full object-cover border-4 border-deepCrimson/80 shadow-lg shadow-amber-900/40"
                   />
+                  <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 overflow-hidden rounded-lg shadow-xl">
+          <img
+            src={imageUrl.replace('224/320', '112/160')}
+            alt={`${title} Overlay`}
+            className="w-full h-full object-cover"
+          />
+        </div>
                 </div>
               </div>
 
@@ -152,6 +159,39 @@ const ImageCard = ({
                 </div>
               </div>
             </div>
+
+            <div className="p-6 bg-gradient-to-br from-black/40 to-black/10 rounded-lg border-2 border-deepCrimson/50 backdrop-blur-sm relative overflow-hidden text-goldenrod">
+                 
+                  <h4
+                    className="text-2xl font-bold  mb-4 relative text-center lg:text-left"
+                    style={{
+                      textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+                    }}
+                  >
+                   {title} Notes
+                  </h4>
+                  <div className="space-y-2  relative text-lg">
+                    <p className=" gap-2">
+                      <span className="font-bold text-burntOrange">Event Type : </span> {typeOfevent}
+                    </p>
+                    <p className=" gap-2">
+                      <span className="font-bold text-burntOrange">Team Size : </span>{teamSize}
+                    </p>
+                    <p className=" gap-2">
+                      <span className="font-bold text-burntOrange">Registration Fee :</span> {registrationFee || "Free"}
+                    </p>
+                    {venue &&
+                      <p className=" gap-2">
+                        <span className="font-bold text-burntOrange">Time & Venue :</span> {venue}
+                      </p>
+                    }
+                    {rules &&
+                      <p className="items-center gap-2">
+                        <span className="font-bold text-burntOrange">Rules & Regulations :</span> {rules}
+                      </p>
+                    }
+                  </div>
+                </div>
 
             {/* Register Button */}
             <div className="mt-8 flex justify-center">

@@ -54,8 +54,8 @@ const ImageCardGrid = () => {
             venue={card.venue}
             rules={card.rules}
             bgUrl={"/scroll1.jpg"}
-            modalImageUrl={card.modalImageUrl || "dragon.png"}
-            imageUrl={card.imageUrl || "dragon.png"}
+            modalImageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
+            imageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
           />
         ))}
       </div>

@@ -9,7 +9,6 @@ const Loader = ({ onPreloadComplete }) => {
       '/images/bg10.png',
       '/images/mysticalforest.webp',
       '/images/a2.webp',
-      'https://imgur.com/XToGp7Q.jpg',
       '/images/background_img2.jpg',
       '/images/sky.jpg',
       'images/dragondungeon.webp',
