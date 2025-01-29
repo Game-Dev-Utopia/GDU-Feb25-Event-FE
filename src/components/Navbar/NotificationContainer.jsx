@@ -4,9 +4,16 @@ import { getRequest } from "../../api/api";
 const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("username")
+  );
   const containerRef = useRef(null);
 
   const fetchNotifications = async () => {
+    if(isLoggedIn)
+    {
+
+    
     try {
       const response = await getRequest(
         `/api/v1/users/notification?username=${localStorage.getItem(
@@ -39,11 +46,13 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
         description: event.description,
       }));
       setNotifications(processedData);
+    
     } catch (error) {
       console.error("Error fetching notifications:", error);
     } finally {
       setLoading(false);
     }
+  }
   };
 
   useEffect(() => {

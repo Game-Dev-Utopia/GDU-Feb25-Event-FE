@@ -43,9 +43,9 @@ function FooterPart() {
           {/* Social Icons */}
 
           {/* Branding */}
-          <div className="text-center md:text-right">
+          <div className="text-center md:text-right font-playfair">
             {/* <img src='/images/Gdulogo.png' className="h-5 w-5" /> */}
-            <span>GamedevUtopia</span>
+            <span>GameDevUtopia</span>
           </div>
 
           

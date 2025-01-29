@@ -63,14 +63,18 @@ const EventRegistrationForm = () => {
       }));
     }
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (event?.typeOfevent === "solo") {
+    if (event?.typeOfevent?.toLowerCase() === "solo") {
       formData.teamemail = [formData.email];
-      console.log(formData)
-    } else if (event?.typeOfevent === "team") {
-      console.log(formData);
+      console.log("formData", formData)
+    } else if (event?.typeOfevent?.toLowerCase() === "team")      {
+      if(formData.teamemail.length === 0){
+        toast.error("Please add team members!", { position: "top-right" });
+        return;
+      }
+      console.log("formData", formData);
     }
     setRegistering(true);
     try {

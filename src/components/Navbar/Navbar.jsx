@@ -3,18 +3,19 @@ import MobileSidebar from "./MobileSidebar";
 import { IoMdNotifications } from "react-icons/io";
 import { useState, useEffect, useRef } from "react";
 import NotificationContainer from "./NotificationContainer";
+import { postRequestJson } from "../../api/api";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem("accessToken")
+    !!localStorage.getItem("username")
   );
   const notificationRef = useRef(null);
 
   useEffect(() => {
     const handleAuthChange = () => {
-      setIsLoggedIn(!!localStorage.getItem("accessToken"));
+      setIsLoggedIn(!!localStorage.getItem("username"));
     };
 
     window.addEventListener("authChange", handleAuthChange);
@@ -43,11 +44,13 @@ const Navbar = () => {
     };
   }, [isNotificationOpen]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+  const handleLogout = async () => {
+    // localStorage.removeItem("accessToken");
+    // localStorage.removeItem("refreshToken");
     localStorage.removeItem("username");
+    const response = await postRequestJson(`/api/v1/users/logout`);
 
+    console.log(response);
     // Trigger the custom event for auth changes
     const authEvent = new Event("authChange");
     window.dispatchEvent(authEvent);

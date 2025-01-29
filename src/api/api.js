@@ -30,7 +30,6 @@ export async function postRequestNoToken(URL) {
   try {
 
     const response = await axiosClient.post(URL);
-
     return response.data;
   } catch (error) {
     throw error;
@@ -42,10 +41,11 @@ export async function postRequestJson(URL, payload) {
     const response = await axiosClient.post(URL, payload);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error("Request failed:", error);
     throw error;
   }
 }
+
 
 export async function postRequestJsonwithHeader(URL, payload) {
   try {

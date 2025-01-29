@@ -52,6 +52,7 @@ const ImageCardGrid = () => {
             teamSize={card.teamSize}
             date={card.date}
             venue={card.venue}
+            time={card.time}
             rules={card.rules}
             bgUrl={"/scroll1.jpg"}
             modalImageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}

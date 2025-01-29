@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { CloseButton, toast } from "react-toastify";
 import { useState } from "react";
-import { postRequestJsonwithHeader } from "../../api/api";
+import { postRequestJsonwithHeader, postRequestNoToken } from "../../api/api";
 import { FaCross } from "react-icons/fa6";
 import { FaRegWindowClose } from "react-icons/fa";
 
@@ -24,20 +24,33 @@ const ImageCard = ({
 
   const handleRegister = async () => {
     try {
-      const response = await postRequestJsonwithHeader('/api/v1/registration/register');
-      if (response) navigate(`/register/${eventId}`);
-    } catch (error) {
-      if (error.response?.status === 401) {
-        toast.error("Login first to register!", { position: "top-right" });
-        setTimeout(() => navigate("/signin"), 2000);
+      const response = await postRequestNoToken("/api/v1/registration/register");
+  
+      if (response) {
+        navigate(`/register/${eventId}`);
       } else {
-        toast.error(
-          `An error occurred: ${error.response?.data?.message || "Unknown error"}`,
-          { position: "top-right" }
-        );
+        throw new Error("Unexpected empty response from server");
+      }
+    } catch (error) {
+      console.error("Registration error:", error); 
+  
+      if (error.response) {
+        const status = error.response.status;
+        const errorMessage = error.response.data?.message || "Unknown error occurred.";
+  
+        if (status === 401) {
+          toast.error("Login first to register!", { position: "top-right" });
+  
+          setTimeout(() => navigate("/signin"), 2000);
+        } else {
+          toast.error(`Error: ${errorMessage}`, { position: "top-right" });
+        }
+      } else {
+        toast.error("Network error. Please try again later.", { position: "top-right" });
       }
     }
   };
+  
 
   return (
     <>

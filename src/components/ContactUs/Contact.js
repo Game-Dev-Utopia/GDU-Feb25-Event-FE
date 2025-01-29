@@ -44,7 +44,7 @@ const ContactUs = () => {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <label htmlFor="name" className="block text-xl focus:outline-none">
+            <label htmlFor="name" className="block text-xl focus:outline-none font-cinzel font-bold">
               Name
             </label>
             <input
@@ -54,11 +54,11 @@ const ContactUs = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg"
+              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-xl focus:outline-none">
+            <label htmlFor="email" className="block text-xl focus:outline-none font-cinzel font-bold">
               Email
             </label>
             <input
@@ -68,11 +68,11 @@ const ContactUs = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg"
+              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
             />
           </div>
           <div>
-            <label htmlFor="contact" className="block text-xl focus:outline-none">
+            <label htmlFor="contact" className="block text-xl focus:outline-none font-cinzel font-bold">
               Contact
             </label>
             <input
@@ -82,11 +82,11 @@ const ContactUs = () => {
               value={formData.contact}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg"
+              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
             />
           </div>
           <div>
-            <label htmlFor="message" className="block text-xl focus:outline-none">
+            <label htmlFor="message" className="block text-xl focus:outline-none font-cinzel font-bold">
               Message
             </label>
             <textarea
@@ -96,7 +96,7 @@ const ContactUs = () => {
               onChange={handleChange}
               required
               rows={4}
-              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange  focus:outline-none text-lg"
+              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange  focus:outline-none text-lg font-playfair"
             ></textarea>
           </div>
           <div className="text-center">
