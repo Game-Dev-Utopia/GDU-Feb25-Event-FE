@@ -4,59 +4,75 @@ import { getRequest } from "../../api/api";
 const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem("username")
-  );
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("username"));
   const containerRef = useRef(null);
+  const hasFetched = useRef(false); // ✅ Ensures notifications are fetched only once
 
   const fetchNotifications = async () => {
-    if(isLoggedIn)
-    {
+    if (!isLoggedIn || hasFetched.current) return; // ✅ Prevents multiple requests
 
-    
+    hasFetched.current = true; // ✅ Ensures it runs only once
+
     try {
       const response = await getRequest(
-        `/api/v1/users/notification?username=${localStorage.getItem(
-          "username"
-        )}`
+        `/api/v1/users/notification?username=${localStorage.getItem("username")}`
       );
 
-      
-
-      // Check if the response is empty
-      if (!response.message === "No events registered for the user.") {
+      if (response.message === "No events registered for the user.") {
         setNotifications([]);
         return;
       }
 
       const eventidArr = response.eventdetail.map((event) => event.eventid);
+
       const eventDetails = await Promise.all(
         eventidArr.map(async (eventId) => {
-          const event = await getRequest(
-            `/api/v1/events/getevent?eventId=${eventId}`
-          );
+          const event = await getRequest(`/api/v1/events/getevent?eventId=${eventId}`);
           return event;
         })
       );
 
-      const processedData = eventDetails.map((event, index) => ({
-        title: event.name,
-        remainingTime: response.eventdetail[index].remainingTime,
-        eventid: event.eventid,
-        description: event.description,
-      }));
+      console.log(eventDetails);
+
+      const processedData = eventDetails.map((event, index) => {
+        console.log(event.date)
+        const firstDate = event.date?.[0]; // ✅ Extract first date correctly
+        let remainingTime = "Date not available";
+
+        if (firstDate) {
+          const eventDate = new Date(firstDate);
+          const now = new Date();
+          const diffMs = eventDate - now;
+
+          if (diffMs > 0) {
+            const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+            remainingTime = `${days}d ${hours}h ${minutes}m remaining`;
+          } else {
+            remainingTime = "Event has started or passed";
+          }
+        }
+
+        return {
+          title: event.name,
+          remainingTime,
+          eventid: event.eventid,
+          description: event.description,
+        };
+      });
+
       setNotifications(processedData);
-    
     } catch (error) {
       console.error("Error fetching notifications:", error);
     } finally {
       setLoading(false);
     }
-  }
   };
 
   useEffect(() => {
-    fetchNotifications();
+    fetchNotifications(); // ✅ Runs only once due to `hasFetched` ref
   }, []);
 
   return (
@@ -72,9 +88,7 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
       {loading ? (
         <p className="text-center mt-4">Loading...</p>
       ) : notifications.length === 0 ? (
-        <p className="text-center mt-4 text-sm text-gray-300">
-          No notifications
-        </p>
+        <p className="text-center mt-4 text-sm text-gray-300">No notifications</p>
       ) : (
         <ul className="divide-y divide-white divide-opacity-20 flex flex-col gap-2 mt-2">
           {notifications.map((notification, index) => (
@@ -82,7 +96,7 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
               <div className="flex items-center justify-between">
                 <h5 className="text-md md:text-xl">{notification.title}</h5>
                 <p className="text-sm">
-                  {notification.remainingTime ?? "Some"} days left
+                  {notification.remainingTime ?? "Some"} 
                 </p>
               </div>
               <p className="text-[10px] text-gray-300 line-clamp-2">
