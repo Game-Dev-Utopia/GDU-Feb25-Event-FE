@@ -73,6 +73,8 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
     }
   };
 
+  console.log("notifications", notifications);
+
   useEffect(() => {
     fetchNotifications(); // ✅ Runs only once due to `hasFetched` ref
   }, []);
