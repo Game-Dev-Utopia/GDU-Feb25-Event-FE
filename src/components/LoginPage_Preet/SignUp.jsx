@@ -30,7 +30,8 @@ const SignUp = () => {
   };
 
   const isValidPassword = (password) => {
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    const passwordRegex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
     return passwordRegex.test(password);
   };
 
@@ -41,20 +42,36 @@ const SignUp = () => {
 
   const handleSubmit = async () => {
     // Validations
-    if (!formData.username || formData.username.length < 3 || formData.username.length > 15) {
-      toast.error("Username must be between 3 and 15 characters.", { position: "top-right" });
+    if (
+      !formData.username ||
+      formData.username.length < 3 ||
+      formData.username.length > 15
+    ) {
+      toast.error("Username must be between 3 and 15 characters.", {
+        position: "top-right",
+      });
       return;
     }
-    if (!formData.fullname || formData.fullname.length < 3 || formData.fullname.length > 30) {
-      toast.error("Full name must be between 3 and 30 characters.", { position: "top-right" });
+    if (
+      !formData.fullname ||
+      formData.fullname.length < 3 ||
+      formData.fullname.length > 30
+    ) {
+      toast.error("Full name must be between 3 and 30 characters.", {
+        position: "top-right",
+      });
       return;
     }
     if (!isValidEmail(formData.email)) {
-      toast.error("Please enter a valid email address.", { position: "top-right" });
+      toast.error("Please enter a valid email address.", {
+        position: "top-right",
+      });
       return;
     }
     if (!isValidContact(formData.contact)) {
-      toast.error("Contact number must be 10 digits.", { position: "top-right" });
+      toast.error("Contact number must be 10 digits.", {
+        position: "top-right",
+      });
       return;
     }
     if (!isValidPassword(formData.password)) {
@@ -64,8 +81,14 @@ const SignUp = () => {
       );
       return;
     }
-    if (!formData.rollNo || formData.rollNo.length < 2 || formData.rollNo.length > 10) {
-      toast.error("Roll number must be between 2 and 10 characters.", { position: "top-right" });
+    if (
+      !formData.rollNo ||
+      formData.rollNo.length < 2 ||
+      formData.rollNo.length > 10
+    ) {
+      toast.error("Roll number must be between 2 and 10 characters.", {
+        position: "top-right",
+      });
       return;
     }
 
@@ -73,54 +96,55 @@ const SignUp = () => {
     setIsLoading(true); // Start loading
     try {
       const response = await postRequestJson(`/api/v1/users/register`, formData);
-      console.log(response);
+      console.log("Response:", response);
     
-      if (response.ok) {
-        // Successful registration
-        const responseData = await response.json();
+      // Check if the response contains the expected fields
+      if (response && response.message) {
         toast.success("Registration successful!", { position: "top-right" });
     
         setTimeout(() => {
           navigate("/signin"); // Navigate to /signin after success
         }, 3000);
       } else {
-        // Handle error based on status code
-        const errorData = await response.json();
-    
-        switch (response.status) {
-          case 400:
-            toast.error("All fields are required.", { position: "top-right" });
-            break;
-          case 409:
-            toast.error(
-              "User with email or username already exists.",
-              { position: "top-right" }
-            );
-            break;
-          case 500:
-            toast.error(
-              "Something went wrong while registering. Please try again later.",
-              { position: "top-right" }
-            );
-            break;
-          default:
-            toast.error(
-              `Registration failed: ${errorData.message || "Unknown error"}`,
-              { position: "top-right" }
-            );
-            break;
-        }
+        // If response does not contain expected data, handle as an error
+        throw new Error("Unexpected response format");
       }
     } catch (error) {
-      // Handle network or other unexpected errors
-      toast.error("An error occurred. Please try again later.", {
-        position: "top-right",
-      });
-    }    
-     finally {
+      console.error("Error during registration:", error);
+    
+      // Handle specific error cases
+      if (error.response) {
+        const statusCode = error.response.status;
+        const errorMessage = error.response.data?.message || "An unknown error occurred.";
+    
+        switch (statusCode) {
+          case 400:
+            toast.error(`Bad Request: ${errorMessage}`, { position: "top-right" });
+            break;
+          case 409:
+            toast.error(`Conflict: ${errorMessage}`, { position: "top-right" });
+            break;
+          case 500:
+            toast.error(`Server Error: ${errorMessage}`, { position: "top-right" });
+            break;
+          default:
+            toast.error(`Error ${statusCode}: ${errorMessage}`, { position: "top-right" });
+        }
+      } else if (error.request) {
+        // Request was made but no response was received
+        toast.error("No response from server. Please check your connection.", {
+          position: "top-right",
+        });
+      } else {
+        // Something happened in setting up the request
+        toast.error("An unexpected error occurred. Please try again later.", {
+          position: "top-right",
+        });
+      }
+    } finally {
       setIsLoading(false); // Stop loading
     }
-  };
+  }   
 
   return (
     <div
@@ -132,12 +156,8 @@ const SignUp = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div
-        className="bg-black bg-opacity-60 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-4xl w-[90%] mx-5 mt-20"
-      >
-        <h1
-          className="text-4xl md:text-6xl font-semibold text-center text-yellow-400"
-        >
+      <div className="bg-black bg-opacity-60 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-4xl w-[90%] mx-5 mt-20">
+        <h1 className="text-4xl md:text-6xl font-semibold text-center text-yellow-400">
           GLITCHED
         </h1>
 
