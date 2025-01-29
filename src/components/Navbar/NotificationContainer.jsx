@@ -17,53 +17,55 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
       const response = await getRequest(
         `/api/v1/users/notification?username=${localStorage.getItem("username")}`
       );
+      console.log(response)
 
       if (response.message === "No events registered for the user.") {
         setNotifications([]);
         return;
       }
 
-      const eventidArr = response.eventdetail.map((event) => event.eventid);
+      // const eventidArr = response.eventdetail.map((event) => event.eventid);
 
-      const eventDetails = await Promise.all(
-        eventidArr.map(async (eventId) => {
-          const event = await getRequest(`/api/v1/events/getevent?eventId=${eventId}`);
-          return event;
-        })
-      );
+      // const eventDetails = await Promise.all(
+      //   eventidArr.map(async (eventId) => {
+      //     const event = await getRequest(`/api/v1/events/getevent?eventId=${eventId}`);
+      //     return event;
+      //   })
+      // );
 
-      console.log(eventDetails);
+      // console.log(eventDetails);
 
-      const processedData = eventDetails.map((event, index) => {
-        console.log(event.date)
-        const firstDate = event.date?.[0]; // ✅ Extract first date correctly
-        let remainingTime = "Date not available";
+      // const processedData = eventDetails.map((event, index) => {
+      //   console.log(event.date)
+      //   const firstDate = event.date?.[0]; // ✅ Extract first date correctly
+      //   let remainingTime = "Date not available";
 
-        if (firstDate) {
-          const eventDate = new Date(firstDate);
-          const now = new Date();
-          const diffMs = eventDate - now;
+      //   if (firstDate) {
+      //     const eventDate = new Date(firstDate);
+      //     const now = new Date();
+      //     const diffMs = eventDate - now;
 
-          if (diffMs > 0) {
-            const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+      //     if (diffMs > 0) {
+      //       const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      //       const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      //       const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
 
-            remainingTime = `${days}d ${hours}h ${minutes}m remaining`;
-          } else {
-            remainingTime = "Event has started or passed";
-          }
-        }
+      //       remainingTime = `${days}d ${hours}h ${minutes}m remaining`;
+      //     } else {
+      //       remainingTime = "Event has started or passed";
+      //     }
+      //   }
 
-        return {
-          title: event.name,
-          remainingTime,
-          eventid: event.eventid,
-          description: event.description,
-        };
-      });
-
+      //   return {
+      //     title: event.name,
+      //     remainingTime,
+      //     eventid: event.eventid,
+      //     description: event.description,
+      //   };
+      // });
+      const processedData = response.eventdetail;
       setNotifications(processedData);
+      // setNotifications([]);
     } catch (error) {
       console.error("Error fetching notifications:", error);
     } finally {
@@ -94,13 +96,13 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
           {notifications.map((notification, index) => (
             <li key={index} className="py-2">
               <div className="flex items-center justify-between">
-                <h5 className="text-md md:text-xl">{notification.title}</h5>
+                <h5 className="text-md md:text-xl">{notification.eventname}</h5>
                 <p className="text-sm">
                   {notification.remainingTime ?? "Some"} 
                 </p>
               </div>
               <p className="text-[10px] text-gray-300 line-clamp-2">
-                {notification.description}
+                {notification.eventdesc}
               </p>
             </li>
           ))}

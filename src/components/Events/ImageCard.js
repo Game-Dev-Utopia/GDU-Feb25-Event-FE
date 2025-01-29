@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { CloseButton, toast } from "react-toastify";
 import { useState } from "react";
-import { postRequestJsonwithHeader, postRequestNoToken } from "../../api/api";
+import { postRequestJsonwithHeader, postRequestNoToken , postRequestJson} from "../../api/api";
 import { FaCross } from "react-icons/fa6";
 import { FaRegWindowClose } from "react-icons/fa";
 
@@ -24,7 +24,7 @@ const ImageCard = ({
 
   const handleRegister = async () => {
     try {
-      const response = await postRequestNoToken("/api/v1/registration/register");
+      const response = await postRequestJson("/api/v1/registration/register", JSON.stringify({"eventId": eventId}));
   
       if (response) {
         navigate(`/register/${eventId}`);
