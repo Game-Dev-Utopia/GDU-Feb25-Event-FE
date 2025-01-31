@@ -96,7 +96,7 @@ const SignUp = () => {
     setIsLoading(true); // Start loading
     try {
       const response = await postRequestJson(`/api/v1/users/register`, formData);
-      console.log("Response:", response);
+     
     
       // Check if the response contains the expected fields
       if (response && response.message) {

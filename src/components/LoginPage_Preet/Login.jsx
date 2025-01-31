@@ -45,8 +45,6 @@ const Login = () => {
         JSON.stringify({ email, password })
       );
 
-      console.log(response);
-
       if (response) {
         toast.success("Login successful!", { position: "top-right" });
         // Save token or user data if provided by API

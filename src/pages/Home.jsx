@@ -10,6 +10,9 @@ import Countdown from "../components/Countdown/Countdown";
 import Prizepool from "../components/PrizePool/Prizepool";
 import Contact from "../components/ContactUs/Contact";
 import PrizePool from "../components/PrizePool/Prizepool";
+import troch from "./torchorg.png";
+import torchLeft from "./torch left.png";
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -21,20 +24,36 @@ const Home = () => {
         id="home"
       >
         {/* Home Banner */}
-        <div className="relative text-white font-sans">
-          {/* Background section with button */}
+        <div className="relative text-white font-sans flex flex-col items-center justify-center h-screen">
+          {/* Background */}
           <div
-            className="relative bg-cover bg-center bg-no-repeat h-screen w-full flex items-end justify-center overlay-section"
-            style={{
-              backgroundImage: `url(/images/a2.webp)`,
-            }}
-          >
-            <button
-              onClick={() => navigate("/Intro")}
-              className="bg-yellow-500 text-blue-900 px-7 py-3 rounded hover:bg-yellow-600 mb-10"
-            >
-              Join Us
-            </button>
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+            style={{ backgroundImage: "url(/images/Dragonbg.webp)" }}
+          ></div>
+
+          {/* Container for Title and Button */}
+          <div className="relative flex flex-col items-center justify-center px-4 sm:px-10 lg:px-20 z-10 text-center">
+            {/* GameDevUtopia Text - Power of Dragon Font Applied */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-wide shadow-lg bg-black bg-opacity-60 px-6 sm:px-8 py-3 sm:py-4 rounded-lg relative font-[PowerOfDragon] animate-float">
+              Glitched
+              <span className="text-blue-400">Utopia</span>
+            </h1>
+            {/* Left Torch Image - Visible on all screens */} 
+            <img
+              src={torchLeft}
+              alt="Torch Left"
+              className="absolute left-[-50px] sm:left-[-100px] md:left-[-150px] bottom-0 w-[100px] sm:w-[150px] md:w-[200px] opacity-90 animate-float"
+            />
+
+            {/* Right Torch Image - Visible on all screens */}
+             <img
+              src={troch}
+              alt="Torch Right"
+              className="absolute right-[-50px] sm:right-[-100px] md:right-[-150px] bottom-0 w-[100px] sm:w-[150px] md:w-[200px] opacity-90 animate-float"
+            /> 
+
+            
+            
           </div>
         </div>
 

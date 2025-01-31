@@ -18,7 +18,7 @@ const Profile = () => {
           const response = await getRequest(
             `/api/v1/users/eventsregistered?username=${username}`
           );
-          console.log("Fetched registered events:", response.events);
+
 
           setUserdata(response.events); // Save registered event IDs
 
@@ -28,7 +28,7 @@ const Profile = () => {
           );
 
           const eventsData = await Promise.all(eventDetailsPromises);
-          console.log("Fetched event details:", eventsData);
+
 
           setEvents(eventsData); // Save detailed event data
         } catch (err) {

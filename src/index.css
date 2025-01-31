@@ -61,3 +61,19 @@ html {
   position: relative;
   z-index: 3; /* Ensure content is above the overlay */
 }
+
+
+
+/* Custom class for "GameDevUtopia" using Power of Dragon font */
+.dragon-text {
+  font-family: 'PowerOfDragon', serif;
+  font-size: 6rem;
+  color: #d4af37; /* Gold */
+  text-shadow: 4px 4px 10px rgba(255, 215, 0, 0.8);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border-radius: 5px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
