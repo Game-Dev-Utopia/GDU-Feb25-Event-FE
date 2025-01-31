@@ -37,7 +37,6 @@ const Home = () => {
             </button>
           </div>
         </div>
-        
 
         {/* Sponser Slider */}
         <div

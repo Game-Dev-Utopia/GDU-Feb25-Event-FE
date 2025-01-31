@@ -26,7 +26,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="p-5">
+    <div className="p-5" id="contact">
       {/* Archer Image */}
       <div className="absolute top-0 left-0 w-full h-full flex justify-start items-center z-10 overflow-hidden">
         <img
@@ -37,14 +37,19 @@ const ContactUs = () => {
       </div>
 
       {/* Form Container */}
-      <div className="relative w-full max-w-xl bg-charcoalGray bg-opacity-50 p-5 md:p-6 rounded-lg shadow-lg z-20 text-goldenrod 
-                     md:ml-auto lg:mr-[5%]">
+      <div
+        className="relative w-full max-w-xl bg-charcoalGray bg-opacity-50 p-5 md:p-6 rounded-lg shadow-lg z-20 text-goldenrod 
+                     md:ml-auto lg:mr-[5%]"
+      >
         <h2 className="text-5xl md:text-6xl font-bold text-center mb-6 font-cinzel">
           Contact Us
         </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <label htmlFor="name" className="block text-xl focus:outline-none font-cinzel font-bold">
+            <label
+              htmlFor="name"
+              className="block text-xl focus:outline-none font-cinzel font-bold"
+            >
               Name
             </label>
             <input
@@ -58,7 +63,10 @@ const ContactUs = () => {
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-xl focus:outline-none font-cinzel font-bold">
+            <label
+              htmlFor="email"
+              className="block text-xl focus:outline-none font-cinzel font-bold"
+            >
               Email
             </label>
             <input
@@ -72,7 +80,10 @@ const ContactUs = () => {
             />
           </div>
           <div>
-            <label htmlFor="contact" className="block text-xl focus:outline-none font-cinzel font-bold">
+            <label
+              htmlFor="contact"
+              className="block text-xl focus:outline-none font-cinzel font-bold"
+            >
               Contact
             </label>
             <input
@@ -86,7 +97,10 @@ const ContactUs = () => {
             />
           </div>
           <div>
-            <label htmlFor="message" className="block text-xl focus:outline-none font-cinzel font-bold">
+            <label
+              htmlFor="message"
+              className="block text-xl focus:outline-none font-cinzel font-bold"
+            >
               Message
             </label>
             <textarea

@@ -9,28 +9,28 @@
     animation-play-state: paused;
   }
 }
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap");
 
 ::-webkit-scrollbar {
   width: 0px;
 }
 
-.body{
+.body,
+html {
   scroll-behavior: smooth;
 }
 
-
 @font-face {
-  font-family: 'HarryP';
-  src: url('./components/LoginPage_Preet/assets/HARRYP__.TTF') format('truetype');
+  font-family: "HarryP";
+  src: url("./components/LoginPage_Preet/assets/HARRYP__.TTF")
+    format("truetype");
 }
 
 ::-webkit-scrollbar {
   width: 0px;
 }
 
-.body{
+.body {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
@@ -40,7 +40,12 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.7)
+  );
   z-index: 1;
 }
 
@@ -56,8 +61,3 @@
   position: relative;
   z-index: 3; /* Ensure content is above the overlay */
 }
-
-
-
-
-

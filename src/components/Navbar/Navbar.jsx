@@ -4,6 +4,7 @@ import { IoMdNotifications } from "react-icons/io";
 import { useState, useEffect, useRef } from "react";
 import NotificationContainer from "./NotificationContainer";
 import { postRequestJson } from "../../api/api";
+import { sidebarLinks } from "./links";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -73,20 +74,18 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <ul className="md:flex hidden items-center space-x-6 text-goldenrod">
-        {["Home", "Sponsors", "Events", "About Us", "FAQ's"].map(
-          (item, index) => (
-            <li key={index} className="relative group">
-              <Link
-                to={`#${item}`}
-                className="relative z-10 text-goldenrod hover:deepCrimson transition text-xl"
-              >
-                {item}
-              </Link>
-              {/* Glow Effect */}
-              <span className="absolute inset-0 bg-goldenrod opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
-            </li>
-          )
-        )}
+        {sidebarLinks.map((item, index) => (
+          <li key={index} className="relative group">
+            <a
+              to={`${item.url}`}
+              className="relative z-10 text-goldenrod hover:deepCrimson transition text-xl"
+            >
+              {item.name}
+            </a>
+            {/* Glow Effect */}
+            <span className="absolute inset-0 bg-goldenrod opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
+          </li>
+        ))}
         {isLoggedIn && (
           <li className="relative group">
             <Link

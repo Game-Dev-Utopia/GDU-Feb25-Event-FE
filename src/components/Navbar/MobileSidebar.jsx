@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { sidebarLinks } from "./links";
 
 const MobileSidebar = () => {
   const navigate = useNavigate();
@@ -62,21 +63,23 @@ const MobileSidebar = () => {
 
         {/* Navigation Links */}
         <ul className="flex flex-col items-center justify-center h-full space-y-6">
-          {["Home", "Sponsers", "Events", "FAQ's", "Contact Us" ].map(
-            (item, index) => (
-              <li key={index} className="relative group w-full">
-                <Link
-                  to="/"
-                  className="block z-20 text-2xl text-goldenrod py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
-                  onClick={() => setIsOpen(false)} // Close sidebar when navigating
-                >
-                  {item}
-                </Link>
-                {/* Glow Effect */}
-                {/* <span className="absolute z-[-1] inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span> */}
-              </li>
-            )
-          )}
+          {sidebarLinks.map((item, index) => (
+            <li
+              key={index}
+              className="relative group w-full"
+              onClick={() => setIsOpen(false)}
+            >
+              <a
+                href={item.url}
+                className="block z-20 text-2xl text-goldenrod py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
+                onClick={() => setIsOpen(false)} // Close sidebar when navigating
+              >
+                {item.name}
+              </a>
+              {/* Glow Effect */}
+              {/* <span className="absolute z-[-1] inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span> */}
+            </li>
+          ))}
           {isLoggedIn && (
             <>
               <li className="relative group w-full">
@@ -87,7 +90,7 @@ const MobileSidebar = () => {
                 >
                   Profile
                 </Link>
-               
+
                 {/* <span className="absolute z-[-1] inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span> */}
               </li>
               <li>
