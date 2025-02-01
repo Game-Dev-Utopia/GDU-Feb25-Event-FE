@@ -13,6 +13,7 @@ const ImageCard = ({
   imageUrl,
   typeOfevent,
   date,
+  time,
   registrationFee = "Free",
   teamSize = "N/A",
   rules,
@@ -188,18 +189,30 @@ const ImageCard = ({
               <div className="space-y-2  relative text-lg">
                 {typeOfevent && <p className=" gap-2">
                   <span className="font-bold text-burntOrange">Event Type : </span> {typeOfevent}
-                </p> }
+                </p>}
                 {teamSize && <p className=" gap-2">
                   <span className="font-bold text-burntOrange">Team Size : </span>{teamSize}
                 </p>}
                 <p className=" gap-2">
                   <span className="font-bold text-burntOrange">Registration Fee :</span> {registrationFee || "Free"}
                 </p>
-                {venue &&
-                  <p className=" gap-2">
-                    <span className="font-bold text-burntOrange">Time & Venue :</span> {venue}
-                  </p>
+
+                {(venue && date && time && date.length > 0 && time.length > 0) ?  (
+                  <div className="gap-2">
+                    <p className="font-bold text-burntOrange">Time & Venue:</p>
+                    {date.map((d, index) => (
+                      <p key={index} className="ml-4">
+                        {new Date(d).toLocaleDateString()} at {time[index] || "TBA"}
+                      </p>
+                    ))}
+                    <p className="mt-1">Venue: {venue}</p>
+                  </div>
+                ) :
+                <p className="items-center gap-2">
+                <span className="font-bold text-burntOrange">Venue :</span> {venue}
+              </p>
                 }
+
                 {rules.length > 0 &&
                   <p className="items-center gap-2">
                     <span className="font-bold text-burntOrange">Rules & Regulations :</span> {rules}
