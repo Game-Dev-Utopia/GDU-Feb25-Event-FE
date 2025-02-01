@@ -77,7 +77,7 @@ const Navbar = () => {
         {sidebarLinks.map((item, index) => (
           <li key={index} className="relative group">
             <a
-              to={`${item.url}`}
+              href={item.url}
               className="relative z-10 text-goldenrod hover:deepCrimson transition text-xl"
             >
               {item.name}
