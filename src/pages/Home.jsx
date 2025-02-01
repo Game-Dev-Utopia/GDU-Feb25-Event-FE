@@ -13,7 +13,6 @@ import PrizePool from "../components/PrizePool/Prizepool";
 import troch from "./torchorg.png";
 import torchLeft from "./torch left.png";
 
-
 const Home = () => {
   const navigate = useNavigate();
 
@@ -34,26 +33,26 @@ const Home = () => {
           {/* Container for Title and Button */}
           <div className="relative flex flex-col items-center justify-center px-4 sm:px-10 lg:px-20 z-10 text-center">
             {/* GameDevUtopia Text - Power of Dragon Font Applied */}
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-wide shadow-lg bg-black bg-opacity-60 px-6 sm:px-8 py-3 sm:py-4 rounded-lg relative font-[PowerOfDragon] animate-float">
-              Glitched
-              <span className="text-blue-400">Utopia</span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-wide shadow-lg bg-black bg-opacity-60 px-6 sm:px-8 py-3 sm:py-5 rounded-lg relative font-[PowerOfDragon] animate-float">
+              <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl block text-gray-300">
+                GameDevUtopia presents
+              </span>
+              <span className="text-blue-400">Glitched</span>
             </h1>
-            {/* Left Torch Image - Visible on all screens */} 
+
+            {/* Left Torch Image - Smaller on mobile */} 
             <img
               src={torchLeft}
               alt="Torch Left"
-              className="absolute left-[-50px] sm:left-[-100px] md:left-[-150px] bottom-0 w-[100px] sm:w-[150px] md:w-[200px] opacity-90 animate-float"
+              className="absolute left-[-30px] sm:left-[-80px] md:left-[-150px] bottom-0 w-[80px] sm:w-[130px] md:w-[200px] opacity-90 animate-float"
             />
 
-            {/* Right Torch Image - Visible on all screens */}
-             <img
+            {/* Right Torch Image - Smaller on mobile */}
+            <img
               src={troch}
               alt="Torch Right"
-              className="absolute right-[-50px] sm:right-[-100px] md:right-[-150px] bottom-0 w-[100px] sm:w-[150px] md:w-[200px] opacity-90 animate-float"
-            /> 
-
-            
-            
+              className="absolute right-[-30px] sm:right-[-80px] md:right-[-150px] bottom-0 w-[80px] sm:w-[130px] md:w-[200px] opacity-90 animate-float"
+            />
           </div>
         </div>
 

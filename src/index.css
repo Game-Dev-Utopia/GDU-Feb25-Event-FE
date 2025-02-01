@@ -9,25 +9,34 @@
     animation-play-state: paused;
   }
 }
+
+/* Google Fonts Import */
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap");
 
-::-webkit-scrollbar {
-  width: 0px;
+/* Custom Font - PowerOfDragon */
+@font-face {
+  font-family: "PowerOfDragon";
+  src: url("../public/fonts/SeraphonRegular-9MKnK.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
-.body,
-html {
-  scroll-behavior: smooth;
-}
-
+/* Custom Font - HarryP */
 @font-face {
   font-family: "HarryP";
   src: url("./components/LoginPage_Preet/assets/HARRYP__.TTF")
     format("truetype");
 }
 
+/* Scrollbar Customization */
 ::-webkit-scrollbar {
   width: 0px;
+}
+
+/* Smooth Scrolling */
+.body,
+html {
+  scroll-behavior: smooth;
 }
 
 .body {
@@ -62,11 +71,9 @@ html {
   z-index: 3; /* Ensure content is above the overlay */
 }
 
-
-
-/* Custom class for "GameDevUtopia" using Power of Dragon font */
+/* Custom class for "GameDevUtopia presents Glitched" using PowerOfDragon font */
 .dragon-text {
-  font-family: 'PowerOfDragon', serif;
+  font-family: "PowerOfDragon", serif;
   font-size: 6rem;
   color: #d4af37; /* Gold */
   text-shadow: 4px 4px 10px rgba(255, 215, 0, 0.8);
@@ -76,4 +83,3 @@ html {
   letter-spacing: 3px;
   text-transform: uppercase;
 }
-
