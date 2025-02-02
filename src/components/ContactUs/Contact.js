@@ -15,7 +15,6 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
     alert("Thank you for reaching out! We'll get back to you soon.");
     setFormData({
       name: "",
@@ -26,7 +25,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="p-5">
+    <div className="p-5" id="contact">
       {/* Archer Image */}
       <div className="absolute top-0 left-0 w-full h-full flex justify-start items-center z-10 overflow-hidden">
         <img
@@ -37,14 +36,19 @@ const ContactUs = () => {
       </div>
 
       {/* Form Container */}
-      <div className="relative w-full max-w-xl bg-charcoalGray bg-opacity-50 p-5 md:p-6 rounded-lg shadow-lg z-20 text-goldenrod 
-                     md:ml-auto lg:mr-[5%]">
+      <div
+        className="relative w-full max-w-xl bg-charcoalGray bg-opacity-50 p-5 md:p-6 rounded-lg shadow-lg z-20 text-goldenrod 
+                     md:ml-auto lg:mr-[5%]"
+      >
         <h2 className="text-5xl md:text-6xl font-bold text-center mb-6 font-cinzel">
           Contact Us
         </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <label htmlFor="name" className="block text-xl focus:outline-none">
+            <label
+              htmlFor="name"
+              className="block text-xl focus:outline-none font-cinzel font-bold"
+            >
               Name
             </label>
             <input
@@ -54,11 +58,14 @@ const ContactUs = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg"
+              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-xl focus:outline-none">
+            <label
+              htmlFor="email"
+              className="block text-xl focus:outline-none font-cinzel font-bold"
+            >
               Email
             </label>
             <input
@@ -68,11 +75,14 @@ const ContactUs = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg"
+              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
             />
           </div>
           <div>
-            <label htmlFor="contact" className="block text-xl focus:outline-none">
+            <label
+              htmlFor="contact"
+              className="block text-xl focus:outline-none font-cinzel font-bold"
+            >
               Contact
             </label>
             <input
@@ -82,11 +92,14 @@ const ContactUs = () => {
               value={formData.contact}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg"
+              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
             />
           </div>
           <div>
-            <label htmlFor="message" className="block text-xl focus:outline-none">
+            <label
+              htmlFor="message"
+              className="block text-xl focus:outline-none font-cinzel font-bold"
+            >
               Message
             </label>
             <textarea
@@ -96,7 +109,7 @@ const ContactUs = () => {
               onChange={handleChange}
               required
               rows={4}
-              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange  focus:outline-none text-lg"
+              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange  focus:outline-none text-lg font-playfair"
             ></textarea>
           </div>
           <div className="text-center">

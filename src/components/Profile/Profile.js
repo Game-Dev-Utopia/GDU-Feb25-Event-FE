@@ -18,7 +18,7 @@ const Profile = () => {
           const response = await getRequest(
             `/api/v1/users/eventsregistered?username=${username}`
           );
-          console.log("Fetched registered events:", response.events);
+
 
           setUserdata(response.events); // Save registered event IDs
 
@@ -28,7 +28,7 @@ const Profile = () => {
           );
 
           const eventsData = await Promise.all(eventDetailsPromises);
-          console.log("Fetched event details:", eventsData);
+
 
           setEvents(eventsData); // Save detailed event data
         } catch (err) {
@@ -60,6 +60,8 @@ const Profile = () => {
     );
   }
 
+
+
   return (
     <div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat py-20 font-cinzel overlay-section"
@@ -87,11 +89,29 @@ const Profile = () => {
               >
                 <h2 className="text-xl font-semibold mb-3 text-yellow-400">{event.name}</h2>
                 <p className="text-gray-200 mb-3">{event.description}</p>
-                <p className="text-gray-400 mb-3">
-                  Date: {new Date(event.date).toLocaleDateString()}
-                </p>
+
+                {/* ✅ Ensure date is displayed properly */}
+                {Array.isArray(event.date) && event.date.length > 0 && (
+                  <div className="text-gray-400 mb-3">
+                    <p className="font-bold">Date(s):</p>
+                    {event.date.map((d, index) => (
+                      <p key={index} className="ml-4">
+                        {new Date(d).toLocaleDateString()} at {event.time?.[index] || "TBA"}
+                      </p>
+                    ))}
+                  </div>
+                )}
+
+                {/* ✅ Display venue properly */}
+                {event.venue && (
+                  <p className="text-gray-400 mb-3">
+                    <span className="font-bold">Venue:</span> {event.venue}
+                  </p>
+                )}
+
               </div>
             ))}
+
           </div>
         </>
       ) : (

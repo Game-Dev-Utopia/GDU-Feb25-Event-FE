@@ -22,7 +22,7 @@ const EventRegistrationForm = () => {
       try {
         setLoading(true);
         const response = await getRequest(`/api/v1/events/getevent?eventId=${eventID}`);
-        console.log("Fetched response:", response); // Log the response directly
+       
         setEvent(response); // Update state
       } catch (err) {
         setError(err.message);
@@ -39,7 +39,7 @@ const EventRegistrationForm = () => {
   // Add a second useEffect to debug state updates
   useEffect(() => {
     if (event) {
-      console.log("Updated event:", event); // Log when event changes
+      
     }
   }, [event]);
 
@@ -63,14 +63,18 @@ const EventRegistrationForm = () => {
       }));
     }
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (event?.typeOfevent === "solo") {
+    if (event?.typeOfevent?.toLowerCase() === "solo") {
       formData.teamemail = [formData.email];
-      console.log(formData)
-    } else if (event?.typeOfevent === "team") {
-      console.log(formData);
+    
+    } else if (event?.typeOfevent?.toLowerCase() === "team")      {
+      if(formData.teamemail.length === 0){
+        toast.error("Please add team members!", { position: "top-right" });
+        return;
+      }
+    
     }
     setRegistering(true);
     try {
@@ -78,7 +82,7 @@ const EventRegistrationForm = () => {
       const token = localStorage.getItem("accessToken");
       const response = await postRequestJsonwithHeader(`/api/v1/registration/eventregister?eventId=${eventID}`, formData);
 
-      console.log(response);
+
 
       if (response) {
         toast.success("Registration successful!", { position: "top-right" });

@@ -20,7 +20,7 @@ function Countdown() {
                             theme="dark"
                             size="large"
                             titlePosition="bottom"
-                            endAt={new Date("2025-02-15T00:00:00Z").toUTCString()} // Set to 15 Feb 2025
+                            endAt={new Date("2025-02-17T00:00:00Z").toUTCString()} // Set to 15 Feb 2025
                             dayTitle="DAYS"
                             hourTitle="HOURS"
                             minuteTitle="MINUTES"

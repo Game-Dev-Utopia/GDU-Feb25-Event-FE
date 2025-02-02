@@ -3,18 +3,20 @@ import MobileSidebar from "./MobileSidebar";
 import { IoMdNotifications } from "react-icons/io";
 import { useState, useEffect, useRef } from "react";
 import NotificationContainer from "./NotificationContainer";
+import { postRequestJson } from "../../api/api";
+import { sidebarLinks } from "./links";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem("accessToken")
+    !!localStorage.getItem("username")
   );
   const notificationRef = useRef(null);
 
   useEffect(() => {
     const handleAuthChange = () => {
-      setIsLoggedIn(!!localStorage.getItem("accessToken"));
+      setIsLoggedIn(!!localStorage.getItem("username"));
     };
 
     window.addEventListener("authChange", handleAuthChange);
@@ -43,11 +45,13 @@ const Navbar = () => {
     };
   }, [isNotificationOpen]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+  const handleLogout = async () => {
+    // localStorage.removeItem("accessToken");
+    // localStorage.removeItem("refreshToken");
     localStorage.removeItem("username");
+    const response = await postRequestJson(`/api/v1/users/logout`);
 
+    console.log(response);
     // Trigger the custom event for auth changes
     const authEvent = new Event("authChange");
     window.dispatchEvent(authEvent);
@@ -70,20 +74,18 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <ul className="md:flex hidden items-center space-x-6 text-goldenrod">
-        {["Home", "Sponsors", "Events", "About Us", "FAQ's"].map(
-          (item, index) => (
-            <li key={index} className="relative group">
-              <Link
-                to={`#${item}`}
-                className="relative z-10 text-goldenrod hover:deepCrimson transition text-xl"
-              >
-                {item}
-              </Link>
-              {/* Glow Effect */}
-              <span className="absolute inset-0 bg-goldenrod opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
-            </li>
-          )
-        )}
+        {sidebarLinks.map((item, index) => (
+          <li key={index} className="relative group">
+            <a
+              href={item.url}
+              className="relative z-10 text-goldenrod hover:deepCrimson transition text-xl"
+            >
+              {item.name}
+            </a>
+            {/* Glow Effect */}
+            <span className="absolute inset-0 bg-goldenrod opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
+          </li>
+        ))}
         {isLoggedIn && (
           <li className="relative group">
             <Link

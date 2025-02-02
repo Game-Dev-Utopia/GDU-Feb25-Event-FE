@@ -31,12 +31,14 @@ const ImageCardGrid = () => {
   }, []); // Empty dependency array to fetch data only once
 
   // Conditional rendering
-  if (loading) return <div className="text-center text-xl">Loading event details...</div>;
+  if (loading)
+    return <div className="text-center text-xl">Loading event details...</div>;
   if (error) return <div className="text-center text-red-500">{error}</div>;
-  if (cards.length === 0) return <div className="text-center text-xl">No events found.</div>;
+  if (cards.length === 0)
+    return <div className="text-center text-xl">No events found.</div>;
 
   return (
-    <div className="container mx-auto p-4 sm:p-8 overflow-x-hidden">
+    <div className="container mx-auto p-4 sm:p-8 overflow-x-hidden" id="events">
       <div className="text-center mb-16 text-6xl font-bold font-cinzel text-goldenrod">
         Events
       </div>
@@ -52,9 +54,12 @@ const ImageCardGrid = () => {
             teamSize={card.teamSize}
             date={card.date}
             venue={card.venue}
+            time={card.time}
             rules={card.rules}
             bgUrl={"/scroll1.jpg"}
-            modalImageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
+            modalImageUrl={
+              card.imageUrl || "/images/events/dungeon_devs_logo.png"
+            }
             imageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
           />
         ))}

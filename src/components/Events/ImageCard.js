@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { CloseButton, toast } from "react-toastify";
 import { useState } from "react";
-import { postRequestJsonwithHeader } from "../../api/api";
+import { postRequestJsonwithHeader, postRequestNoToken, postRequestJson } from "../../api/api";
 import { FaCross } from "react-icons/fa6";
 import { FaRegWindowClose } from "react-icons/fa";
 
@@ -13,6 +13,7 @@ const ImageCard = ({
   imageUrl,
   typeOfevent,
   date,
+  time,
   registrationFee = "Free",
   teamSize = "N/A",
   rules,
@@ -24,20 +25,35 @@ const ImageCard = ({
 
   const handleRegister = async () => {
     try {
-      const response = await postRequestJsonwithHeader('/api/v1/registration/register');
-      if (response) navigate(`/register/${eventId}`);
-    } catch (error) {
-      if (error.response?.status === 401) {
-        toast.error("Login first to register!", { position: "top-right" });
-        setTimeout(() => navigate("/signin"), 2000);
+      const response = await postRequestJson("/api/v1/registration/register", JSON.stringify({ "eventId": eventId }));
+
+      if (response) {
+        navigate(`/register/${eventId}`);
       } else {
-        toast.error(
-          `An error occurred: ${error.response?.data?.message || "Unknown error"}`,
-          { position: "top-right" }
-        );
+        throw new Error("Unexpected empty response from server");
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+
+      if (error.response) {
+        const status = error.response.status;
+        const errorMessage = error.response.data?.message || "Unknown error occurred.";
+
+        if (status === 401) {
+          toast.error("Login first to register!", { position: "top-right" });
+
+          setTimeout(() => navigate("/signin"), 2000);
+        } else {
+          toast.error(`Error: ${errorMessage}`, { position: "top-right" });
+        }
+      } else {
+        toast.error("Network error. Please try again later.", { position: "top-right" });
       }
     }
   };
+
+
+
 
   return (
     <>
@@ -112,7 +128,7 @@ const ImageCard = ({
               className="absolute top-2 right-2 text-goldenrod text-3xl font-bold bg-transparent hover:text-red-500 focus:outline-none"
               onClick={() => setIsOpen(false)}
             >
-              <FaRegWindowClose  />
+              <FaRegWindowClose />
             </button>
 
             {/* Modal Content */}
@@ -127,12 +143,12 @@ const ImageCard = ({
                     className="rounded-lg w-full object-cover border-4 border-deepCrimson/80 shadow-lg shadow-amber-900/40"
                   />
                   <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 overflow-hidden rounded-lg shadow-xl">
-          <img
-            src={imageUrl.replace('224/320', '112/160')}
-            alt={`${title} Overlay`}
-            className="w-full h-full object-cover"
-          />
-        </div>
+                    <img
+                      src={imageUrl.replace('224/320', '112/160')}
+                      alt={`${title} Overlay`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -161,37 +177,49 @@ const ImageCard = ({
             </div>
 
             <div className="p-6 bg-gradient-to-br from-black/40 to-black/10 rounded-lg border-2 border-deepCrimson/50 backdrop-blur-sm relative overflow-hidden text-goldenrod">
-                 
-                  <h4
-                    className="text-2xl font-bold  mb-4 relative text-center lg:text-left"
-                    style={{
-                      textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
-                    }}
-                  >
-                   {title} Notes
-                  </h4>
-                  <div className="space-y-2  relative text-lg">
-                    <p className=" gap-2">
-                      <span className="font-bold text-burntOrange">Event Type : </span> {typeOfevent}
-                    </p>
-                    <p className=" gap-2">
-                      <span className="font-bold text-burntOrange">Team Size : </span>{teamSize}
-                    </p>
-                    <p className=" gap-2">
-                      <span className="font-bold text-burntOrange">Registration Fee :</span> {registrationFee || "Free"}
-                    </p>
-                    {venue &&
-                      <p className=" gap-2">
-                        <span className="font-bold text-burntOrange">Time & Venue :</span> {venue}
+
+              <h4
+                className="text-2xl font-bold  mb-4 relative text-center lg:text-left"
+                style={{
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+                }}
+              >
+                {title} Notes
+              </h4>
+              <div className="space-y-2  relative text-lg">
+                {typeOfevent && <p className=" gap-2">
+                  <span className="font-bold text-burntOrange">Event Type : </span> {typeOfevent}
+                </p>}
+                {teamSize && <p className=" gap-2">
+                  <span className="font-bold text-burntOrange">Team Size : </span>{teamSize}
+                </p>}
+                <p className=" gap-2">
+                  <span className="font-bold text-burntOrange">Registration Fee :</span> {registrationFee || "Free"}
+                </p>
+
+                {(venue && date && time && date.length > 0 && time.length > 0) ?  (
+                  <div className="gap-2">
+                    <p className="font-bold text-burntOrange">Time & Venue:</p>
+                    {date.map((d, index) => (
+                      <p key={index} className="ml-4">
+                        {new Date(d).toLocaleDateString()} at {time[index] || "TBA"}
                       </p>
-                    }
-                    {rules &&
-                      <p className="items-center gap-2">
-                        <span className="font-bold text-burntOrange">Rules & Regulations :</span> {rules}
-                      </p>
-                    }
+                    ))}
+                    <p className="mt-1">Venue: {venue}</p>
                   </div>
-                </div>
+                ) :
+                <p className="items-center gap-2">
+                <span className="font-bold text-burntOrange">Venue :</span> {venue}
+              </p>
+                }
+
+                {rules.length > 0 &&
+                  <p className="items-center gap-2">
+                    <span className="font-bold text-burntOrange">Rules & Regulations :</span> {rules}
+                  </p>
+                }
+              </div>
+            </div>
 
             {/* Register Button */}
             <div className="mt-8 flex justify-center">

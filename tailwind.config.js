@@ -26,19 +26,24 @@ module.exports = {
       fontFamily: {
         cinzel: ['Cinzel', ...defaultTheme.fontFamily.serif], // Cinzel font with default serif fallback
         playfair: ['"Playfair Display"', ...defaultTheme.fontFamily.serif], // Playfair Display with default serif fallback
+        powerOfDragon: ['PowerOfDragon', ...defaultTheme.fontFamily.sans], // ✅ Added PowerOfDragon font
       },
       keyframes: {
         'slide-left': {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-100%)' },
-        }
+        },
+        float: {
+          "0%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+          "100%": { transform: "translateY(0)" },
+        },
       },
       animation: {
         'slide-left': 'slide-left 8s linear infinite',
+        'float': "float 3s ease-in-out infinite",
       },
-      
     },
-    
   },
   plugins: [],
 };
