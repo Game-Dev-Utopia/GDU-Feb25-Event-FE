@@ -3,7 +3,7 @@ import React from 'react'
 const SponserSlider = () => {
   return (
     <section className="p-16 ">
-      <h1 className='font-cinzel text-center text-5xl md:text-6xl mb-16 font-bold  text-goldenrod'> Sponsers </h1>
+      <h1 className='font-cinzel text-center text-5xl md:text-6xl mb-16 font-bold  text-goldenrod'> Sponsors </h1>
       <div className="logos group relative overflow-hidden whitespace-nowrap  py-10 [mask-image:_linear-gradient(to_right,_transparent_0,_white_128px,white_calc(100%-128px),_transparent_100%)]">
         <div className="animate-slide-left group-hover:animation-pause inline-block w-max">
 
