@@ -57,46 +57,66 @@ const ImageCard = ({
 
   return (
     <>
-      <div
-        className="relative overflow-hidden rounded-lg transition-all duration-300 h-[320px] shadow-lg hover:shadow-xl"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {/* Main background image */}
-        <img
-          src={bgUrl}
-          alt={title}
-          className="w-full h-full object-cover"
-        />
+<div
+  className="relative overflow-hidden rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl w-[305px] h-[400px]"
+  onMouseEnter={() => setIsHovered(true)}
+  onMouseLeave={() => setIsHovered(false)}
+>
+  {/* Main background image */}
+  <img
+    src={bgUrl}
+    alt={title}
+    className="absolute inset-0 w-full h-full object-cover rounded-lg"
+  />
 
-        {/* Overlay smaller placeholder */}
-        <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 overflow-hidden rounded-lg shadow-xl">
-          <img
-            src={imageUrl.replace('224/320', '112/160')}
-            alt={`${title} Overlay`}
-            className="w-full h-full object-cover"
-          />
-        </div>
+  {/* Overlay smaller placeholder */}
+  <div className="absolute top-1/4 left-1/4 w-1/2 h-1/3 overflow-hidden rounded-lg shadow-xl">
+    <img
+      src={imageUrl.replace('224/320', '112/160')}
+      alt={`${title} Overlay`}
+      className="w-full h-full object-cover"
+    />
+  </div>
 
-        <div
-          className={`absolute bottom-0 left-0 right-0 h-1/2 bg-black bg-opacity-85 transition-opacity duration-300 ${isHovered ? 'opacity-75' : 'opacity-0'
-            }`}
-        />
+  {/* Title & Truncated Description (Positioned Higher) */}
+  <div className="absolute top-[59.5%] left-1/4 w-1/2 text-center">
+    <p
+      className="text-xl font-bold uppercase tracking-wide"
+      style={{
+        color: "#8B0000", // Deep brown for contrast on golden bg
+        textShadow:
+        "2px 2px 6px rgba(0, 0, 0, 0.6), 1px 1px 4px rgba(255, 223, 0, 0.5)",
+      
+      }}
+    >
+      {title}
+    </p>
+    <p className="text-black text-xs font-medium line-clamp-2 overflow-hidden">
+      {description}
+    </p>
+  </div>
 
-        <div
-          className={`absolute bottom-0 left-0 right-0 h-1/2 p-6 flex flex-col justify-end  transition-all duration-300 transform ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-        >
-          <h3 className="text-2xl font-bold mb-1 text-burntOrange">{title}</h3>
-          <p className="text-lg mb-2 line-clamp-3 text-silver">{description}</p>
-          <button
-            onClick={() => setIsOpen(true)}
-            className="bg-goldenrod text-deepCrimson px-4 py-2 rounded-md w-fit  transition-colors duration-200"
-          >
-            Read More
-          </button>
-        </div>
-      </div>
+  {/* Hover Content - Read More Button */}
+  <div
+  className={`absolute bottom-[60px] left-0 right-0 p-2 flex items-center justify-center transition-all duration-300 transform ${
+    isHovered ? "opacity-100 translate-y-[-20px]" : "opacity-0 translate-y-4"
+  }`}
+>
+  <button
+    onClick={() => setIsOpen(true)}
+    className="bg-goldenrod text-deepCrimson font-bold px-3 py-1 text-sm rounded-md w-fit transition-colors duration-200 shadow-md hover:shadow-lg"
+  >
+    Read More
+  </button>
+</div>
+
+
+
+
+</div>
+
+
+
 
       {/* Modal */}
       {isOpen && (
@@ -123,13 +143,14 @@ const ImageCard = ({
               inset 0 0 100px rgba(0, 0, 0, 0.8)`,
             }}
           >
+        
             {/* Close Button */}
-            <button
-              className="absolute top-2 right-2 text-goldenrod text-3xl font-bold bg-transparent hover:text-red-500 focus:outline-none"
-              onClick={() => setIsOpen(false)}
-            >
-              <FaRegWindowClose />
-            </button>
+<button
+  className="absolute top-2 right-2 text-goldenrod text-3xl font-bold bg-transparent hover:text-red-500 focus:outline-none z-50"
+  onClick={() => setIsOpen(false)}
+>
+  <FaRegWindowClose />
+</button>
 
             {/* Modal Content */}
             <div className="flex flex-col lg:flex-row gap-8 text-goldenrod">

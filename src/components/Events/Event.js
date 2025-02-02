@@ -44,24 +44,26 @@ const ImageCardGrid = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {cards.map((card, index) => (
-          <ImageCard
-            key={index}
-            eventId={card._id}
-            title={card.name || "Untitled Event"}
-            description={card.description || "No description available."}
-            registrationFee={card.registrationFee || "Free"}
-            typeOfevent={card.typeOfevent}
-            teamSize={card.teamSize}
-            date={card.date}
-            venue={card.venue}
-            time={card.time}
-            rules={card.rules}
-            bgUrl={"/scroll1.jpg"}
-            modalImageUrl={
-              card.imageUrl || "/images/events/dungeon_devs_logo.png"
-            }
-            imageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
-          />
+          <div key={index} className="relative overflow-hidden">
+            <ImageCard
+              eventId={card._id}
+              title={card.name || "Untitled Event"}
+              description={card.description || "No description available."}
+              registrationFee={card.registrationFee || "Free"}
+              typeOfevent={card.typeOfevent}
+              teamSize={card.teamSize}
+              date={card.date}
+              venue={card.venue}
+              time={card.time}
+              rules={card.rules}
+              bgUrl={"/images/events/gold.jpg"}
+              modalImageUrl={
+                card.imageUrl || "/images/events/dungeon_devs_logo.png"
+              }
+              imageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
+              placeholderText={card.placeholderText || "Dynamic Text Here"} // Pass dynamic text
+            />
+          </div>
         ))}
       </div>
     </div>
