@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.9",
     "canvas-confetti": "^1.9.3",
+    "framer-motion": "^12.0.6",
     "frontend": "file:",
     "gh-pages": "^6.3.0",
     "gsap": "^3.12.7",

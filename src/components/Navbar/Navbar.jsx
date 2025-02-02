@@ -13,6 +13,7 @@ const Navbar = () => {
     !!localStorage.getItem("username")
   );
   const notificationRef = useRef(null);
+  const notificationButtonRef = useRef(null); // Ref for the button
 
   useEffect(() => {
     const handleAuthChange = () => {
@@ -30,7 +31,9 @@ const Navbar = () => {
     const handleClickOutside = (event) => {
       if (
         notificationRef.current &&
-        !notificationRef.current.contains(event.target)
+        !notificationRef.current.contains(event.target) &&
+        notificationButtonRef.current &&
+        !notificationButtonRef.current.contains(event.target)
       ) {
         setIsNotificationOpen(false);
       }
@@ -38,6 +41,8 @@ const Navbar = () => {
 
     if (isNotificationOpen) {
       document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
@@ -46,27 +51,23 @@ const Navbar = () => {
   }, [isNotificationOpen]);
 
   const handleLogout = async () => {
-    // localStorage.removeItem("accessToken");
-    // localStorage.removeItem("refreshToken");
     localStorage.removeItem("username");
     const response = await postRequestJson(`/api/v1/users/logout`);
 
     console.log(response);
-    // Trigger the custom event for auth changes
     const authEvent = new Event("authChange");
     window.dispatchEvent(authEvent);
 
-    // Redirect to the home page
     navigate("/");
   };
 
   const handleNotificationClick = (event) => {
-    event.stopPropagation(); // Prevent click from propagating to the document
-    setIsNotificationOpen(!isNotificationOpen);
+    event.stopPropagation(); // Prevents click from triggering document event
+    setIsNotificationOpen((prev) => !prev);
   };
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4 bg-white/8 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-md border-b border-white/10 font-cinzel font-semibold">
+    <nav className="flex items-center justify-between px-6 py-4 bg-black fixed top-0 left-0 right-0 z-50 shadow-md border-b border-white/10 font-cinzel font-semibold">
       {/* Logo */}
       <Link to={"/"} className="text-3xl font-bold text-goldenrod">
         GDU
@@ -78,11 +79,10 @@ const Navbar = () => {
           <li key={index} className="relative group">
             <a
               href={item.url}
-              className="relative z-10 text-goldenrod hover:deepCrimson transition text-xl"
+              className="relative z-10 text-goldenrod hover:deepCrimson transition text-xl font-bold"
             >
               {item.name}
             </a>
-            {/* Glow Effect */}
             <span className="absolute inset-0 bg-goldenrod opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
           </li>
         ))}
@@ -94,7 +94,6 @@ const Navbar = () => {
             >
               Profile
             </Link>
-            {/* Glow Effect */}
             <span className="absolute inset-0 bg-goldenrod opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
           </li>
         )}
@@ -103,17 +102,20 @@ const Navbar = () => {
       {/* Call-to-Action Button */}
       <div className="md:flex hidden">
         {isLoggedIn ? (
-          <div className="flex items-center space-x-4" ref={notificationRef}>
+          <div className="flex items-center space-x-4">
             <button
+              ref={notificationButtonRef}
               className="p-2 bg-goldenrod text-deepCrimson rounded-full transition relative"
-              onClick={() => setIsNotificationOpen(!isNotificationOpen)}
+              onClick={handleNotificationClick}
             >
               <IoMdNotifications className="size-6" />
+            </button>
+            <div ref={notificationRef}>
               <NotificationContainer
                 isOpen={isNotificationOpen}
                 setIsOpen={setIsNotificationOpen}
               />
-            </button>
+            </div>
             <button
               className="px-4 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-xl"
               onClick={handleLogout}
@@ -134,14 +136,11 @@ const Navbar = () => {
       <div className="md:hidden flex items-center gap-10">
         {isLoggedIn && (
           <button
+            ref={notificationButtonRef}
             className="p-2 bg-goldenrod text-deepCrimson rounded-full transition relative"
-            onClick={() => setIsNotificationOpen(!isNotificationOpen)}
+            onClick={handleNotificationClick}
           >
             <IoMdNotifications className="size-6" />
-            <NotificationContainer
-              isOpen={isNotificationOpen}
-              setIsOpen={setIsNotificationOpen}
-            />
           </button>
         )}
         <MobileSidebar />

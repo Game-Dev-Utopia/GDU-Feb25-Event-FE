@@ -53,14 +53,14 @@ function FooterPart() {
           {/* Copyright */}
           <div className="flex items-center gap-1 mb-2 md:mb-0">
             <FaCopyright className="text-sm md:text-lg" />
-            <span>2025 Copyright reserved.</span>
+            <span>Copyright 2025 | All rights reserved</span>
           </div>
 
           <div className="flex gap-4 mb-2 md:mb-0">
-            <FaFacebookF className="text-lg hover:text-yellow-400 cursor-pointer" />
-            <FaTwitter className="text-lg hover:text-yellow-400 cursor-pointer" />
-            <FaInstagram className="text-lg hover:text-yellow-400 cursor-pointer" />
-            <FaWhatsapp className="text-lg hover:text-yellow-400 cursor-pointer" />
+            <a href="" ><FaFacebookF className="text-lg hover:text-yellow-400 cursor-pointer" /></a>
+           <a href=""> <FaTwitter className="text-lg hover:text-yellow-400 cursor-pointer" /></a>
+           <a href=""> <FaInstagram className="text-lg hover:text-yellow-400 cursor-pointer" /></a>
+            <a href=""><FaWhatsapp className="text-lg hover:text-yellow-400 cursor-pointer" /></a>
           </div>
 
           

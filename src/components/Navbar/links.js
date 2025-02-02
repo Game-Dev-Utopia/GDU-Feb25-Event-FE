@@ -4,8 +4,8 @@ export const sidebarLinks = [
     url: "/#home",
   },
   {
-    name: "Sponsers",
-    url: "/#sponsers",
+    name: "Sponsors",
+    url: "/#sponsors",
   },
   {
     name: "Events",

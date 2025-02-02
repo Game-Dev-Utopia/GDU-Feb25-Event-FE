@@ -12,6 +12,7 @@ import Contact from "../components/ContactUs/Contact";
 import PrizePool from "../components/PrizePool/Prizepool";
 import troch from "./torchorg.png";
 import torchLeft from "./torch left.png";
+import { GradualSpacing } from "../motion/gradual-spacing";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -34,11 +35,10 @@ const Home = () => {
           <div className="relative flex flex-col items-center justify-center px-4 sm:px-10 lg:px-20 z-10 text-center">
             {/* GameDevUtopia Text - Power of Dragon Font Applied */}
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-wide shadow-lg bg-black bg-opacity-60 px-6 sm:px-8 py-3 sm:py-5 rounded-lg relative font-[PowerOfDragon] animate-float">
-              <span className="text-2xl sm:text-3xl md:text-5xl lg:text-8xl block text-gray-300">
-                GameDevUtopia presents
-              </span>
-              <span className="text-blue-400">Glitched</span>
+              <GradualSpacing text = "GameDevUtopia Presents" color="darkSapphire" />
+              <GradualSpacing text = "GLITCHED" color="goldenrod" />
             </h1>
+
 
             {/* Left Torch Image - Smaller on mobile */} 
             <img
