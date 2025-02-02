@@ -40,7 +40,7 @@ const ImageCardGrid = () => {
 
   return (
     <div className="container mx-auto p-4 sm:p-8 " id="events">
-      <div className="text-center mb-16 text-6xl font-bold font-cinzel text-goldenrod">
+      <div className="text-center mb-16 text-6xl font-bold font-cinzel text-burntOrange">
         Events
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center justify-center mx-auto place-items-center font-cinzel">

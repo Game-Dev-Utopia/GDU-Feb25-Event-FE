@@ -38,7 +38,7 @@ function FooterPart() {
       </div> */}
 
       {/* Footer Line Over Image */}
-      <div className="absolute bottom-0 w-full text-goldenrod bg-black bg-opacity-50 py-4 px-6 text-2xl">
+      <div className="absolute bottom-0 w-full text-burntOrange bg-black bg-opacity-50 py-4 px-6 text-2xl">
         <div className="flex flex-col md:flex-row justify-between items-center text-sm md:text-base">
           {/* Social Icons */}
 

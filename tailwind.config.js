@@ -11,7 +11,7 @@ module.exports = {
         // Primary Colors
         deepCrimson: "#7B2D26", // Represents bravery, battles, and magic (red)
         darkSapphire: "#1C3B57", // Evokes mystery and dungeons (blue)
-        goldenrod: "#D35400", // Symbolizes treasure, artifacts, and royal heritage (yellow)
+        goldenrod: "#C49A3E", // Symbolizes treasure, artifacts, and royal heritage (yellow)
 
         // Secondary Colors
         forestGreen: "#2E4F3A", // Reflects nature and druids

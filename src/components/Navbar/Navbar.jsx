@@ -69,32 +69,32 @@ const Navbar = () => {
   return (
     <nav className="flex items-center justify-between px-6 py-4 bg-black fixed top-0 left-0 right-0 z-50 shadow-md border-b border-white/10 font-cinzel font-semibold">
       {/* Logo */}
-      <Link to={"/"} className="text-3xl font-bold text-goldenrod">
+      <Link to={"/"} className="text-3xl font-extrabold text-burntOrange">
         GDU
       </Link>
 
       {/* Navigation Links */}
-      <ul className="md:flex hidden items-center space-x-6 text-goldenrod">
+      <ul className="md:flex hidden items-center space-x-6 text-burntOrange">
         {sidebarLinks.map((item, index) => (
           <li key={index} className="relative group">
             <a
               href={item.url}
-              className="relative z-10 text-goldenrod hover:deepCrimson transition text-xl font-bold"
+              className="relative z-10 text-burntOrange hover:deepCrimson transition text-xl font-bold"
             >
               {item.name}
             </a>
-            <span className="absolute inset-0 bg-goldenrod opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
+            <span className="absolute inset-0 bg-burntOrange opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
           </li>
         ))}
         {isLoggedIn && (
           <li className="relative group">
             <Link
               to="/profile"
-              className="relative z-10 text-goldenrod hover:deepCrimson transition text-xl"
+              className="relative z-10 text-burntOrange hover:deepCrimson transition text-xl"
             >
               Profile
             </Link>
-            <span className="absolute inset-0 bg-goldenrod opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
+            <span className="absolute inset-0 bg-burntOrange opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
           </li>
         )}
       </ul>
@@ -105,7 +105,9 @@ const Navbar = () => {
           <div className="flex items-center space-x-4">
             <button
               ref={notificationButtonRef}
-              className="p-2 bg-goldenrod text-deepCrimson rounded-full transition relative"
+              className="bg-black p-2 border border-3 border-burntOrange text-white font-bold rounded-full 
+             transition text-xl shadow-lg shadow-burntOrange/50 hover:shadow-xl hover:shadow-burntOrange 
+             hover:bg-burntOrange hover:text-black"
               onClick={handleNotificationClick}
             >
               <IoMdNotifications className="size-6" />
@@ -117,7 +119,7 @@ const Navbar = () => {
               />
             </div>
             <button
-              className="px-4 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-xl"
+              className="px-4 py-2 bg-black border border-3 border-burntOrange text-white font-bold rounded-full transition text-xl"
               onClick={handleLogout}
             >
               Logout
@@ -125,7 +127,11 @@ const Navbar = () => {
           </div>
         ) : (
           <Link to="/signin">
-            <button className="px-4 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-xl">
+            <button
+              className="px-4 py-2 bg-black border border-3 border-burntOrange text-white font-bold rounded-full 
+             transition text-xl shadow-lg shadow-burntOrange/50 hover:shadow-xl hover:shadow-burntOrange 
+             hover:bg-burntOrange hover:text-black"
+            >
               Login
             </button>
           </Link>
@@ -137,7 +143,9 @@ const Navbar = () => {
         {isLoggedIn && (
           <button
             ref={notificationButtonRef}
-            className="p-2 bg-goldenrod text-deepCrimson rounded-full transition relative"
+            className="bg-black p-2 border border-3 border-burntOrange text-white font-bold rounded-full 
+             transition text-xl shadow-lg shadow-burntOrange/50 hover:shadow-xl hover:shadow-burntOrange 
+             hover:bg-burntOrange hover:text-black"
             onClick={handleNotificationClick}
           >
             <IoMdNotifications className="size-6" />

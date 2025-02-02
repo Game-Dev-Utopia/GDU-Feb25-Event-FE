@@ -38,7 +38,7 @@ const MobileSidebar = () => {
       {/* Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 right-4 z-20 bg-goldenrod p-2 rounded-lg shadow-md transition duration-300"
+        className="fixed top-4 right-4 z-20 bg-burntOrange p-2 rounded-lg shadow-md transition duration-300"
       >
         <img
           src="https://cdn-icons-png.flaticon.com/128/6015/6015685.png"
@@ -56,7 +56,7 @@ const MobileSidebar = () => {
         {/* Close Button */}
         <button
           onClick={() => setIsOpen(false)}
-          className="absolute top-4 right-4 bg-deepCrimson py-2 px-3 rounded-full text-goldenrod transition"
+          className="absolute top-4 right-4 bg-deepCrimson py-2 px-3 rounded-full text-burntOrange transition"
         >
           ✕
         </button>
@@ -71,7 +71,7 @@ const MobileSidebar = () => {
             >
               <a
                 href={item.url}
-                className="block z-20 text-2xl text-goldenrod py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
+                className="block z-20 text-2xl text-burntOrange py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
                 onClick={() => setIsOpen(false)} // Close sidebar when navigating
               >
                 {item.name}
@@ -85,7 +85,7 @@ const MobileSidebar = () => {
               <li className="relative group w-full">
                 <Link
                   to="/profile"
-                  className="block z-20 text-2xl text-goldenrod py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
+                  className="block z-20 text-2xl text-burntOrange py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
                   onClick={() => setIsOpen(false)} // Close sidebar when navigating
                 >
                   Profile
@@ -96,7 +96,9 @@ const MobileSidebar = () => {
               <li>
                 <button
                   onClick={handleLogout}
-                  className="block px-4 z-20 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-2xl"
+                  className="px-4 py-2 bg-black border border-3 border-burntOrange text-white font-bold rounded-full 
+                  transition text-xl shadow-lg shadow-burntOrange/50 hover:shadow-xl hover:shadow-burntOrange 
+                  hover:bg-burntOrange hover:text-black"
                 >
                   Logout
                 </button>
@@ -104,10 +106,12 @@ const MobileSidebar = () => {
             </>
           )}
           {!isLoggedIn && (
-            <li className="relative group w-full">
+            <li className="relative group w-full text-center">
               <Link
                 to="/signin"
-                className="block  px-4 py-2 bg-goldenrod text-deepCrimson font-bold rounded-full transition text-2xl text-center"
+                className="px-4 py-2 bg-black border border-3 border-burntOrange text-white font-bold rounded-full 
+                transition text-xl shadow-lg shadow-burntOrange/50 hover:shadow-xl hover:shadow-burntOrange 
+                hover:bg-burntOrange hover:text-black"
                 onClick={() => setIsOpen(false)} // Close sidebar when navigating
               >
                 Login

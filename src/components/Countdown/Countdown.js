@@ -11,7 +11,7 @@ function Countdown() {
           whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
           viewport={{ once: false, amount: 0.5 }} // Triggers every time on scroll
-          className="text-3xl md:text-6xl tracking-[10px] mb-16 text-goldenrod"
+          className="text-3xl md:text-6xl tracking-[10px] mb-16 text-burntOrange"
         >
           WE'RE LAUNCHING SOON
         </motion.h1>

@@ -37,7 +37,7 @@ const ContactUs = () => {
 
       {/* Form Container */}
       <div
-        className="relative w-full max-w-xl bg-charcoalGray bg-opacity-50 p-5 md:p-6 rounded-lg shadow-lg z-20 text-goldenrod 
+        className="relative w-full max-w-xl bg-charcoalGray bg-opacity-50 p-5 md:p-6 rounded-lg shadow-lg z-20 text-burntOrange 
                      md:ml-auto lg:mr-[5%]"
       >
         <h2 className="text-5xl md:text-6xl font-bold text-center mb-6 font-cinzel">
@@ -47,7 +47,7 @@ const ContactUs = () => {
           <div>
             <label
               htmlFor="name"
-              className="block text-xl focus:outline-none font-cinzel font-bold"
+              className="block text-md md:text-xl  focus:outline-none font-cinzel font-bold"
             >
               Name
             </label>
@@ -58,13 +58,13 @@ const ContactUs = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
+              className="w-full px-4 py-1 md:py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
             />
           </div>
           <div>
             <label
               htmlFor="email"
-              className="block text-xl focus:outline-none font-cinzel font-bold"
+              className="block  text-md md:text-xl focus:outline-none font-cinzel font-bold"
             >
               Email
             </label>
@@ -75,13 +75,13 @@ const ContactUs = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
+              className="w-full px-4 py-1 md:py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
             />
           </div>
           <div>
             <label
               htmlFor="contact"
-              className="block text-xl focus:outline-none font-cinzel font-bold"
+              className="block  text-md md:text-xl focus:outline-none font-cinzel font-bold"
             >
               Contact
             </label>
@@ -92,13 +92,13 @@ const ContactUs = () => {
               value={formData.contact}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
+              className="w-full px-4 py-1 md:py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
             />
           </div>
           <div>
             <label
               htmlFor="message"
-              className="block text-xl focus:outline-none font-cinzel font-bold"
+              className="block  text-md md:text-xl focus:outline-none font-cinzel font-bold"
             >
               Message
             </label>
@@ -109,13 +109,15 @@ const ContactUs = () => {
               onChange={handleChange}
               required
               rows={4}
-              className="w-full px-4 py-2 rounded-lg bg-[#333333] border border-burntOrange  focus:outline-none text-lg font-playfair"
+              className="w-full px-4 py-1 md:py-2 rounded-lg bg-[#333333] border border-burntOrange  focus:outline-none text-lg font-playfair"
             ></textarea>
           </div>
           <div className="text-center">
             <button
               type="submit"
-              className="px-6 py-3 bg-deepCrimson font-bold rounded-lg hover:bg-deepCrimson"
+              className="px-4 py-1 md:py-3 bg-black border border-3 border-burntOrange text-white rounded-full 
+             transition text-xl shadow-lg shadow-burntOrange/50 hover:shadow-xl hover:shadow-burntOrange 
+             hover:bg-burntOrange hover:text-black font-cinzel"
             >
               Send Message
             </button>

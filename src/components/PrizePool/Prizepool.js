@@ -57,7 +57,7 @@ const PrizePool = () => {
   return (
     <div
       ref={componentRef}
-      className="flex flex-col items-center justify-center text-center text-goldenrod font-cinzel relative"
+      className="flex flex-col items-center justify-center text-center text-burntOrange font-cinzel relative"
     >
       <motion.div
         className="text-overlay"

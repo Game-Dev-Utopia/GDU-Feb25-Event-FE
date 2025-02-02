@@ -48,7 +48,7 @@ const Faq = () => {
       className="relative flex justify-center p-5 mt-10 font-playfair"
     >
       <div className="w-full md:w-3/5 p-5 bg-charcoalGray bg-opacity-50 rounded-lg">
-        <div className="text-center mb-5 text-5xl md:text-6xl font-bold font-cinzel text-goldenrod">
+        <div className="text-center mb-5 text-5xl md:text-6xl font-bold font-cinzel text-burntOrange">
           Frequently Asked Questions
         </div>
         <div className="space-y-3">

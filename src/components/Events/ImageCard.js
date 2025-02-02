@@ -42,7 +42,7 @@ const ImageCard = ({
         if (status === 401) {
           toast.error("Login first to register!", { position: "top-right" });
 
-          setTimeout(() => navigate("/signin"), 2000);
+          setTimeout(() => navigate("/signin"));
         } else {
           toast.error(`Error: ${errorMessage}`, { position: "top-right" });
         }
@@ -160,7 +160,7 @@ const ImageCard = ({
                   <img
                     src={bgUrl || `https://via.placeholder.com/600x300?text=${encodeURIComponent(title)}`}
                     alt={`${title} Expanded`}
-                    className="rounded-lg w-full object-cover border-4 border-deepCrimson/80 shadow-lg shadow-amber-900/40"
+                    className="rounded-lg w-full h-full object-cover border-4 border-deepCrimson/80 shadow-lg shadow-amber-900/40"
                   />
                   <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 overflow-hidden rounded-lg shadow-xl">
                     <img

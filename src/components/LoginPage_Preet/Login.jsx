@@ -52,6 +52,7 @@ const Login = () => {
         // localStorage.setItem("refreshToken", response.refreshToken);
         
         localStorage.setItem("username", response.user.username);
+        localStorage.setItem("email", response.user.email);
         setEmail("");
         setPassword("");
         // Dispatch the custom authChange event
