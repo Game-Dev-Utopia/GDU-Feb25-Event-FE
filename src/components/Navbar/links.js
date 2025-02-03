@@ -14,9 +14,5 @@ export const sidebarLinks = [
   {
     name: "FAQ's",
     url: "/#faq",
-  },
-  {
-    name: "Contact Us",
-    url: "/contactus",
-  },
+  }
 ];

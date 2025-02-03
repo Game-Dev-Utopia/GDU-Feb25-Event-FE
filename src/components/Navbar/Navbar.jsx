@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import NotificationContainer from "./NotificationContainer";
 import { postRequestJson } from "../../api/api";
 import { sidebarLinks } from "./links";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -53,8 +54,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     localStorage.removeItem("username");
     const response = await postRequestJson(`/api/v1/users/logout`);
-
-    console.log(response);
+    toast.success("Logged Out successfully!", { position: "top-right" });
     const authEvent = new Event("authChange");
     window.dispatchEvent(authEvent);
 
@@ -86,6 +86,17 @@ const Navbar = () => {
             <span className="absolute inset-0 bg-burntOrange opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
           </li>
         ))}
+
+        <li className="relative group">
+          <Link
+            to="/contactus"
+            className="relative z-10 text-burntOrange hover:deepCrimson transition text-xl"
+          >
+            Contact US
+          </Link>
+          <span className="absolute inset-0 bg-burntOrange opacity-0 blur-lg rounded-lg group-hover:opacity-50 transition duration-300"></span>
+        </li>
+
         {isLoggedIn && (
           <li className="relative group">
             <Link
@@ -119,7 +130,9 @@ const Navbar = () => {
               />
             </div>
             <button
-              className="px-4 py-2 bg-black border border-3 border-burntOrange text-white font-bold rounded-full transition text-xl"
+              className="px-4 py-2 bg-black border border-3 border-burntOrange text-white font-bold rounded-full 
+             transition text-xl shadow-lg shadow-burntOrange/50 hover:shadow-xl hover:shadow-burntOrange 
+             hover:bg-burntOrange hover:text-black"
               onClick={handleLogout}
             >
               Logout

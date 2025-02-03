@@ -80,6 +80,19 @@ const MobileSidebar = () => {
               {/* <span className="absolute z-[-1] inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span> */}
             </li>
           ))}
+
+          <li className="relative group w-full">
+            <Link
+              to="/contactus"
+              className="block z-20 text-2xl text-burntOrange py-2 px-6 rounded-md text-center hover:text-red-400 transition duration-300"
+              onClick={() => setIsOpen(false)} // Close sidebar when navigating
+            >
+              Contact US
+            </Link>
+
+            {/* <span className="absolute z-[-1] inset-0 bg-red-500 opacity-0 blur-xl rounded-md group-hover:opacity-50 transition duration-300"></span> */}
+          </li>
+
           {isLoggedIn && (
             <>
               <li className="relative group w-full">

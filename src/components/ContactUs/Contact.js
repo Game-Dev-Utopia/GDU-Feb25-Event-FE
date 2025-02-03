@@ -59,17 +59,23 @@ const ContactUs = () => {
         backgroundRepeat: "no-repeat",
         minHeight: "100vh",
         width: "100%",
+
       }}
     >
       {/* PinLocation Image */}
+
       <motion.img
         src="/images/PinLocation.png"
         alt="Location Pin"
-        className="w-48 h-48 md:w-56 md:h-56 absolute left-10 transform -translate-y-1/2"
+        className="w-48 h-48 md:w-56 md:h-56 absolute left-10 transform -translate-y-1/2 cursor-pointer"
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
+        onClick={() => window.open("https://maps.app.goo.gl/nPLvGBDaT7JgyEwD7", "_blank")}
       />
+
+      
+
       {/* Form Container */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -173,7 +179,7 @@ const ContactUs = () => {
       </motion.div>
     </div>
 
-    
+
   );
 };
 

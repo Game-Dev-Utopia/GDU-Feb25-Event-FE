@@ -24,6 +24,7 @@ import { ToastContainer } from 'react-toastify';
 import Logout from './components/LoginPage_Preet/Logout';
 import ContactPage from './pages/ContactUs';
 import TermsAndConditions from './pages/TermsCondition';
+import ContactUs from './components/ContactUs/Contact';
 
 const AppWrapper = () => {
   const [loading, setLoading] = useState(true);
@@ -52,7 +53,7 @@ const router = new Router(
       <Route path="/logout" element={<Logout />} />
       {/* <Route path="/intro" element={<Intro />} /> */}
       <Route path="/profile" element={<Profile />} />
-      <Route path="/contactus" element={<ContactPage />} />
+      <Route path="/contactus" element={<ContactUs />} />
       <Route path="/terms" element={<TermsAndConditions />} />
     </Route>
   )
