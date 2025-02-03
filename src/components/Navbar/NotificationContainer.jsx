@@ -17,6 +17,7 @@ const NotificationContainer = ({ isOpen, setIsNotificationOpen }) => {
       const response = await getRequest(
         `/api/v1/users/notification?username=${localStorage.getItem("username")}`
       );
+      console.log(response)
      
 
       if (response.message === "No events registered for the user.") {

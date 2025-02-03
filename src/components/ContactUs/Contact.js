@@ -120,6 +120,7 @@ const ContactUs = () => {
           <motion.input
             type="text"
             name="phone"
+            minLength={10}
             value={formData.phone}
             onChange={handleChange}
             placeholder="Your Contact Number"
