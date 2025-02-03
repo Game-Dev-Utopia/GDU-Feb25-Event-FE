@@ -110,14 +110,14 @@ const Home = () => {
         </div>
 
         {/* Contact */}
-        <div
+        {/* <div
           className="relative bg-cover bg-center bg-no-repeat overlay-section"
           style={{
             backgroundImage: `url(/images/mysticalforest.webp)`,
           }}
         >
           <Contact />
-        </div>
+        </div> */}
 
         {/* Footer */}
         <div

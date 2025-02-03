@@ -45,7 +45,10 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="p-5" id="contact">
+    <div  id="contact" className="px-5 py-20 relative bg-cover bg-center bg-no-repeat overlay-section"
+    style={{
+      backgroundImage: `url(/images/mysticalforest.webp)`,
+    }}>
       {/* Archer Image */}
       <div className="absolute top-0 left-0 w-full h-full flex justify-start items-center z-10 overflow-hidden">
         <img
