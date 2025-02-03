@@ -7,12 +7,12 @@ const MobileSidebar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem("accessToken")
+    !!localStorage.getItem("username")
   );
 
   useEffect(() => {
     const handleAuthChange = () => {
-      setIsLoggedIn(!!localStorage.getItem("accessToken"));
+      setIsLoggedIn(!!localStorage.getItem("username"));
     };
 
     window.addEventListener("authChange", handleAuthChange);

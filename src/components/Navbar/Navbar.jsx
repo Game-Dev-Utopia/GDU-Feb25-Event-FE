@@ -28,6 +28,8 @@ const Navbar = () => {
     };
   }, []);
 
+  console.log(isLoggedIn)
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
