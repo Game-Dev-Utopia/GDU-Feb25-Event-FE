@@ -87,8 +87,8 @@ const Login = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="bg-black bg-opacity-60 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg  w-[90%] md:w-1/3 mx-5 font-playfair">
-        <h1 className="text-4xl md:text-6xl font-semibold text-center text-yellow-400 mb-6">
+      <div className="bg-black bg-opacity-60 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg  max-w-4xl w[90%] lg:w-[30%] mx-5 mt-20 font-playfair">
+        <h1 className="text-4xl sm:text-4xl lg:text-6xl mx-auto font-semibold text-center text-yellow-400 mb-6">
           GLITCHED
         </h1>
 
@@ -98,7 +98,7 @@ const Login = () => {
               Email
             </label>
             <input
-              className="w-full border-2 border-gray-300 rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-blue-500 text-yellow-200"
+              className="w-full border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod"
               type="text"
               minLength="0" maxLength="100"
               placeholder="Enter your email"
@@ -112,7 +112,7 @@ const Login = () => {
               Password
             </label>
             <input
-              className="w-full border-2 border-gray-300 rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-blue-500 text-yellow-200"
+              className="w-full border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod autofill:bg-transparent"
               type="password"
               minLength="8" maxLength="20"
               placeholder="Enter your password"

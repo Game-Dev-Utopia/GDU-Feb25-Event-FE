@@ -83,3 +83,9 @@ html {
   letter-spacing: 3px;
   text-transform: uppercase;
 }
+input:-webkit-autofill {
+  background-color: transparent !important;
+}
+
+
+

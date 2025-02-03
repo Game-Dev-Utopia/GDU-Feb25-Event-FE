@@ -1,27 +1,47 @@
 import { useState } from "react";
+import { postRequestJson } from "../../api/api";
+import { toast } from "react-toastify";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    contact: "",
+    phone: "",
     message: "",
   });
+
+  const [loading, setLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState(""); // Stores success/error message
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Thank you for reaching out! We'll get back to you soon.");
-    setFormData({
-      name: "",
-      email: "",
-      contact: "",
-      message: "",
-    });
+    setLoading(true);
+    setResponseMessage("");
+
+    try {
+      const response = await postRequestJson("/api/v1/contact", JSON.stringify(formData));
+
+      if (response) {
+        toast.success("Thank you for reaching out! We'll get back to you soon.", { position: "top-right" });
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      } else {
+        toast.error(response || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -29,7 +49,7 @@ const ContactUs = () => {
       {/* Archer Image */}
       <div className="absolute top-0 left-0 w-full h-full flex justify-start items-center z-10 overflow-hidden">
         <img
-          src="/images/archer.png"
+          src="/images/char.webp"
           alt="Archer"
           className="max-w-[500px] max-h-[700px] object-contain shadow-xl"
         />
@@ -47,7 +67,7 @@ const ContactUs = () => {
           <div>
             <label
               htmlFor="name"
-              className="block text-md md:text-xl  focus:outline-none font-cinzel font-bold"
+              className="block text-md md:text-xl focus:outline-none font-cinzel font-bold text-goldenrod"
             >
               Name
             </label>
@@ -58,13 +78,13 @@ const ContactUs = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-1 md:py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
+              className="w-full px-4 py-1 md:py-2 text-lg border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod font-playfair"
             />
           </div>
           <div>
             <label
               htmlFor="email"
-              className="block  text-md md:text-xl focus:outline-none font-cinzel font-bold"
+              className="block text-goldenrod text-md md:text-xl focus:outline-none font-cinzel font-bold"
             >
               Email
             </label>
@@ -75,30 +95,30 @@ const ContactUs = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-1 md:py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
+              className="w-full px-4 py-1 md:py-2 text-lg border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod font-playfair"
             />
           </div>
           <div>
             <label
-              htmlFor="contact"
-              className="block  text-md md:text-xl focus:outline-none font-cinzel font-bold"
+              htmlFor="phone"
+              className="block text-goldenrod text-md md:text-xl focus:outline-none font-cinzel font-bold"
             >
               Contact
             </label>
             <input
               type="text"
-              id="contact"
-              name="contact"
-              value={formData.contact}
+              id="phone"
+              name="phone"
+              value={formData.phone}
               onChange={handleChange}
               required
-              className="w-full px-4 py-1 md:py-2 rounded-lg bg-[#333333] border border-burntOrange focus:outline-none text-lg font-playfair"
+              className="w-full px-4 py-1 md:py-2 text-lg border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod font-playfair"
             />
           </div>
           <div>
             <label
               htmlFor="message"
-              className="block  text-md md:text-xl focus:outline-none font-cinzel font-bold"
+              className="block text-goldenrod text-md md:text-xl focus:outline-none font-cinzel font-bold"
             >
               Message
             </label>
@@ -109,17 +129,31 @@ const ContactUs = () => {
               onChange={handleChange}
               required
               rows={4}
-              className="w-full px-4 py-1 md:py-2 rounded-lg bg-[#333333] border border-burntOrange  focus:outline-none text-lg font-playfair"
+              className="w-full px-4 py-1 md:py-2 text-lg border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod font-playfair"
             ></textarea>
           </div>
+
+          {/* Success/Error Message */}
+          {responseMessage && (
+            <div
+              className={`text-center font-cinzel ${responseMessage.includes("Thank you")
+                  ? "text-green-500"
+                  : "text-red-500"
+                }`}
+            >
+              {responseMessage}
+            </div>
+          )}
+
           <div className="text-center">
             <button
               type="submit"
               className="px-4 py-1 md:py-3 bg-black border border-3 border-burntOrange text-white rounded-full 
              transition text-xl shadow-lg shadow-burntOrange/50 hover:shadow-xl hover:shadow-burntOrange 
              hover:bg-burntOrange hover:text-black font-cinzel"
+              disabled={loading}
             >
-              Send Message
+              {loading ? "Sending..." : "Send Message"}
             </button>
           </div>
         </form>

@@ -3,7 +3,7 @@ import SponsorCard from "./SponsorCard";
 
 const Sponser = () => {
   return (
-    <div className="w-screen h-screen bg-black" id="sponser">
+    <div className="w-screen h-screen bg-black" id="sponsors">
       <SponsorCard />
     </div>
   );
