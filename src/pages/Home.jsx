@@ -21,13 +21,13 @@ const Home = () => {
     <>
       <div
         className="w-screen h-screen overflow-y-scroll overflow-x-hidden bg-goldenrod"
-        id="home"
+        
       >
         {/* Home Banner */}
-        <div className="relative text-white font-sans flex flex-col items-center justify-center h-screen">
+        <div className="relative  text-white font-sans flex flex-col items-center justify-center h-screen" id="home">
           {/* Background */}
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+            className="absolute overlay-section inset-0 bg-cover bg-center bg-no-repeat z-0"
             style={{ backgroundImage: "url(/images/Dragonbg.webp)" }}
           ></div>
 
@@ -62,7 +62,7 @@ const Home = () => {
           style={{
             backgroundImage: `url(/images/bg8.webp)`,
           }}
-          id="sponsers"
+          id="sponsors"
         >
           <SponserSlider />
         </div>

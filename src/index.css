@@ -33,12 +33,7 @@
   width: 0px;
 }
 
-/* Smooth Scrolling */
-.body,
-html {
-  scroll-behavior: smooth;
-}
-
+.html,
 .body {
   scroll-behavior: smooth;
   overflow-x: hidden;

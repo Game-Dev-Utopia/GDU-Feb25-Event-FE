@@ -138,7 +138,7 @@ const SignUp = () => {
       }}
     >
       <div className="bg-black bg-opacity-60 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-4xl w-[90%] mx-5 mt-20">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-center text-yellow-400">
+        <h1 className="text-4xl  md:text-6xl font-semibold text-center text-yellow-400">
           GLITCHED
         </h1>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
@@ -158,7 +158,7 @@ const SignUp = () => {
                 {label}
               </label>
               <input
-                className="w-full border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod"
+                className="w-full border-2 border-gray-300 rounded-xl p-4 bg-transparent focus:outline-none focus:border-blue-500 text-yellow-200 text-xl"
                 type={type}
                 name={name}
                 value={formData[name]}
