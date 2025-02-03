@@ -65,6 +65,7 @@ const ImageCardGrid = () => {
             <ImageCard
               eventId={card._id}
               title={card.name || "Untitled Event"}
+              tag = {card.tag || ""}
               description={card.description || "No description available."}
               registrationFee={card.registrationFee || "Free"}
               typeOfevent={card.typeOfevent}

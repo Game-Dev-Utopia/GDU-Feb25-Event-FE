@@ -5,6 +5,8 @@ import {
   FaTwitter,
   FaInstagram,
   FaWhatsapp,
+  FaLinkedinIn,
+  FaEnvelope,
 } from "react-icons/fa";
 
 function FooterPart() {
@@ -57,10 +59,9 @@ function FooterPart() {
           </div>
 
           <div className="flex gap-4 mb-2 md:mb-0">
-            <a href="" ><FaFacebookF className="text-lg hover:text-yellow-400 cursor-pointer" /></a>
-           <a href=""> <FaTwitter className="text-lg hover:text-yellow-400 cursor-pointer" /></a>
-           <a href=""> <FaInstagram className="text-lg hover:text-yellow-400 cursor-pointer" /></a>
-            <a href=""><FaWhatsapp className="text-lg hover:text-yellow-400 cursor-pointer" /></a>
+            <a mailto="gamedevutopia@pict.edu" ><FaEnvelope className="text-lg hover:text-yellow-400 cursor-pointer" /></a>
+           <a href="https://www.linkedin.com/company/gamedevutopia/"> <FaLinkedinIn className="text-lg hover:text-yellow-400 cursor-pointer" /></a>
+           <a href="https://www.instagram.com/gamedevutopia_pict?igsh=NDMxenN2ODFvMjRi"> <FaInstagram className="text-lg hover:text-yellow-400 cursor-pointer" /></a>
           </div>
 
           

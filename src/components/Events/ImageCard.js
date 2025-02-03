@@ -9,6 +9,7 @@ const ImageCard = ({
   eventId,
   title = "Untitled Event",
   description = "No description available.",
+  tag,
   bgUrl,
   imageUrl,
   typeOfevent,
@@ -120,7 +121,7 @@ const ImageCard = ({
       {/* Modal */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex items-start justify-center z-50 overflow-y-auto font-cinzel mt-16 md:mt-12 p-2"
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-start justify-center z-[9999] overflow-y-auto font-cinzel mt-16 md:mt-12"
           onClick={() => setisModalOpen(false)}
         >
           <div
@@ -174,7 +175,7 @@ const ImageCard = ({
               </div>
 
               {/* Content */}
-              <div className="w-full lg:w-2/3 flex flex-col gap-6">
+              <div className="w-full lg:w-2/3 flex flex-col gap-4">
                 <h2
                   className="text-5xl font-bold text-center lg:text-left"
                   style={{
@@ -182,6 +183,15 @@ const ImageCard = ({
                   }}
                 >
                   {title}
+                </h2>
+
+                <h2
+                  className="text-xl font-bold text-center lg:text-left text-burntOrange"
+                  style={{
+                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 191, 0, 0.3)',
+                  }}
+                >
+                  {tag}
                 </h2>
                 <div className="relative">
                   <div className="absolute inset-0 bg-black/20 rounded-lg filter blur-sm"></div>
@@ -197,10 +207,10 @@ const ImageCard = ({
               </div>
             </div>
 
-            <div className="p-6 bg-gradient-to-br from-black/40 to-black/10 rounded-lg border-2 border-deepCrimson/50 backdrop-blur-sm relative overflow-hidden text-goldenrod">
+            <div className="p-2 md:p-6 bg-gradient-to-br from-black/40 to-black/10 rounded-lg border-2 border-deepCrimson/50 backdrop-blur-sm relative overflow-hidden text-goldenrod">
 
               <h4
-                className="text-2xl font-bold  mb-4 relative text-center lg:text-left"
+                className="text-2xl text-burntOrange font-bold  mb-4 relative text-center lg:text-left"
                 style={{
                   textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
                 }}
@@ -244,8 +254,8 @@ const ImageCard = ({
 
             {/* Register Button */}
             <div className="mt-8 flex justify-center">
-               {title == 'Dungeon Devs' ? <a href="https://unstop.com/o/HC5aVRp?lb=A1YJYb6a&utm_medium=Share&utm_source=WhatsApp" target="_blank" className="px-6 py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-400">Register</a> : <button
-                className="px-6 py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-400"
+               {title == 'Dungeon Devs' ? <a href="https://unstop.com/o/HC5aVRp?lb=A1YJYb6a&utm_medium=Share&utm_source=WhatsApp" target="_blank" className="px-6 py-3 bg-burntOrange text-black font-bold rounded-lg  focus:outline-none focus:ring-2 focus:ring-amber-400">Register</a> : <button
+                className="px-6 py-3 bg-burntOrange text-black font-bold rounded-lg  focus:outline-none focus:ring-2 focus:ring-amber-400"
                 onClick={handleRegister}
               >
                 Register
