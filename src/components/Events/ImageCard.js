@@ -160,15 +160,16 @@ const ImageCard = ({
                   <img
                     src={bgUrl || `https://via.placeholder.com/600x300?text=${encodeURIComponent(title)}`}
                     alt={`${title} Expanded`}
-                    className="rounded-lg w-full h-full object-cover border-4 border-deepCrimson/80 shadow-lg shadow-amber-900/40"
+                    className="rounded-lg w-full object-cover border-4 border-deepCrimson/80 shadow-lg shadow-amber-900/40"
                   />
-                  <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 overflow-hidden rounded-lg shadow-xl">
+                  <div className="absolute top-1/2 left-1/2 w-1/3 h-1/3 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg shadow-xl">
                     <img
                       src={imageUrl.replace('224/320', '112/160')}
                       alt={`${title} Overlay`}
                       className="w-full h-full object-cover"
                     />
                   </div>
+
                 </div>
               </div>
 
