@@ -1,17 +1,20 @@
+
 import { useState } from "react";
 import { postRequestJson } from "../../api/api";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+    address: "",
     message: "",
   });
 
   const [loading, setLoading] = useState(false);
-  const [responseMessage, setResponseMessage] = useState(""); // Stores success/error message
+  const [responseMessage, setResponseMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,6 +35,7 @@ const ContactUs = () => {
           name: "",
           email: "",
           phone: "",
+          address: "",
           message: "",
         });
       } else {
@@ -45,122 +49,127 @@ const ContactUs = () => {
   };
 
   return (
-    <div  id="contact" className="px-5 py-20 relative bg-cover bg-center bg-no-repeat overlay-section"
-    style={{
-      backgroundImage: `url(/images/mysticalforest.webp)`,
-    }}>
-      {/* Archer Image */}
-      <div className="absolute top-0 left-0 w-full h-full flex justify-start items-center z-10 overflow-hidden">
-        <img
-          src="/images/char.webp"
-          alt="Archer"
-          className="max-w-[500px] max-h-[700px] object-contain shadow-xl"
-        />
-      </div>
-
+    <div
+      id="contact"
+      className="px-5 py-20 relative bg-cover bg-center bg-no-repeat overlay-section flex flex-col md:flex-row items-center justify-between"
+      style={{
+        backgroundImage: `url(/images/dragon_contactus.png)`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
+        width: "100%",
+      }}
+    >
+      {/* PinLocation Image */}
+      <motion.img
+        src="/images/PinLocation.png"
+        alt="Location Pin"
+        className="w-48 h-48 md:w-56 md:h-56 absolute left-10 transform -translate-y-1/2"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+      />
       {/* Form Container */}
-      <div
-        className="relative w-full max-w-xl bg-charcoalGray bg-opacity-50 p-5 md:p-6 rounded-lg shadow-lg z-20 text-burntOrange 
-                     md:ml-auto lg:mr-[5%]"
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="relative w-full max-w-xl p-5 md:p-6 rounded-lg shadow-lg z-20 text-deepCrimson md:ml-auto lg:mr-[5%]"
+        style={{
+          backgroundImage: `url(/images/parchment.png)`,
+          backgroundSize: "100% 100%",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          width: "100%",
+          minHeight: "500px",
+        }}
       >
-        <h2 className="text-5xl md:text-6xl font-bold text-center mb-6 font-cinzel">
+        <h2 className="text-4xl md:text-6xl font-bold text-center mt-6 mb-6 font-cinzel">
           Contact Us
         </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-md md:text-xl focus:outline-none font-cinzel font-bold text-goldenrod"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-1 md:py-2 text-lg border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod font-playfair"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-goldenrod text-md md:text-xl focus:outline-none font-cinzel font-bold"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-1 md:py-2 text-lg border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod font-playfair"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="phone"
-              className="block text-goldenrod text-md md:text-xl focus:outline-none font-cinzel font-bold"
-            >
-              Contact
-            </label>
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-1 md:py-2 text-lg border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod font-playfair"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="message"
-              className="block text-goldenrod text-md md:text-xl focus:outline-none font-cinzel font-bold"
-            >
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              rows={4}
-              className="w-full px-4 py-1 md:py-2 text-lg border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod font-playfair"
-            ></textarea>
-          </div>
+          <motion.input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Your Name"
+            required
+            className="w-full px-4 py-2 text-lg border-2 border-black rounded-xl bg-transparent focus:outline-none 
+                      focus:border-burntOrange text-deepCrimson placeholder-deepCrimson font-bold font-playfair"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          />
 
-          {/* Success/Error Message */}
+          <motion.input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Your Email"
+            required
+            className="w-full px-4 py-2 text-lg border-2 border-black rounded-xl bg-transparent focus:outline-none 
+                      focus:border-burntOrange text-deepCrimson placeholder-deepCrimson font-bold font-playfair"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          />
+
+          <motion.input
+            type="text"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="Your Contact Number"
+            required
+            className="w-full px-4 py-2 text-lg border-2 border-black rounded-xl bg-transparent focus:outline-none 
+                      focus:border-burntOrange text-deepCrimson placeholder-deepCrimson font-bold font-playfair"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          />
+          <motion.textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            placeholder="Your Message"
+            required
+            rows={4}
+            className="w-full px-4 py-2 text-lg border-2 border-black rounded-xl bg-transparent focus:outline-none 
+                      focus:border-burntOrange text-deepCrimson placeholder-deepCrimson font-bold font-playfair"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+          ></motion.textarea>
+
           {responseMessage && (
             <div
-              className={`text-center font-cinzel ${responseMessage.includes("Thank you")
-                  ? "text-green-500"
-                  : "text-red-500"
-                }`}
+              className={`text-center font-cinzel ${responseMessage.includes("Thank you") ? "text-green-500" : "text-red-500"}`}
             >
               {responseMessage}
             </div>
           )}
 
-          <div className="text-center">
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
+          >
             <button
               type="submit"
-              className="px-4 py-1 md:py-3 bg-black border border-3 border-burntOrange text-white rounded-full 
-             transition text-xl shadow-lg shadow-burntOrange/50 hover:shadow-xl hover:shadow-burntOrange 
-             hover:bg-burntOrange hover:text-black font-cinzel"
+              className="px-4 py-3 bg-black border border-3 border-burntOrange text-white rounded-full 
+                        transition text-xl shadow-lg shadow-burntOrange/50 hover:shadow-xl hover:shadow-burntOrange 
+                        hover:bg-burntOrange hover:text-black font-cinzel"
               disabled={loading}
             >
               {loading ? "Sending..." : "Send Message"}
             </button>
-          </div>
+          </motion.div>
         </form>
-      </div>
+      </motion.div>
     </div>
 
     
