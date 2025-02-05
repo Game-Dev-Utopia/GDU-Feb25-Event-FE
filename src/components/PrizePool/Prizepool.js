@@ -29,7 +29,7 @@ const PrizePool = () => {
   };
 
   const celebrate = () => {
-    const duration = 2000; // 2 seconds
+    const duration = 1000; // 2 seconds
     const end = Date.now() + duration;
 
     const frame = () => {

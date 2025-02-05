@@ -23,7 +23,7 @@ const Faq = () => {
     {
       question: "What is Game Dev Utopia?",
       answer:
-        "Game Dev Utopia is a club in the PICT which helps the students to explore their interests in the game development domain and provides an exposure to them about the development process.",
+        "- GameDevUtopia is a student focused game developer' community with chapters in technical colleges across India. GDU PICT is one of the first student chapters of the community in India focusing on giving students an exposure to the game development industry.",
     },
     {
       question: "What's the event all about?",

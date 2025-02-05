@@ -125,9 +125,25 @@ const SignUp = () => {
         throw new Error("Unexpected response format");
       }
     } catch (error) {
-      toast.error("Error during registration. Please try again.", {
-        position: "top-right",
-      });
+      if (error.response) {
+        const status = error.response.status;
+        const errorMessage =
+          error.response.data?.message || "Unknown error occurred.";
+
+        if (status === 409) {
+          toast.error("User with email or username already exists", { position: "top-right" });
+          setTimeout(() => navigate("/signin"));
+        } else if (status === 400) {
+          toast.error(`All fields are required`, { position: "top-right" });
+        }
+        else if (status === 500) {
+          toast.error(`Something went wrong ${errorMessage}`, { position: "top-right" });
+        }
+      } else {
+        toast.error("Network error. Please try again later.", {
+          position: "top-right",
+        });
+      }
     }
   };
 
