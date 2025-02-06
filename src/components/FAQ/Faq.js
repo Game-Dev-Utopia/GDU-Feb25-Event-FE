@@ -21,7 +21,7 @@ const Faq = () => {
 
   const faqs = [
     {
-      question: "What is Game Dev Utopia?",
+      question: "What is GameDevUtopia?",
       answer:
         "- GameDevUtopia is a student focused game developer' community with chapters in technical colleges across India. GDU PICT is one of the first student chapters of the community in India focusing on giving students an exposure to the game development industry.",
     },
