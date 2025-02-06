@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { postRequestJson } from "../../api/api";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -51,7 +51,7 @@ const Login = () => {
         // Save token or user data if provided by API
         // localStorage.setItem("accessToken", response.accessToken);
         // localStorage.setItem("refreshToken", response.refreshToken);
-        
+
         localStorage.setItem("username", response.user.username);
         localStorage.setItem("email", response.user.email);
         setEmail("");
@@ -69,10 +69,19 @@ const Login = () => {
         });
       }
     } catch (error) {
-      toast.error(
-        "An error occurred while logging in. Please try again later.",
-        { position: "top-right" }
-      );
+      if (error.response) {
+        const status = error.response.status;
+        const errorMessage =
+          error.response.data?.message || "Unknown error occurred.";
+
+        toast.error(`${errorMessage}`, {
+          position: "top-right",
+        });
+      } else {
+        toast.error("Network error. Please try again later.", {
+          position: "top-right",
+        });
+      }
     } finally {
       setIsLoading(false); // Stop loading
     }
@@ -106,25 +115,43 @@ const Login = () => {
           GLITCHED
         </motion.h1>
 
-        <motion.div className="mt-8" initial="hidden" animate="visible" transition={{ staggerChildren: 0.2 }}>
-          <motion.div className="mb-6" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <label className="text-2xl font-medium text-yellow-400">Email</label>
+        <motion.div
+          className="mt-8"
+          initial="hidden"
+          animate="visible"
+          transition={{ staggerChildren: 0.2 }}
+        >
+          <motion.div
+            className="mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <label className="text-2xl font-medium text-yellow-400">
+              Email
+            </label>
             <input
               className="w-full border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod"
               type="text"
               placeholder="Enter your email"
               value={email}
+              name="email"
               onChange={(e) => setEmail(e.target.value)}
             />
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <label className="text-2xl font-medium text-yellow-400">Password</label>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <label className="text-2xl font-medium text-yellow-400">
+              Password
+            </label>
             <input
               className="w-full border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod"
               type="password"
               placeholder="Enter your password"
               value={password}
+              name="password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </motion.div>

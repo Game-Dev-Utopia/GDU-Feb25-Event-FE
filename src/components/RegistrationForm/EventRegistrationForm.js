@@ -116,16 +116,13 @@ const EventRegistrationForm = () => {
 
       setTimeout(() => navigate("/"), 1000);
     } catch (error) {
+
       if (error.response) {
         const status = error.response.status;
         const errorMessage = error.response.data?.message || "Unknown error occurred.";
-
-        if (status === 400) {
-          toast.error("Login first to register!", { position: "top-right" });
-          setTimeout(() => navigate("/signin"));
-        } else if (status === 400){
-          toast.error(`Error: ${errorMessage}`, { position: "top-right" });
-        }
+        toast.error(`${errorMessage}`, {
+          position: "top-right",
+        });
       } else {
         toast.error("Network error. Please try again later.", { position: "top-right" });
       }

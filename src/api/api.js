@@ -10,7 +10,7 @@ export async function getRequest(URL) {
     return response.data;
   } catch (error) {
     throw error; // Rethrow the error for better handling in components
-    console.log(error);
+    // console.log(error);
   }
 }
 
@@ -41,7 +41,7 @@ export async function postRequestJson(URL, payload) {
     const response = await axiosClient.post(URL, payload);
     return response.data;
   } catch (error) {
-    console.error("Request failed:", error);
+    // console.error("Request failed:", error);
     throw error;
   }
 }
@@ -62,7 +62,7 @@ export async function postRequestJsonwithHeader(URL, payload) {
     );
     return response.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     throw error;
   }
 }
