@@ -14,7 +14,9 @@ const Loader = ({ onPreloadComplete }) => {
       'images/dragondungeon.webp',
       '/scroll1.jpg',
       'dragon.png',
-      'images/Dragonbg.webp'
+      'images/Dragonbg.webp',
+      '/images/parchment.png',
+      '/images/dragon_contactus.png'
     ];
 
     const preloadImages = () => {

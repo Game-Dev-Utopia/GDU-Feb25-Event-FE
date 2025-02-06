@@ -230,7 +230,7 @@ const ImageCard = ({
 
                 {(venue && date && time && date.length > 0 && time.length > 0) ? (
                   <div className="gap-2">
-                    <p className="font-bold text-burntOrange">Time & Venue:</p>
+                    <p className="font-bold text-burntOrange">Date & Time:</p>
                     {date.map((d, index) => (
                       <p key={index} className="ml-4">
                         {new Date(d).toLocaleDateString()} at {time[index] || "TBA"}

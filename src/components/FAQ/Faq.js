@@ -33,7 +33,7 @@ const Faq = () => {
     {
       question: "How can I register for the event?",
       answer:
-        "It's very simple. Just fill up the form circulated on the class groups and you're eligible to participate in it!",
+        "It's very simple. Just register on the website and you're eligible to participate in it!",
     },
     {
       question: "When is the event happening?",
