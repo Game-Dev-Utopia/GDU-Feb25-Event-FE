@@ -25,6 +25,7 @@ import Logout from './components/LoginPage_Preet/Logout';
 import ContactPage from './pages/ContactUs';
 import TermsAndConditions from './pages/TermsCondition';
 import ContactUs from './components/ContactUs/Contact';
+import Dashboard from './components/Admin/Dashboard';
 
 const AppWrapper = () => {
   const [loading, setLoading] = useState(true);
@@ -53,6 +54,7 @@ const router = new Router(
       <Route path="/logout" element={<Logout />} />
       {/* <Route path="/intro" element={<Intro />} /> */}
       <Route path="/profile" element={<Profile />} />
+      <Route path="/admin" element={<Dashboard />} />
       <Route path="/contactus" element={<ContactUs />} />
       <Route path="/terms" element={<TermsAndConditions />} />
     </Route>

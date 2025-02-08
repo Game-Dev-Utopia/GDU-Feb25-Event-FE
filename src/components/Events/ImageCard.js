@@ -236,7 +236,7 @@ const ImageCard = ({
                         {new Date(d).toLocaleDateString()} at {time[index] || "TBA"}
                       </p>
                     ))}
-                    <p className="mt-1">Venue: {venue}</p>
+                    <p className="mt-1"> <span className="font-bold text-burntOrange">Venue :</span> {venue}</p>
                   </div>
                 ) :
                   <p className="items-center gap-2">
@@ -254,7 +254,8 @@ const ImageCard = ({
 
             {/* Register Button */}
             <div className="mt-8 flex justify-center">
-               {title == 'Dungeon Devs' ? <a href="https://unstop.com/o/HC5aVRp?lb=A1YJYb6a&utm_medium=Share&utm_source=WhatsApp" target="_blank" className="px-6 py-3 bg-burntOrange text-black font-bold rounded-lg  focus:outline-none focus:ring-2 focus:ring-amber-400">Register</a> : <button
+               {title == 'Dungeon Devs' ? <a href="https://unstop.com/o/HC5aVRp?lb=A1YJYb6a&utm_medium=Share&utm_source=WhatsApp" target="_blank" className="px-6 py-3 bg-burntOrange text-black font-bold rounded-lg  focus:outline-none focus:ring-2 focus:ring-amber-400">Register</a> 
+               : <button
                 className="px-6 py-3 bg-burntOrange text-black font-bold rounded-lg  focus:outline-none focus:ring-2 focus:ring-amber-400"
                 onClick={handleRegister}
               >

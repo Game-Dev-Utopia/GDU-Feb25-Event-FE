@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { sidebarLinks } from "./links";
+import { postRequestJson } from "../../api/api";
+import { toast } from "react-toastify";
+
 
 const MobileSidebar = () => {
   const navigate = useNavigate();
@@ -22,16 +25,19 @@ const MobileSidebar = () => {
     };
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("username");
-
-    const authEvent = new Event("authChange");
-    window.dispatchEvent(authEvent);
-
-    navigate("/");
-  };
+  const handleLogout = async () => {
+      localStorage.removeItem("username");
+      const response = await postRequestJson(`/api/v1/users/logout`);
+      console.log(response);
+      toast.success("Logged Out successfully!", { position: "top-right" });
+  
+      localStorage.removeItem("username");
+      localStorage.removeItem("email");
+      const authEvent = new Event("authChange");
+      window.dispatchEvent(authEvent);
+  
+      navigate("/");
+    };
 
   return (
     <div className="md:hidden block">

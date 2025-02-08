@@ -28,7 +28,7 @@ const Navbar = () => {
     };
   }, []);
 
-  console.log(isLoggedIn)
+  console.log(isLoggedIn);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -56,7 +56,11 @@ const Navbar = () => {
   const handleLogout = async () => {
     localStorage.removeItem("username");
     const response = await postRequestJson(`/api/v1/users/logout`);
+    console.log(response);
     toast.success("Logged Out successfully!", { position: "top-right" });
+
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
     const authEvent = new Event("authChange");
     window.dispatchEvent(authEvent);
 
@@ -154,17 +158,32 @@ const Navbar = () => {
       </div>
 
       {/* Mobile View */}
-      <div className="md:hidden flex items-center gap-10">
+      <div className="md:hidden flex items-center gap-10 relative">
         {isLoggedIn && (
-          <button
-            ref={notificationButtonRef}
-            className="bg-black p-2 border border-3 border-burntOrange text-white font-bold rounded-full 
-             transition text-xl shadow-lg shadow-burntOrange/50 hover:shadow-xl hover:shadow-burntOrange 
-             hover:bg-burntOrange hover:text-black"
-            onClick={handleNotificationClick}
-          >
-            <IoMdNotifications className="size-6" />
-          </button>
+          <>
+            <button
+              ref={notificationButtonRef}
+              className="bg-black p-2 border border-3 border-burntOrange text-white font-bold rounded-full 
+         transition text-xl shadow-lg shadow-burntOrange/50 hover:shadow-xl hover:shadow-burntOrange 
+         hover:bg-burntOrange hover:text-black"
+              onClick={handleNotificationClick}
+            >
+              <IoMdNotifications className="size-6" />
+            </button>
+
+            {/* Ensure NotificationContainer is rendered in mobile */}
+            <div
+              ref={notificationRef}
+              className={`absolute top-0 right-0 ${
+                isNotificationOpen ? "block" : "hidden"
+              }`}
+            >
+              <NotificationContainer
+                isOpen={isNotificationOpen}
+                setIsOpen={setIsNotificationOpen}
+              />
+            </div>
+          </>
         )}
         <MobileSidebar />
       </div>

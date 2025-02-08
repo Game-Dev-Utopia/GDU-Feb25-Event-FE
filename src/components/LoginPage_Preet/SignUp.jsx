@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { postRequestJson } from "../../api/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ const SignUp = () => {
   const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -19,10 +20,12 @@ const SignUp = () => {
     password: "",
     collegeName: "",
     year: "",
-    dept: "",
-    rollNo: "",
   });
 
+  const [errors, setErrors] = useState({});
+  const [touchedFields, setTouchedFields] = useState({});
+
+  // Validation Functions
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const isValidPassword = (password) =>
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(
@@ -30,9 +33,63 @@ const SignUp = () => {
     );
   const isValidContact = (contact) => /^\d{10}$/.test(contact);
 
+  // Validate specific field when user stops typing
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      Object.keys(touchedFields).forEach((field) => validateField(field));
+    }, 500); // Debounce of 500ms after user stops typing
+
+    return () => clearTimeout(timer);
+  }, [formData]);
+
+  const validateField = (name) => {
+    let errorMsg = "";
+
+    switch (name) {
+      case "username":
+        if (!formData.username.trim()) errorMsg = "Username is required";
+        break;
+      case "fullname":
+        if (!formData.fullname.trim()) errorMsg = "Full Name is required";
+        break;
+      case "email":
+        if (!isValidEmail(formData.email)) errorMsg = "Invalid email format";
+        break;
+      case "contact":
+        if (!isValidContact(formData.contact))
+          errorMsg = "Contact must be 10 digits";
+        break;
+      case "password":
+        if (!isValidPassword(formData.password)) {
+          errorMsg =
+            "Password must be at least 6 characters, contain a number & special character";
+        }
+        break;
+      case "collegeName":
+        if (!formData.collegeName.trim()) errorMsg = "College Name is required";
+        break;
+      case "year":
+        if (!formData.year.trim()) errorMsg = "Year is required";
+        break;
+    
+      default:
+        break;
+    }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: errorMsg,
+    }));
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    // Update field value
     setFormData({ ...formData, [name]: value });
+
+    // Mark field as touched
+    setTouchedFields((prev) => ({ ...prev, [name]: true }));
   };
 
   const handleOtpChange = (e) => {
@@ -40,6 +97,15 @@ const SignUp = () => {
   };
 
   const handleSendOtp = async () => {
+    Object.keys(formData).forEach(validateField);
+
+    if (Object.values(errors).some((error) => error !== "")) {
+      toast.error("Please correct the errors before submitting.", {
+        position: "top-right",
+      });
+      return;
+    }
+
     if (!formData.email) {
       toast.error("Please enter your email first.", { position: "top-right" });
       return;
@@ -49,6 +115,7 @@ const SignUp = () => {
     try {
       const response = await postRequestJson("/api/v1/users/send-otp", {
         email: formData.email,
+        username: formData.username,
       });
 
       if (response) {
@@ -58,9 +125,19 @@ const SignUp = () => {
         throw new Error(response.message || "Failed to send verification mail");
       }
     } catch (error) {
-      toast.error("Error sending verification mail. Please try again.", {
-        position: "top-right",
-      });
+      if (error.response) {
+        const status = error.response.status;
+        const errorMessage =
+          error.response.data?.message || "Unknown error occurred.";
+
+        toast.error(`${errorMessage}`, {
+          position: "top-right",
+        });
+      } else {
+        toast.error("Network error. Please try again later.", {
+          position: "top-right",
+        });
+      }
     } finally {
       setIsSendingOtp(false);
     }
@@ -93,26 +170,6 @@ const SignUp = () => {
   };
 
   const handleSubmit = async () => {
-    if (!isValidEmail(formData.email)) {
-      toast.error("Please enter a valid email address.", {
-        position: "top-right",
-      });
-      return;
-    }
-    if (!isValidContact(formData.contact)) {
-      toast.error("Contact number must be 10 digits.", {
-        position: "top-right",
-      });
-      return;
-    }
-    if (!isValidPassword(formData.password)) {
-      toast.error(
-        "Password must be at least 6 characters long, contain one number, and one special character.",
-        { position: "top-right" }
-      );
-      return;
-    }
-
     try {
       const response = await postRequestJson(
         `/api/v1/users/register`,
@@ -142,7 +199,7 @@ const SignUp = () => {
   };
 
   return (
-    <motion.div
+    <div
       className="flex justify-center items-center min-h-screen font-playfair"
       style={{
         backgroundImage: "url('/images/bg8.jpg')",
@@ -150,9 +207,6 @@ const SignUp = () => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
     >
       <motion.div
         className="bg-black bg-opacity-60 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-4xl w-[90%] mx-5 mt-20"
@@ -169,12 +223,7 @@ const SignUp = () => {
           GLITCHED
         </motion.h1>
 
-        <motion.div
-          className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6"
-          initial="hidden"
-          animate="visible"
-          transition={{ staggerChildren: 0.2 }}
-        >
+        <motion.div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
           {[
             { label: "Username", name: "username", type: "text" },
             { label: "Full Name", name: "fullname", type: "text" },
@@ -183,25 +232,26 @@ const SignUp = () => {
             { label: "Password", name: "password", type: "password" },
             { label: "College Name", name: "collegeName", type: "text" },
             { label: "Year", name: "year", type: "number" },
-            { label: "Department", name: "dept", type: "text" },
-            { label: "Roll Number", name: "rollNo", type: "text" },
           ].map(({ label, name, type }) => (
-            <motion.div
-              key={name}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <label className="text-xl md:text-2xl font-medium text-yellow-400">
+            <motion.div key={name}>
+              <label className="text-xl font-medium text-yellow-400">
                 {label}
               </label>
               <input
-                className="w-full border-2 border-gray-300 rounded-xl p-4 bg-transparent focus:outline-none focus:border-blue-500 text-yellow-200 text-xl"
+                className={`w-full border-2 border-goldenrod rounded-xl p-4 mt-1 bg-transparent focus:outline-none focus:border-burntOrange text-goldenrod ${
+                  touchedFields[name] && errors[name]
+                    ? "border-red-500"
+                    : "border-gray-300" 
+                }`}
                 type={type}
                 name={name}
                 value={formData[name]}
                 onChange={handleInputChange}
                 placeholder={`Enter your ${label.toLowerCase()}`}
               />
+              {touchedFields[name] && errors[name] && (
+                <p className="text-red-500 text-sm mt-1">{errors[name]}</p>
+              )}
             </motion.div>
           ))}
         </motion.div>
@@ -259,7 +309,7 @@ const SignUp = () => {
           </span>
         </motion.div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 

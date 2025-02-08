@@ -61,7 +61,11 @@ const Login = () => {
         window.dispatchEvent(authEvent);
         console.log("Event dispatched!"); // Debugging log
 
-        setTimeout(() => navigate("/"), 2000); // Redirect to /
+        if(response.user.isAdmin){
+          setTimeout(() => navigate("/admin"), 2000); // Redirect to /
+        }else{
+          setTimeout(() => navigate("/"), 2000); // Redirect to /
+        }
       } else {
         const errorData = await response.json();
         toast.error(`Login failed: ${errorData.message || "Unknown error"}`, {
@@ -88,7 +92,7 @@ const Login = () => {
   };
 
   return (
-    <motion.div
+    <div
       className="flex justify-center items-center min-h-screen"
       style={{
         backgroundImage: `url('/images/bg8.jpg')`,
@@ -96,9 +100,6 @@ const Login = () => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
     >
       <motion.div
         className="bg-black bg-opacity-60 px-10 py-10 rounded-3xl border-2 border-yellow-500 shadow-lg max-w-4xl w-[90%] lg:w-[30%] mx-5 mt-20 font-playfair"
@@ -189,7 +190,7 @@ const Login = () => {
           </motion.div>
         </motion.div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 

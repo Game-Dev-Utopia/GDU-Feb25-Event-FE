@@ -14,14 +14,14 @@ const ImageCardGrid = () => {
         setLoading(true);
         setError(null); // Reset error state
         const response = await getRequest(`/api/v1/events/getallevents`);
-        console.log("Fetched response:", response); // Log the response for debugging
+        // console.log("Fetched response:", response); // Log the response for debugging
         if (Array.isArray(response)) {
           setCards(response); // Update cards if response is an array
         } else {
           setError("Unexpected response format."); // Handle unexpected response
         }
       } catch (err) {
-        console.error("Error fetching events:", err); // Log error
+        // console.error("Error fetching events:", err); // Log error
         setError("Failed to fetch event details. Please try again later.");
       } finally {
         setLoading(false);
