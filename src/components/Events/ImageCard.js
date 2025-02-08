@@ -3,13 +3,12 @@ import { CloseButton, toast } from "react-toastify";
 import { useState } from "react";
 import { postRequestJsonwithHeader, postRequestNoToken, postRequestJson } from "../../api/api";
 import { FaCross } from "react-icons/fa6";
-import { FaRegWindowClose } from "react-icons/fa";
+import { FaRegWindowClose, FaUserCircle } from "react-icons/fa";
 
 const ImageCard = ({
   eventId,
   title = "Untitled Event",
   description = "No description available.",
-  tag,
   bgUrl,
   imageUrl,
   typeOfevent,
@@ -19,10 +18,12 @@ const ImageCard = ({
   teamSize = "N/A",
   rules,
   venue = "Unknown Venue",
+  speaker
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setisModalOpen] = useState(false);
   const navigate = useNavigate();
+  console.log(speaker)
 
   const handleRegister = async () => {
     try {
@@ -43,7 +44,7 @@ const ImageCard = ({
         if (status === 401) {
           toast.error("Login first to register!", { position: "top-right" });
 
-          setTimeout(() => navigate("/signin"));
+          setTimeout(() => navigate("/signin"), 2000);
         } else {
           toast.error(`Error: ${errorMessage}`, { position: "top-right" });
         }
@@ -104,7 +105,7 @@ const ImageCard = ({
         >
           <button
             onClick={() => setisModalOpen(true)}
-            className="bg-goldenrod text-deepCrimson font-bold px-3 py-1 text-sm rounded-md w-fit transition-colors duration-200 shadow-md hover:shadow-lg"
+            className="bg-goldenrod text-burntOrange font-bold px-3 py-1 text-sm rounded-md w-fit transition-colors duration-200 shadow-md hover:shadow-lg"
           >
             Read More
           </button>
@@ -121,11 +122,11 @@ const ImageCard = ({
       {/* Modal */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex items-start justify-center z-[9999] overflow-y-auto font-cinzel mt-16 md:mt-12"
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-start justify-center z-50 overflow-y-auto font-cinzel mt-16 md:mt-12 p-2"
           onClick={() => setisModalOpen(false)}
         >
           <div
-            className="w-full max-w-3xl h-90vh bg-[#2a1810] rounded-lg p-6 sm:p-8 mx-4 flex flex-col gap-8 relative mt-10"
+            className="w-full max-w-5xl h-90vh bg-[#2a1810] rounded-lg p-6 sm:p-8 mx-4 flex flex-col gap-8 relative mt-10"
             onClick={(e) => e.stopPropagation()}
             style={{
               backgroundImage: `
@@ -175,7 +176,7 @@ const ImageCard = ({
               </div>
 
               {/* Content */}
-              <div className="w-full lg:w-2/3 flex flex-col gap-4">
+              <div className="w-full lg:w-2/3 flex flex-col gap-6">
                 <h2
                   className="text-5xl font-bold text-center lg:text-left"
                   style={{
@@ -183,15 +184,6 @@ const ImageCard = ({
                   }}
                 >
                   {title}
-                </h2>
-
-                <h2
-                  className="text-xl font-bold text-center lg:text-left text-burntOrange"
-                  style={{
-                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 191, 0, 0.3)',
-                  }}
-                >
-                  {tag}
                 </h2>
                 <div className="relative">
                   <div className="absolute inset-0 bg-black/20 rounded-lg filter blur-sm"></div>
@@ -206,17 +198,53 @@ const ImageCard = ({
                 </div>
               </div>
             </div>
+            {speaker && <div className="p-6 bg-gradient-to-br from-black/40 to-black/10 rounded-lg border-2 border-deepCrimson/50 backdrop-blur-sm relative overflow-hidden text-goldenrod">
+              <h4
+                className="text-2xl font-bold mb-4 relative text-center lg:text-left"
+                style={{
+                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
+                }}
+              >
+                {title} Speakers
+              </h4>
 
-            <div className="p-2 md:p-6 bg-gradient-to-br from-black/40 to-black/10 rounded-lg border-2 border-deepCrimson/50 backdrop-blur-sm relative overflow-hidden text-goldenrod">
+              {/* Display Speaker List */}
+              <div className="space-y-4">
+                {speaker.length > 0 ? (
+                  speaker.map((spk, index) => (
+                    <div key={index} className="p-4 border border-goldenrod rounded-lg bg-black/30 shadow-lg backdrop-blur-md">
+                      {/* Speaker Name with User Icon */}
+                      <div className="flex items-center gap-3">
+                        <FaUserCircle className="text-2xl text-goldenrod" /> {/* User Icon */}
+                        <h3 className="text-xl font-semibold text-burntOrange">{spk[0]}</h3>
+                      </div>
+
+                      {/* Speaker Description */}
+                      <p className="text-goldenrod text-sm mt-2 leading-relaxed">{spk[1]}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-400">No speakers available for this event.</p>
+                )}
+              </div>
+            </div>}
+
+
+
+            <div className="p-6 bg-gradient-to-br from-black/40 to-black/10 rounded-lg border-2 border-deepCrimson/50 backdrop-blur-sm relative overflow-hidden text-goldenrod">
 
               <h4
-                className="text-2xl text-burntOrange font-bold  mb-4 relative text-center lg:text-left"
+                className="text-2xl font-bold  mb-4 relative text-center lg:text-left"
                 style={{
                   textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
                 }}
               >
                 {title} Notes
               </h4>
+
+
+
+
               <div className="space-y-2  relative text-lg">
                 {typeOfevent && <p className=" gap-2">
                   <span className="font-bold text-burntOrange">Event Type : </span> {typeOfevent}
@@ -236,7 +264,7 @@ const ImageCard = ({
                         {new Date(d).toLocaleDateString()} at {time[index] || "TBA"}
                       </p>
                     ))}
-                    <p className="mt-1"> <span className="font-bold text-burntOrange">Venue :</span> {venue}</p>
+                    <p className="mt-1 ">  <span className="font-bold text-burntOrange">Venue :</span> {venue}</p>
                   </div>
                 ) :
                   <p className="items-center gap-2">
@@ -254,15 +282,12 @@ const ImageCard = ({
 
             {/* Register Button */}
             <div className="mt-8 flex justify-center">
-               {title == 'Dungeon Devs' ? <a href="https://unstop.com/o/HC5aVRp?lb=A1YJYb6a&utm_medium=Share&utm_source=WhatsApp" target="_blank" className="px-6 py-3 bg-burntOrange text-black font-bold rounded-lg  focus:outline-none focus:ring-2 focus:ring-amber-400">Register</a> 
-               : <button
-                className="px-6 py-3 bg-burntOrange text-black font-bold rounded-lg  focus:outline-none focus:ring-2 focus:ring-amber-400"
+              <button
+                className="px-6 py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-400"
                 onClick={handleRegister}
               >
                 Register
-              </button>}   
-
-              
+              </button>
             </div>
           </div>
         </div>

@@ -43,47 +43,75 @@ const ImageCardGrid = () => {
       <div className="text-center mb-16 text-6xl font-bold font-cinzel text-burntOrange">
         Events
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center justify-center mx-auto place-items-center font-cinzel">
+      <div className="flex flex-col items-center w-full space-y-6 md:space-y-0 mx-auto font-cinzel">
+        {/* First Row (3 Cards in One Line) */}
+        <div className="flex flex-col md:flex-row justify-between w-full md:w-[90%]">
+          {cards.slice(0, 3).map((card, index) => (
+            <motion.div
+              key={index}
+              className="w-full md:w-[30%] px-2 flex justify-center" // Centered on mobile
+              initial={{ opacity: 0, x: -50, y: 50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut", repeatType: "reverse" }}
+              viewport={{ once: false, amount: 0.2 }}
+            >
+              <ImageCard
+                eventId={card._id}
+                title={card.name || "Untitled Event"}
+                tag={card.tag || ""}
+                description={card.description || "No description available."}
+                registrationFee={card.registrationFee || "Free"}
+                typeOfevent={card.typeOfevent}
+                teamSize={card.teamSize}
+                date={card.date}
+                venue={card.venue}
+                time={card.time}
+                rules={card.rules}
+                bgUrl={"/images/events/gold.jpg"}
+                modalImageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
+                imageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
+                placeholderText={card.placeholderText || "Dynamic Text Here"}
+                speaker={card.speaker}
+              />
+            </motion.div>
+          ))}
+        </div>
 
-        {cards.map((card, index) => (
-         <motion.div
-         key={index}
-         className="relative overflow-hidden"
-         initial={{ opacity: 0, x: -50, y: 50 }} // Starts hidden from left & below
-         whileInView={{ opacity: 1, x: 0, y: 0 }} // Moves to normal position
-         exit={{ opacity: 0, x: -50, y: 0 }} // Moves left when disappearing
-         animate={{ y: [0, -10, 0] }} // Floating animation effect
-         transition={{
-           duration: 0.6,
-           delay: index * 0.1,
-           ease: "easeOut",
-          //  repeat: Infinity, // Infinite floating animation
-           repeatType: "reverse", // Moves up and down smoothly
-         }}
-         viewport={{ once: false, amount: 0.2 }} // Allows animation on both scroll down & up
-       >
-            <ImageCard
-              eventId={card._id}
-              title={card.name || "Untitled Event"}
-              tag = {card.tag || ""}
-              description={card.description || "No description available."}
-              registrationFee={card.registrationFee || "Free"}
-              typeOfevent={card.typeOfevent}
-              teamSize={card.teamSize}
-              date={card.date}
-              venue={card.venue}
-              time={card.time}
-              rules={card.rules}
-              bgUrl={"/images/events/gold.jpg"}
-              modalImageUrl={
-                card.imageUrl || "/images/events/dungeon_devs_logo.png"
-              }
-              imageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
-              placeholderText={card.placeholderText || "Dynamic Text Here"}
-            />
-          </motion.div>
-        ))}
+        {/* Second Row (2 Cards Staggered Between First Row) */}
+        <div className="flex flex-col md:flex-row justify-between w-full md:w-[70%] mt-4">
+          {cards.slice(3, 5).map((card, index) => (
+            <motion.div
+              key={index}
+              className="w-full md:w-[45%] px-2 flex justify-center" // Centered on mobile
+              initial={{ opacity: 0, x: -50, y: 50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.6, delay: (index + 3) * 0.1, ease: "easeOut", repeatType: "reverse" }}
+              viewport={{ once: false, amount: 0.2 }}
+            >
+              <ImageCard
+                eventId={card._id}
+                title={card.name || "Untitled Event"}
+                tag={card.tag || ""}
+                description={card.description || "No description available."}
+                registrationFee={card.registrationFee || "Free"}
+                typeOfevent={card.typeOfevent}
+                teamSize={card.teamSize}
+                date={card.date}
+                venue={card.venue}
+                time={card.time}
+                rules={card.rules}
+                bgUrl={"/images/events/gold.jpg"}
+                modalImageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
+                imageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
+                placeholderText={card.placeholderText || "Dynamic Text Here"}
+                speaker={card.speaker}
+              />
+            </motion.div>
+          ))}
+        </div>
       </div>
+
+
     </div>
   );
 };
