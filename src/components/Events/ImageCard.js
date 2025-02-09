@@ -282,12 +282,14 @@ const ImageCard = ({
 
             {/* Register Button */}
             <div className="mt-8 flex justify-center">
-              <button
+              {title == 'Dungeon Devs' ? <a  target="_blank" className="px-6 py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-400" href="https://unstop.com/p/dungeon-devs-glitched-sctrs-pune-institute-of-computer-technology-pune-1386507">Register</a> 
+              : <button
                 className="px-6 py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-400"
                 onClick={handleRegister}
               >
                 Register
-              </button>
+              </button>}
+              
             </div>
           </div>
         </div>
