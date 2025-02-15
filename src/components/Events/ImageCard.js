@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import { CloseButton, toast } from "react-toastify";
 import { useState } from "react";
 import { postRequestJsonwithHeader, postRequestNoToken, postRequestJson } from "../../api/api";
-import { FaCross } from "react-icons/fa6";
+import { FaCross, FaLinkedin } from "react-icons/fa6";
 import { FaRegWindowClose, FaUserCircle } from "react-icons/fa";
 
 const ImageCard = ({
@@ -18,12 +18,13 @@ const ImageCard = ({
   teamSize = "N/A",
   rules,
   venue = "Unknown Venue",
-  speaker
+  speaker,
+  prize
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setisModalOpen] = useState(false);
   const navigate = useNavigate();
-  console.log(speaker)
+  // console.log(prize)
 
   const handleRegister = async () => {
     try {
@@ -215,12 +216,15 @@ const ImageCard = ({
                     <div key={index} className="p-4 border border-goldenrod rounded-lg bg-black/30 shadow-lg backdrop-blur-md">
                       {/* Speaker Name with User Icon */}
                       <div className="flex items-center gap-3">
-                        <FaUserCircle className="text-2xl text-goldenrod" /> {/* User Icon */}
+                        <img src={spk[3]} className="text-2xl text-goldenrod h-10 w-10 md:w-[4rem] md:h-[4rem] rounded-full" />
                         <h3 className="text-xl font-semibold text-burntOrange">{spk[0]}</h3>
+
+                        <a href={spk[2]} target="_blank"><FaLinkedin /></a>
                       </div>
 
                       {/* Speaker Description */}
                       <p className="text-goldenrod text-sm mt-2 leading-relaxed">{spk[1]}</p>
+
                     </div>
                   ))
                 ) : (
@@ -256,6 +260,12 @@ const ImageCard = ({
                   <span className="font-bold text-burntOrange">Registration Fee :</span> {registrationFee || "Free"}
                 </p>
 
+                {
+                  prize && <p className=" gap-2">
+                    <span className="font-bold text-burntOrange">Prize Pool :</span> Rs. {prize}
+                    </p>
+                }
+
                 {(venue && date && time && date.length > 0 && time.length > 0) ? (
                   <div className="gap-2">
                     <p className="font-bold text-burntOrange">Date & Time:</p>
@@ -282,15 +292,29 @@ const ImageCard = ({
 
             {/* Register Button */}
             <div className="mt-8 flex justify-center">
-              {title == 'Dungeon Devs' ? <a  target="_blank" className="px-6 py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-400" href="https://unstop.com/p/dungeon-devs-glitched-sctrs-pune-institute-of-computer-technology-pune-1386507">Register</a> 
-              : <button
-                className="px-6 py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-400"
-                onClick={handleRegister}
-              >
-                Register
-              </button>}
-              
+              {title === "Dungeon Devs" || title === "Pixelate" ? (
+                <a
+                  href={
+                    title === "Dungeon Devs"
+                      ? "https://unstop.com/p/dungeon-devs-glitched-sctrs-pune-institute-of-computer-technology-pune-1386507"
+                      : "https://unstop.com/hackathons/art-jam-glitched-gamedevutopia-1391730"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                >
+                  Register
+                </a>
+              ) : (
+                <button
+                  className="px-6 py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                  onClick={handleRegister}
+                >
+                  Register
+                </button>
+              )}
             </div>
+
           </div>
         </div>
       )}

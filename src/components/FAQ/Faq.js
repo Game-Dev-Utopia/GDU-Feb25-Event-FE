@@ -38,7 +38,7 @@ const Faq = () => {
     {
       question: "When is the event happening?",
       answer:
-        "The event is on 17, 18, and 19 February 2025 after the college hours in PICT itself. You may participate in it and have a fun evening after college!",
+        "The event is on 17 and 18 February 2025 after the college hours in PICT itself. You may participate in it and have a fun evening after college!",
     },
   ];
 

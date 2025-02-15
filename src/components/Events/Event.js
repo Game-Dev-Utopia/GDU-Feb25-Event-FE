@@ -14,7 +14,7 @@ const ImageCardGrid = () => {
         setLoading(true);
         setError(null); // Reset error state
         const response = await getRequest(`/api/v1/events/getallevents`);
-        // console.log("Fetched response:", response); // Log the response for debugging
+        console.log("Fetched response:", response); // Log the response for debugging
         if (Array.isArray(response)) {
           setCards(response); // Update cards if response is an array
         } else {
@@ -30,6 +30,7 @@ const ImageCardGrid = () => {
 
     fetchEventDetails();
   }, []); // Empty dependency array to fetch data only once
+  // console.log(cards)
 
   // Conditional rendering
   if (loading)
@@ -72,6 +73,7 @@ const ImageCardGrid = () => {
                 imageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
                 placeholderText={card.placeholderText || "Dynamic Text Here"}
                 speaker={card.speaker}
+                prize = {card.prize}
               />
             </motion.div>
           ))}
@@ -105,6 +107,7 @@ const ImageCardGrid = () => {
                 imageUrl={card.imageUrl || "/images/events/dungeon_devs_logo.png"}
                 placeholderText={card.placeholderText || "Dynamic Text Here"}
                 speaker={card.speaker}
+                prize = {card.prize}
               />
             </motion.div>
           ))}
