@@ -78,14 +78,14 @@ const ImageCardGrid = () => {
         </div>
 
         {/* Second Row (2 Cards Staggered Between First Row) */}
-        <div className="flex flex-col md:flex-row justify-between w-full md:w-[70%] mt-4">
-          {cards.slice(3, 5).map((card, index) => (
+        <div className="flex flex-col md:flex-row justify-between w-full md:w-[90%]">
+          {cards.slice(3, 6).map((card, index) => (
             <motion.div
               key={index}
-              className="w-full md:w-[45%] px-2 flex justify-center" // Centered on mobile
+              className="w-full md:w-[30%] px-2 flex justify-center" // Centered on mobile
               initial={{ opacity: 0, x: -50, y: 50 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ duration: 0.6, delay: (index + 3) * 0.1, ease: "easeOut", repeatType: "reverse" }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut", repeatType: "reverse" }}
               viewport={{ once: false, amount: 0.2 }}
             >
               <ImageCard
