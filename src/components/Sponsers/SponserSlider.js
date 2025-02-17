@@ -7,31 +7,43 @@ const SponserSlider = () => {
         Sponsors
       </h1>
 
-      <div className="flex flex-wrap justify-center gap-12 items-center">
+      {/* Grid Layout for Proper Alignment */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 items-center justify-items-center p-14">
         {/* Sponsor 1 */}
-        <div className="w-48 md:w-64 flex flex-col items-center text-center">
+        <div className="flex flex-col items-center text-center">
           <img
             src="/campus_times.png"
-            alt="campus times"
-            className="w-20 h-20 md:w-28 md:h-28 object-contain"
+            alt="Campus Times"
+            className="w-24 h-24 md:w-28 md:h-28 object-contain"
           />
           <h2 className="mt-2 text-xl md:text-2xl font-semibold text-goldenrod font-cinzel">
             Campus Times
           </h2>
-
         </div>
 
         {/* Sponsor 2 */}
-        <div className="w-48 md:w-64 flex flex-col items-center text-center">
+        <div className="flex flex-col items-center text-center">
           <img
             src="/GduLogo.png"
-            alt="GDU Umbrella"
-            className="w-20 h-20 md:w-28 md:h-28 object-contain"
+            alt="GameDevUtopia DAO"
+            className="w-24 h-24 md:w-28 md:h-28 object-contain"
           />
           <h2 className="mt-2 text-xl md:text-2xl font-semibold text-goldenrod font-cinzel">
-           GDU Umbrella
+            GameDevUtopia DAO
           </h2>
-         
+        </div>
+
+        {/* Sponsor 3 */}
+        <div className="flex flex-col items-center text-center">
+          <img
+            src="/spo2.jpg"
+            alt="Dr. Akash Sondhi"
+            className="w-24 h-24 md:w-28 md:h-28 object-contain"
+          />
+          <h2 className="mt-2 text-xl md:text-2xl font-semibold text-goldenrod font-cinzel">
+            Dr. Akash Sondhi <br />
+            Mentor, GameDevUtopia
+          </h2>
         </div>
       </div>
     </section>
