@@ -5,7 +5,7 @@ import confetti from "canvas-confetti";
 const PrizePool = () => {
   const [count, setCount] = useState(0);
   const componentRef = useRef(null);
-  const endValue = 40000;
+  const endValue = 30000;
   const duration = 4000; // Duration in ms
 
   // Function to animate the count-up every time it enters view
@@ -83,7 +83,7 @@ const PrizePool = () => {
           viewport={{ once: false, amount: 0.5 }}
           className="text-6xl md:text-[10rem] count-up font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-mysticPurple to-burntOrange"
         >
-          ₹{count.toLocaleString()}+
+          ₹{count.toLocaleString()}
         </motion.div>
       </motion.div>
 
