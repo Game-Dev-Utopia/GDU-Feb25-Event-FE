@@ -1,36 +1,41 @@
-import React from 'react'
+import React from "react";
 
 const SponserSlider = () => {
   return (
-    <section className="p-16 ">
-      <h1 className='font-cinzel text-center text-5xl md:text-6xl mb-16 font-bold  text-burntOrange'> Sponsors </h1>
-      <div className="logos group relative overflow-hidden whitespace-nowrap  py-10 [mask-image:_linear-gradient(to_right,_transparent_0,_white_128px,white_calc(100%-128px),_transparent_100%)]">
-        {/* <div className="animate-slide-left  inline-block w-max">
+    <section className="p-8 md:p-16">
+      <h1 className="font-cinzel text-center text-4xl md:text-5xl lg:text-6xl mb-12 font-bold text-burntOrange">
+        Sponsors
+      </h1>
 
-          <img className="mx-4 inline h-16" src="https://tailwindui.com/plus/img/logos/158x48/transistor-logo-white.svg" alt="Transistor" />
-          <img className="mx-4 inline h-16" src="https://tailwindui.com/plus/img/logos/158x48/reform-logo-white.svg" alt="Reform" />
-          <img className="mx-4 inline h-16" src="https://tailwindui.com/plus/img/logos/158x48/tuple-logo-white.svg" alt="Tuple" />
-          <img className="mx-4 inline h-16" src="https://tailwindui.com/plus/img/logos/158x48/savvycal-logo-white.svg" alt="SavvyCal" />
-          <img className="mx-4 inline h-16" src="https://tailwindui.com/plus/img/logos/158x48/statamic-logo-white.svg" alt="SavvyCal" />
-          <img className="mx-4 inline h-16" src="https://tailwindui.com/plus/img/logos/158x48/laravel-logo-white.svg" alt="SavvyCal" />
+      <div className="flex flex-wrap justify-center gap-12 items-center">
+        {/* Sponsor 1 */}
+        <div className="w-48 md:w-64 flex flex-col items-center text-center">
+          <img
+            src="/campus_times.png"
+            alt="campus times"
+            className="w-20 h-20 md:w-28 md:h-28 object-contain"
+          />
+          <h2 className="mt-2 text-xl md:text-2xl font-semibold text-goldenrod font-cinzel">
+            Campus Times
+          </h2>
+
         </div>
 
-
-        <div className="animate-slide-left  inline-block w-max">
-
-          <img className="mx-4 inline h-16" src="https://tailwindui.com/plus/img/logos/158x48/transistor-logo-white.svg" alt="Transistor" />
-          <img className="mx-4 inline h-16" src="https://tailwindui.com/plus/img/logos/158x48/reform-logo-white.svg" alt="Reform" />
-          <img className="mx-4 inline h-16" src="https://tailwindui.com/plus/img/logos/158x48/tuple-logo-white.svg" alt="Tuple" />
-          <img className="mx-4 inline h-16" src="https://tailwindui.com/plus/img/logos/158x48/savvycal-logo-white.svg" alt="SavvyCal" />
-          <img className="mx-4 inline h-16" src="https://tailwindui.com/plus/img/logos/158x48/statamic-logo-white.svg" alt="SavvyCal" />
-          <img className="mx-4 inline h-16" src="https://tailwindui.com/plus/img/logos/158x48/laravel-logo-white.svg" alt="SavvyCal" />
-        </div> */}
-
-        <h1 className='text-center text-2xl md:text-5xl font-cinzel text-goldenrod font-bold'>Coming Soon .... </h1>
+        {/* Sponsor 2 */}
+        <div className="w-48 md:w-64 flex flex-col items-center text-center">
+          <img
+            src="/GduLogo.png"
+            alt="GDU Umbrella"
+            className="w-20 h-20 md:w-28 md:h-28 object-contain"
+          />
+          <h2 className="mt-2 text-xl md:text-2xl font-semibold text-goldenrod font-cinzel">
+           GDU Umbrella
+          </h2>
+         
+        </div>
       </div>
     </section>
+  );
+};
 
-  )
-}
-
-export default SponserSlider
+export default SponserSlider;
