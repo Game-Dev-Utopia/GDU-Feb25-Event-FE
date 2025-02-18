@@ -13,7 +13,7 @@ function Countdown() {
           viewport={{ once: false, amount: 0.5 }} // Triggers every time on scroll
           className="text-3xl md:text-6xl tracking-[10px] mb-16 text-burntOrange"
         >
-          WE'RE LAUNCHING SOON
+          EVENT HAS STARTED
         </motion.h1>
 
         {/* Countdown Timer */}
